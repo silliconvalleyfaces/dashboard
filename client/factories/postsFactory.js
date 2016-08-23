@@ -1,5 +1,4 @@
-SVF_app.factory('postsFactory', function($http){
-
+myApp.factory('postsFactory', function($http){
 
 	var posts = []
 

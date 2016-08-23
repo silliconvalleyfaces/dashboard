@@ -1,4 +1,4 @@
-SVF_app.controller('indexController', function($scope, postsFactory){
+myApp.controller('indexController', function($scope, postsFactory){
 
 	// postsFactory.getPosts(function(data){
  // 		$scope.posts = data
