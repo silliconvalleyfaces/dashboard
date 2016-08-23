@@ -10,7 +10,7 @@ myApp.controller('indexController', function($scope, postsFactory){
  		postsFactory.addPost($scope.post, function(data){
 			console.log(data);
 			$scope.post = null;
-			$scope.posts.push(data.data);
+			$scope.posts.unshift(data.data);
  		})
  	};
 

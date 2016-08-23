@@ -161,10 +161,10 @@
 
 
 <div>
-	<p ng-repeat = 'x in posts'>
-		{{x.title}} - {{x.text}}
-		Created at: {{x.created_at | date: 'MMMM, dd, yyyy @ H:m a'}}
-	</p>
+	<ul ng-repeat = 'x in posts'>
+		<h4>{{x.title}}</h4>
+		{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ H:m a'}}
+	</ul>
 
 
 </div>
