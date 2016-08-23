@@ -14,5 +14,11 @@ myApp.controller('indexController', function($scope, postsFactory){
 			console.log(data);
 		})
 	};
+	$scope.searchPosts = function(search){
+		console.log('at the searchPosts controller function'); 
+		postsFactory.searchPosts(search, function(data){
+			console.log(data);
+		})		
+	}
 	
 })

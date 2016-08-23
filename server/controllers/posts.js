@@ -3,7 +3,18 @@ var mongoose = require('mongoose');
 
 module.exports = (function() {
 	return {
-
+		searchPosts: function(req, res){
+			console.log(req.body); 
+			// MongooseDb.find({"name": new RegExp(req.body.name, "i")}, function(err, response){
+			// 	if(err){
+			// 		console.log(err);
+			// 	}
+			// 	else{
+			// 		console.log('at the findNames function')
+			// 		res.json(response);
+			// 	}
+			// })
+		},
 		makePost: function(req, res){
 			console.log(req.body, 'THIS IS REQ BODY');
 			// post = new Post(req.body);

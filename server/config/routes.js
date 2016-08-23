@@ -6,7 +6,10 @@ module.exports = function(app){
 
 		postsController.makePost(req, res);
 	})
-
+	app.post('/search', function(req, res){
+		console.log('search posts query'); 
+		postsController.searchPosts(req, res);
+	})
 	// app.get('/posts', function(req, res){
 
 	// 	postsController.getPosts(req, res);
