@@ -33,16 +33,6 @@ myApp.factory('dummyFactory', function($http){
 			}
 		})
 	}
-	factory.searchPosts = function(search, callback){
-		$http.post('/search', search).then(function(output){
-			if(output.error){
-				console.log(output.error); 
-			}
-			else{
-				callback(output.data);
-			}
-		})
-	}
 
 	return factory;
 })
