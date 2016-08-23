@@ -148,6 +148,37 @@
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+<div>
+	<p ng-repeat = 'x in posts'>
+		{{x.title}} - {{x.text}}
+		Created at: {{x.created_at | date: 'MMMM, dd, yyyy @ H:m a'}}
+	</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script>
 $('.fa.fa-bars').hover(function() {

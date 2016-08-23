@@ -1,14 +1,17 @@
 myApp.controller('indexController', function($scope, postsFactory){
 
-	// postsFactory.getPosts(function(data){
- // 		$scope.posts = data
- // 	});
+	postsFactory.getPosts(function(data){
+ 		console.log(data);
+ 		$scope.posts = data
+ 	});
 
 	$scope.addPost = function(){
  		console.log('hello');
  		postsFactory.addPost($scope.post, function(data){
 			console.log(data);
 			$scope.post = null;
+			$scope.posts.push(data);
+
  		})
  	};
 

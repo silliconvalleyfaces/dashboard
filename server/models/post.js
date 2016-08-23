@@ -9,7 +9,8 @@ var PostSchema = new mongoose.Schema({
       first_name: String,
       last_name: String,
       text: String
-    }]
+    }], 
+    created_at: {type: Date, default: new Date}
 });
 
 mongoose.model('posts', PostSchema);

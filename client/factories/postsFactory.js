@@ -4,12 +4,12 @@ myApp.factory('postsFactory', function($http){
 
 	var factory = {}
 
-	// factory.getPosts = function(callback){
-	// 	$http.get('/posts').then(function(data){
-	// 		posts = data.data;
-	// 		callback(data.data);
-	// 	});
-	// }
+	factory.getPosts = function(callback){
+		$http.get('/posts').then(function(data){
+			posts = data.data;
+			callback(data.data);
+		});
+	}
 
 	factory.addPost = function(info, callback){
 		console.log('info:', info)

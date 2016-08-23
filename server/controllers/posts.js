@@ -19,15 +19,16 @@ module.exports = (function() {
 			})
 		},
 
-		// getPosts: function(req, res){
-		// 	Post.find({}, function(err, posts){
-		// 		if(err){
-		// 			console.log(err);
-		// 		} else {
-		// 			res.json(posts);
-		// 		}
-		// 	})
-		// },
+		getPosts: function(req, res){
+			Post.find({}, function(err, posts){
+				if(err){
+					console.log(err);
+				} else {
+					console.log(posts);
+					res.json(posts);
+				}
+			})
+		},
 
 		searchPosts: function(req, res){
  			console.log(req.body); 
