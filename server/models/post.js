@@ -4,7 +4,7 @@ var PostSchema = new mongoose.Schema({
     last_name: {Type: String, required: [true,'Last name cannot be blank']},
     title: {Type: String, required: [true,'Title cannot be blank']},
     text: {Type: String, required: [true,'text cannot be blank']},
-    url: {Type: String}
+    url: {Type: String},
     comments: [{
       first_name: String,
       last_name: String,
