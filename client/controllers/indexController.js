@@ -8,6 +8,7 @@ myApp.controller('indexController', function($scope, postsFactory){
  		console.log('hello');
  		postsFactory.addPost($scope.post, function(data){
 			console.log(data);
+			$scope.post = null;
  		})
  	};
 
