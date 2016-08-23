@@ -8,10 +8,11 @@
 <head>
 	<title>Welcome!</title>
 	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A safe place and private way to stay in touch!">
-    <meta name="author" content="Coding Dojo Scrum Team">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="A safe place and private way to stay in touch!">
+	<meta name="author" content="Coding Dojo Scrum Team">
+
 
     <link rel='stylesheet' href='../../../style.css'>
     <script src="angular/angular.js"></script>
@@ -58,17 +59,17 @@
 					<a href="#posts" onclick=$("#menu-close").click(); data-toggle="modal" data-target="#mkPostModal">Make a Post</a>
 				</li>
 				<li>
-					<a href="#portfolio" onclick=$("#menu-close").click(); data-toggle="modal" data-target="#editProfileModal">Profile</a>
+					<a href="#profile" onclick=$("#menu-close").click(); data-toggle="modal" data-target="#editProfileModal">Profile</a>
 				</li>
 				<li>
-					<a href="#portfolio" onclick=$("#menu-close").click(); data-toggle="modal" data-target="#findUserModal">Find a Friend</a>
+					<a href="#finduser" onclick=$("#menu-close").click(); data-toggle="modal" data-target="#findUserModal">Find a Friend</a>
 				</li>
 				<li role="separator" class="divider"></li>
 				<li>
-					<a href="#top" onclick=$("#menu-close").click();>Terms & Conditons</a>
+					<a href="#termsConditions" onclick=$("#menu-close").click();>Terms & Conditons</a>
 				</li>
 				<li>
-					<a href="#about" onclick=$("#menu-close").click();>Logout</a>
+					<a href="#logout" onclick=$("#menu-close").click();>Logout</a>
 				</li>
 				<a id="menu-close" class="btn-light toggle"><i class="fa fa-times" style="font-size: 25px"></i></a> <!-- ADD IF covers menu -->
 			</ul>
@@ -78,6 +79,7 @@
 <!-- Modal -->
 <div class="modal fade" id="mkPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
+<<<<<<< HEAD
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -91,57 +93,91 @@
         <button type="button" class="btn btn-primary"ng-click='addPost()'>Post</button>
       </div>
     </div>
+=======
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel">Make a Post</h4>
+	  </div>
+	  <div class="modal-body">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="caption" class="col-sm-2 control-label">Caption</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="caption" placeholder="Enter caption">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="customer_name" class="col-sm-2 control-label" >Image (url):</label>
+				<div class="col-sm-10">
+					<input class="form-control" name="url" type="text" ng-model="new_product.img" placeholder="http://" required >
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="caption" class="col-sm-2 control-label">Message</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" rows="3"></textarea>
+				</div>
+			</div>
+		</form>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-primary">Post</button>
+	  </div>
+	</div>
+>>>>>>> 4b5af4c997d72cd38d1e86ba78e9dcc335fdd3de
   </div>
 </div>
 <div class="modal fade" id="mkPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+	  </div>
+	  <div class="modal-body">
+	 <div class="modal-body">
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-primary">Save</button>
+	  </div>
+	</div>
   </div>
 </div>
 <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+	  </div>
+	  <div class="modal-body">
+		...
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-primary">Save</button>
+	  </div>
+	</div>
   </div>
 </div>
 <div class="modal fade" id="findUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Find a Friend</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Search</button>
-      </div>
-    </div>
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel">Find a Friend</h4>
+	  </div>
+	  <div class="modal-body">
+		...
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-primary">Search</button>
+	  </div>
+	</div>
   </div>
 </div>
 <div class="container">
