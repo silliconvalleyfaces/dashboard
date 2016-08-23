@@ -1,0 +1,49 @@
+<!doctype html>
+
+<!-- 
+	Very important that we add this in our index.html. Without this ng-app
+	we won't be able to instantiate our angular application in our app.js file 
+-->
+<html ng-app = 'Myapp'>
+<head>
+	<title>New guy</title>
+
+	<!-- 
+		We are importing our angular script as 
+		 well as our angular routes script from
+		 bower component folder. This will only work 
+		 if we set that folder as a static folder 
+		 in our server.js file
+	 -->
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+
+<!-- 
+	After importing angular the file we should be importing is our app.js 
+	file. This file is where we instantiate our angular application as well
+	as pass in our dependencies. For this assignment we will only be injecting 
+	ng router.
+
+	Make sure that as you add new controllers and factories, that we must include
+	a script tag for each one.
+ -->
+    <script src = "app.js"></script>
+    <script src = "/controllers/indexController.js"></script>
+    <script src = "/factories/dummyFactory.js"></script>
+
+
+</head>
+<body>
+
+	<div class = 'container'>
+		<h1>This is working</h1>
+		
+		<!-- 
+		this is where our partials will be loaded.
+		treat this index.html file like a template. Stuff that could go in here
+		is like a general navbar and footer. 
+		 -->
+		<div ng-view></div>
+	</div>
+</body>
+</html>
