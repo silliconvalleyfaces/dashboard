@@ -18,7 +18,7 @@
     <script src="angular-route/angular-route.js"></script>
     <script src = "app.js"></script>
     <script src = "/controllers/indexController.js"></script>
-    <script src = "/factories/dummyFactory.js"></script>
+    <script src = "/factories/postsFactory.js"></script>
 	<script src="https://use.fontawesome.com/3b9b16c0a6.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
@@ -84,11 +84,11 @@
         <h4 class="modal-title" id="myModalLabel">Make a Post</h4>
       </div>
       <div class="modal-body">
-        ...
+        <input type="text" ng-model='post.text'></input>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Post</button>
+        <button type="button" class="btn btn-primary"ng-click='addPost()'>Post</button>
       </div>
     </div>
   </div>

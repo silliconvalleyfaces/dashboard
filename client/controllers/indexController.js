@@ -1,13 +1,21 @@
-myApp.controller('indexController', function($scope, dummyFactory){
-	// Here is where we are creating indexController. 
-	// You have to make sure that our index controller matches the name 
-	// that we pass in, in our router. 
-	// So far the only variable that I'm injecting into this controller
-	// is $scope.
+SVF_app.controller('indexController', function($scope, postsFactory){
 
-	console.log('I am able to load my indexController along with my index partial');
+	// postsFactory.getPosts(function(data){
+ // 		$scope.posts = data
+ // 	});
 
-	dummyFactory.addDummy({name: 'req.body.test', status: 'working'}, function(data){
-		console.log(data);
-	})
+	$scope.addPost = function(){
+ 		console.log('hello');
+ 		postsFactory.addPost($scope.post, function(data){
+			console.log(data);
+ 		})
+ 	};
+
+ 	$scope.searchPosts = function(search){
+ 		console.log('at the searchPosts controller function'); 
+ 		postsFactory.searchPosts(search, function(data){
+ 			console.log(data);
+ 		})		
+ 	}
+ 	
 })
