@@ -1,1 +1,15 @@
-<h1>hello</h1>
+<form>
+	<input type="text" name="search" ng-model="search.text" placeholder="Name, Post Title, Post Content">
+	<input type="submit" name="submit" ng-click="searchPosts(search)" value="Search">
+</form>
+
+
+
+<div>
+	<ul ng-repeat = 'x in posts'>
+		<h4>{{x.title}}</h4>
+		{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}
+	</ul>
+
+
+</div>
