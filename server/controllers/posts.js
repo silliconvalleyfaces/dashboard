@@ -31,16 +31,22 @@ module.exports = (function() {
 		},
 
 		searchPosts: function(req, res){
- 			console.log(req.body); 
- 			// MongooseDb.find({"name": new RegExp(req.body.name, "i")}, function(err, response){
- 			// 	if(err){
- 			// 		console.log(err);
- 			// 	}
- 			// 	else{
- 			// 		console.log('at the findNames function')
- 			// 		res.json(response);
- 			// 	}
- 			// })
+ 			console.log(req.body.text); 
+ 			Post.find({$or: [
+ 					 {"first_name": new RegExp(req.body.text, "i")}, 
+ 					 {"last_name": new RegExp(req.body.text, "i")}, 
+ 					 {"text": new RegExp(req.body.text, "i")},
+ 					 {"title": new RegExp(req.body.text, "i")}
+
+ 				]}, function(err, response){
+ 				if(err){
+ 					console.log(err);
+ 				}
+ 				else{
+ 					console.log('at the findNames function', response);
+ 					res.json(response);
+ 				}
+ 			})
  		}
 
 
