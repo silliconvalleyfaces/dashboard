@@ -92,7 +92,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" ng-click='addPost()' data-dismiss = "modal"'>Post</button>
+					<button type="button" class="btn btn-primary" ng-click='addPost()' data-dismiss = "modal">Post</button>
 				</div>
 			</div>
 		</div>
@@ -161,7 +161,7 @@
 <div>
 	<ul ng-repeat = 'x in posts'>
 		<h4>{{x.title}}</h4>
-		{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ H:m a'}}
+		{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}
 	</ul>
 
 
