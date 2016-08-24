@@ -1,7 +1,12 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
 var PostSchema = new mongoose.Schema({
     first_name: String,
     last_name: String,
+    _user_id: String,
+    // FOR NOW USER ID IS A PLACEHOLDER, LATER WE WILL USE THIS ONE:
+    // _user_id: [{type: Schema.Types.ObjectId, ref: 'users'}],
     title: String,
     text: String,
     url: String,

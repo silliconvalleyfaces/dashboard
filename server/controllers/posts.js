@@ -41,7 +41,17 @@ module.exports = (function() {
  			// 		res.json(response);
  			// 	}
  			// })
- 		}
+ 		},
+ 		destroyPost: function(req, res){
+ 			Post.findByIdAndRemove(req.params.id, function(err){
+ 				if(err){
+ 					console.log('error deleting post:', err);
+ 				}
+ 				else{
+ 					res.json({status: 'ok'})
+ 				}
+ 			})
+ 		},
 
 
 

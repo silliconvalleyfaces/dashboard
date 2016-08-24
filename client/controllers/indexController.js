@@ -1,5 +1,8 @@
 myApp.controller('indexController', function($scope, postsFactory){
 
+	// THIS WILL LATER BE THE REAL LOGGED IN USER'S ID
+	$scope.user_id = 'placeholder';
+
 	postsFactory.getPosts(function(data){
  		console.log(data);
  		$scope.posts = data
@@ -7,12 +10,23 @@ myApp.controller('indexController', function($scope, postsFactory){
 
 	$scope.addPost = function(){
  		console.log('hello');
+ 		// PLACEHOLDER WILL LATER BE THE LOGGED IN USER'S ID 
+ 		$scope.post._user_id = 'placeholder'
  		postsFactory.addPost($scope.post, function(data){
 			console.log(data);
 			$scope.post = null;
 			$scope.posts.unshift(data.data);
  		})
  	};
+
+ 	$scope.deletePost = function(postId){
+ 		postsFactory.deletePost(postId, function(status){
+ 			postsFactory.getPosts(function(data){
+		 		console.log(data);
+		 		$scope.posts = data
+		 	});
+ 		})	
+ 	}
 
  	$scope.searchPosts = function(search){
  		console.log('at the searchPosts controller function'); 
