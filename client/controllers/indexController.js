@@ -1,4 +1,5 @@
-myApp.controller('indexController', function($scope, $location, $window, postsFactory, usersFactory){
+myApp.controller('indexController', function($scope, $location, $window, $timeout, postsFactory, usersFactory){
+$scope.userStatus = false;
 
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
@@ -47,9 +48,9 @@ myApp.controller('indexController', function($scope, $location, $window, postsFa
 		console.log('new_user information', $scope.new_user);
 		usersFactory.createUser($scope.new_user, function(data){
 			console.log(data);
-			if(data.data.status === 201){
+			if(data.data.isLoggedIn){
 					$location.url('/wall');
-					$window.location.reload();
+					// $window.location.reload();
 			}
 		});
 	};
@@ -62,12 +63,32 @@ myApp.controller('indexController', function($scope, $location, $window, postsFa
        if (data.data.status === 500){
 				 	$scope.errorMsg = data.data.message;
 			 }
-			 else if(data.data.status === 200){
-				 	$location.url('/wall');
-					$window.location.reload();
+			 else if(data.data.isLoggedIn){
+				 console.log(data);
+				 chageUserStatus();
+				//  $timeout(function () {
+				 //
+				// 		 $scope.userStatus = true;
+				 //
+				//  }, 1000);
+				//  $scope.$apply(function (){
+				// 	 $scope.userStatus = true;
+				//  });
+				 console.log(" $scope.userStatus", $scope.userStatus);
+						$location.url('/wall');
+						//
+						// $scope.$watch(function() {
+						// 		$scope.isLoggedIn = true;
+  					// 		return $scope.isLoggedIn;
+						// 	}, function(newValue, oldValue) {
+  					// 	console.log("change detected: " + newValue);
+						// 	});
+					// $window.location.reload();
 			 }
-
 		});
 	};
 
+	chageUserStatus = function (){
+		$scope.userStatus = true;
+	};
 });
