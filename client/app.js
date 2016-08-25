@@ -1,7 +1,7 @@
 var myApp = angular.module('Myapp', ['ngRoute']);
 
 // We instantiate our application and we inject ngrouter so that it's available
-// and so that we can use it to set up our routes below. 
+// and so that we can use it to set up our routes below.
 
 
 
@@ -10,10 +10,34 @@ var myApp = angular.module('Myapp', ['ngRoute']);
 (function(){
 	myApp.config(function($routeProvider){
 		$routeProvider
-			.when('/', 
+
+			.when('/',
 			{
-				// controller: 'indexController', don't need this
-				templateUrl: "partials/index.html"
+				controller: 'indexController',
+				templateUrl: "partials/login.html"
 			})
-	})
+			.when('/login',
+			{
+				controller: 'indexController',
+				templateUrl: "partials/login.html"
+			})
+			.when('/register',
+			{
+				controller: 'indexController',
+				templateUrl: "partials/register.html"
+			})
+      .when('/termsConditions',
+			{
+				controller: 'indexController',
+				templateUrl: "partials/termsConditions.html"
+			})
+			.when('/wall',
+			{
+				controller: 'indexController',
+				templateUrl: "partials/wall.html"
+			})
+			.otherwise({
+            redirectTo: '/'
+        });
+	});
 }());

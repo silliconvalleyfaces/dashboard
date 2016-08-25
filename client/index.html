@@ -1,201 +1,182 @@
 <!doctype html>
+<!--[if lt IE 7]><html lang="en" class="no-js ie6"><![endif]-->
+<!--[if IE 7]><html lang="en" class="no-js ie7"><![endif]-->
+<!--[if IE 8]><html lang="en" class="no-js ie8"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js" ng-app = 'Myapp'>
+<!--<![endif]-->
 
-<html ng-app = 'Myapp'>
 <head>
-<title>Welcome!</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A safe place and private way to stay in touch!">
-<meta name="author" content="Coding Dojo Scrum Team">
 
-<script src="angular/angular.js"></script>
-<script src="angular-route/angular-route.js"></script>
-<link rel='stylesheet' href='../../../style.css'>
-
-<script src = "app.js"></script>
-<script src = "/controllers/indexController.js"></script>
-<script src = "/factories/postsFactory.js"></script>
-<script src="https://use.fontawesome.com/3b9b16c0a6.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
-
-
+    <meta charset="UTF-8">
+    <title>Silicon Valley FACES</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="A safe place and private way to stay in touch!">
+    <meta name="author" content="Coding Dojo Scrum Team">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 <body ng-controller='indexController'>
-	<nav class="navbar navbar-default navbar-fixed-top"> <!-- id="nav-color" -->
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand navbar-left" href="#">
-					<img alt="SVF Logo" src="...">
-				</a>
-			</div>
-			<!-- </div> --> <!-- remove if you want to cover menu button -->
-			<!-- Navigation -->
-			<a id="menu-toggle" class="btn-dark menu-align"><i class="fa fa-bars" style="font-size: 200%"></i></a>
-			<nav id="sidebar-wrapper">
-				<ul class="sidebar-nav navbar-brand navbar-right">
-					<li class="sidebar-brand">
-						<b><a href="/" onclick=$("#menu-close").click(); style="Helvetica Neue">Silicon Valley Faces</a></b>
-					</li>
-					<li>
-						<a href="" onclick=$("#menu-close").click(); data-toggle="modal" data-target="#mkPostModal">Make a Post</a>
-					</li>
-					<li>
-						<a href="" onclick=$("#menu-close").click(); data-toggle="modal" data-target="#editProfileModal">Profile</a>
-					</li>
-					<li>
-						<a href="" onclick=$("#menu-close").click(); data-toggle="modal" data-target="#findUserModal">Find a Friend</a>
-					</li>
-					<li role="separator" class="divider"></li>
-					<li>
-						<a href="#termsConditions" onclick=$("#menu-close").click();>Terms & Conditons</a>
-					</li>
-					<li>
-						<a href="#logout" onclick=$("#menu-close").click();>Logout</a>
-					</li>
-					<a id="menu-close" class="btn-light toggle"><i class="fa fa-times" style="font-size: 25px"></i></a> <!-- ADD IF covers menu -->
-				</ul>
-			</nav>
-		</div>
-	</nav>
-	<!-- Modal -->
-	<div class="modal fade" id="mkPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Make a Post</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label for="title" class="col-sm-2 control-label">Title</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="postTitle" placeholder="Enter title" ng-model="post.title">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="imgURL" class="col-sm-2 control-label" >Image (url):</label>
-							<div class="col-sm-10">
-								<input class="form-control" name="url" type="text" ng-model="post.url" placeholder="http://" >
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="message" class="col-sm-2 control-label">Message</label>
-							<div class="col-sm-10">
-								<textarea class="form-control" rows="3" ng-model='post.text'></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-12">
-								<button type="button" class="btn btn-primary pull-right" ng-click='addPost()' data-dismiss = "modal">Post</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<!-- <h4 class="modal-title" id="myModalLabel">Edit Profile</h4> -->
-				</div>
-				<div class="modal-body">
 
-					<div w3-include-html="firstProject.html"></div>
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="js/rs-plugin/css/settings.css">
+
+    <script type="text/javascript" src="js/modernizr.custom.32033.js"></script>
 
 
 
 
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="css/eco.css">
+    <link rel='stylesheet' href='css/style.css'>
+    <link rel='stylesheet' href='../../../style.css'>
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+    <script src = "app.js"></script>
+    <script src = "/controllers/indexController.js"></script>
+    <script src = "/factories/postsFactory.js"></script>
+    <script src = "/factories/usersFactory.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="https://use.fontawesome.com/3b9b16c0a6.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+
+</head>
+
+<body ng-controller='indexController'>
+
+    <div class="pre-loader">
+        <div class="load-con">
+            <img src="img/svfLogo3.jpeg" class="animated fadeInDown" alt=""> <!-- Logo piceture here -->
+            <div class="spinner">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+            </div>
+        </div>
+    </div>
+
+<header>
+        <nav class="navbar navbar-default " role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button id="circleButton" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="fa fa-bars fa-lg"></span>
+                        </button>
+                        <a class="navbar-brand" href="#/">
+                          <img src="img/svfLogo.jpeg" alt="" class="logo" >
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                        <ul class="nav navbar-nav navbar-right" id="navButton" >
+                            <li ><a href="#/login">Login</a>
+                            </li>
+                            <li><a href="#/register">Register</a>
+                            </li>
+                            <!-- <li><a href="#/termsConditions">Terms & Conditions</a>
+                            </li> -->
+                            <!-- <li><a href="#/posts">Make a Post</a>
+                            </li>
+                            <li><a href="#/profile">Profile</a>
+                            </li>
+                            <li><a  href="#/findFriends">Find Friends</a>
+                            </li>
+                            <li><a href="#/logout">Logout</a>
+                            </li> -->
+                            <li ng-if="loggedInUser.data[0] != null"><a href="/logout">Log Out</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-->
+        </nav>
+
+</header>
+
+        <div ng-view=''></div>
+
+    <div class="wrapper">
 
 
+<footer>
+        <div class="container">
+
+            <a href="#" class="scrollpoint sp-effect3">
+                <img src="img/svfLogo.jpeg" alt="" class="logo">
+            </a>
+            <!-- <div class="social">
+                <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-twitter fa-lg"></i></a>
+                <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-google-plus fa-lg"></i></a>
+                <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-facebook fa-lg"></i></a>
+            </div> -->
+            <div class="rights">
+                <p>Copyright &copy; 2016</p>
+                <!-- <p>Template by <a href="http://www.scoopthemes.com" target="_blank">ScoopThemes</a></p> -->
+                <h4><a href="#/termsConditions">Terms and Conditions</a></h4>
+
+            </div>
+        </div>
+</footer>
+
+    </div>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/placeholdem.min.js"></script>
+    <script src="js/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+    <script src="js/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script>
+        $(document).ready(function() {
+            appMaster.preLoader();
+        });
+        $('.navbarItem').click(function() {
+          console.log('navbarItem clicked');
+          $('#bs-example-navbar-collapse-1').hide();
+        })
+        // $("#circleButton").click(function() {
+        //   console.log('bs-example-navbar-collapse-1');
+        //   $('#bs-example-navbar-collapse-1').slideToggle('fast');
+        // })
+        $('.fa.fa-bars').hover(function() {
+        /* Stuff to do when the mouse enters the element */
+        style='font-size: 55px'
+        }, function() {
+        /* Stuff to do when the mouse leaves the element */
+        style='font-size: 25px'
+        });
+        // Closes the sidebar menu
+        $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+        });
+        // Opens the sidebar menu
+        $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+        });
+    </script>
 
 
-
-
-
-
-					<!--<p>Hi </p><link type="html" href='./firstProject.html'>-->
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="findUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Find a Friend</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label for="findFriend" class="col-sm-2 control-label">Search</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="findFriend" placeholder="Provide Friend's Name">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-12">
-								<button type="submit" class="btn btn-primary pull-right" data-dismiss="modal">Search</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
-
-
-
-<div ng-view = ''></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script>
-	$('.fa.fa-bars').hover(function() {
-	/* Stuff to do when the mouse enters the element */
-	style='font-size: 55px'
-	}, function() {
-	/* Stuff to do when the mouse leaves the element */
-	style='font-size: 25px'
-	}); 
-	// Closes the sidebar menu
-	$("#menu-close").click(function(e) {
-	e.preventDefault();
-	$("#sidebar-wrapper").toggleClass("active");
-	});
-	// Opens the sidebar menu
-	$("#menu-toggle").click(function(e) {
-	e.preventDefault();
-	$("#sidebar-wrapper").toggleClass("active");
-	});
-</script>
 
 <script src="http://www.w3schools.com/lib/w3data.js"></script>
 <script> w3IncludeHTML(); </script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </body>
+
 </html>
