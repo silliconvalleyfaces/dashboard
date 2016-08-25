@@ -49,8 +49,7 @@ myApp.controller('indexController', function($scope, $location, $window, postsFa
 			console.log(data);
 			if(data.data.status === 201){
 					$location.url('/wall');
-					// $window.location.href = '/wall';
-					// $window.location.reload();
+					$window.location.reload();
 			}
 		});
 	};
