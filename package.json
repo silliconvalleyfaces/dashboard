@@ -2,6 +2,7 @@
   "name": "SVF",
   "version": "0.0.1",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "latest",
     "cookie-parser": "^1.4.3",
     "express": "~4.2.0",

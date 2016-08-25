@@ -12,6 +12,21 @@ myApp.controller('indexController', function($scope, $location, $window, postsFa
  		$scope.posts = data;
  	});
 
+	$scope.feed = true; 
+
+	$scope.search = {};
+
+	$scope.reset = function(){
+		postsFactory.getPosts(function(data){
+	 		console.log(data);
+	 		$scope.posts = data; 
+	 		$scope.feed = true;
+	 		$scope.search.text = null;
+	 	});
+
+	}
+
+
 	$scope.addPost = function(){
  		console.log('hello');
  		// PLACEHOLDER WILL LATER BE THE LOGGED IN USER'S ID
@@ -33,13 +48,14 @@ myApp.controller('indexController', function($scope, $location, $window, postsFa
  	};
 
  	$scope.searchPosts = function(search){
- 		console.log('at the searchPosts controller function');
+ 		console.log('at the searchPosts controller function'); 
  		postsFactory.searchPosts(search, function(data){
- 			console.log(data);
- 		});
  			console.log("search results:", data);
-
- 	};
+ 			$scope.posts = data;
+ 			$scope.feed = false;
+ 		})		
+ 	}
+ 	
 
 // Login and Register
 	$scope.register = function (){
@@ -59,15 +75,15 @@ myApp.controller('indexController', function($scope, $location, $window, postsFa
 		console.log('login information', $scope.loginInfo);
 		usersFactory.login($scope.loginInfo, function (data){
 			console.log("usersFactory.login", data);
-       if (data.data.status === 500){
+       		if (data.data.status === 500){
 				 	$scope.errorMsg = data.data.message;
-			 }
-			 else if(data.data.status === 200){
+			}
+			else if(data.data.status === 200){
 				 	$location.url('/wall');
 					$window.location.reload();
-			 }
-
+			}
 		});
 	};
 
 });
+

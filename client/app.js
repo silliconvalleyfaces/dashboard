@@ -37,7 +37,7 @@ var myApp = angular.module('Myapp', ['ngRoute']);
 				templateUrl: "partials/wall.html"
 			})
 			.otherwise({
-            redirectTo: '/'
-        });
+	            redirectTo: '/'
+	        });
 	});
 }());
