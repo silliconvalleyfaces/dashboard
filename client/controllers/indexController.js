@@ -8,6 +8,21 @@ myApp.controller('indexController', function($scope, postsFactory){
  		$scope.posts = data
  	});
 
+	$scope.feed = true; 
+
+	$scope.search = {};
+
+	$scope.reset = function(){
+		postsFactory.getPosts(function(data){
+	 		console.log(data);
+	 		$scope.posts = data; 
+	 		$scope.feed = true;
+	 		$scope.search.text = null;
+	 	});
+
+	}
+
+
 	$scope.addPost = function(){
  		console.log('hello');
  		// PLACEHOLDER WILL LATER BE THE LOGGED IN USER'S ID 
@@ -32,6 +47,8 @@ myApp.controller('indexController', function($scope, postsFactory){
  		console.log('at the searchPosts controller function'); 
  		postsFactory.searchPosts(search, function(data){
  			console.log("search results:", data);
+ 			$scope.posts = data;
+ 			$scope.feed = false;
  		})		
  	}
  	

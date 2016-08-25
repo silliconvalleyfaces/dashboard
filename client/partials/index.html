@@ -1,6 +1,7 @@
 <form>
 	<input type="text" name="search" ng-model="search.text" placeholder="Name, Post Title, Post Content">
 	<input type="submit" name="submit" ng-click="searchPosts(search)" value="Search">
+	<button ng-if='feed == false' ng-click = 'reset()'>Back to feed</button>
 </form>
 
 
@@ -9,6 +10,7 @@
 	<ul ng-repeat = 'x in posts'>
 		<h4>{{x.title}}</h4>
 		{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}
+		<button ng-click = 'deletePost(x._id)'>Delete</button>
 	</ul>
 
 
