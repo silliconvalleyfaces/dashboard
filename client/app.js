@@ -13,7 +13,7 @@ var myApp = angular.module('Myapp', ['ngRoute']);
 			.when('/',
 			{
 				controller: 'indexController',
-				templateUrl: "partials/main.html"
+				templateUrl: "partials/login.html"
 			})
 			.when('/login',
 			{
@@ -29,6 +29,11 @@ var myApp = angular.module('Myapp', ['ngRoute']);
 			{
 				controller: 'indexController',
 				templateUrl: "partials/termsConditions.html"
+			})
+			.when('/wall',
+			{
+				controller: 'indexController',
+				templateUrl: "partials/wall.html"
 			})
 			.otherwise({
             redirectTo: '/'

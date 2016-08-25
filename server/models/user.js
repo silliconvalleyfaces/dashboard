@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var passportLocalMongoose = require('passport-local-mongoose');
+
 var UserSchema = new mongoose.Schema({
     first_name: String,
     last_name : String,
@@ -7,6 +10,11 @@ var UserSchema = new mongoose.Schema({
     phone : Number,
     profile_pic : String
 });
+
+// the following codes are for passport
+// they need to be above mongoose.model('users', UserSchema);
+UserSchema.plugin(passportLocalMongoose);
+module.exports = mongoose.model('users', UserSchema);
 
 mongoose.model('users', UserSchema);
 // Validations

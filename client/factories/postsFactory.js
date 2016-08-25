@@ -33,5 +33,16 @@ myApp.factory('postsFactory', function($http){
  		})
  	}
 
+ 	factory.deletePost = function(postId, callback){
+		console.log('deletePost at factory', postId)
+		$http.post('/posts/' + postId + '/destroy').then(function(data){
+			if(data.error){
+				callback(data);
+			} else {
+				callback(data);
+			}
+		})
+	}
+
 	return factory;
 })

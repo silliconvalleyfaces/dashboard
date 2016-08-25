@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> Create your SVF Profile </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+h1{
+	margin-left: 140px
+}
+a:hover{
+	color:blue;
+	background-color: transparent;
+	text-decoration: underline;
+}
+.container input{
+	width:20%;
+	height:30px;
+
+}
+input[type=text];focus{
+	border:2px solid blue;
+	border-radius: 4px
+	font-size:100%;
+}
+input[type=email]{
+	float:left;
+}
+input[type=checkbox]{
+	vertical-align:middle;
+	position:left;
+	bottom:-5px;
+}
+
+
+textarea{
+	width:20%;
+	height:150px;
+	resize:none;
+}
+</style>
+</head>
+<body>
+		<h1 align="left"> Create Your Profile </h1>
+		
+		
+		<div class="container">
+		<form>
+			First Name<br><br>
+			<input type="text" name="txtFirstName" maxlength="25" placeholder="Enter First Name"><br><br>
+			Last  Name<br><br>
+			<input type="text" name="txtLastName" maxlength="25" placeholder="Enter Last Name"><br><br>
+			Phone<br><br>	   
+			<input type="number" name="nbrPhone" maxlength="10" placeholder="Enter Phone Number ">
+			<!--<input type="checkbox" name="chkemailshare">Share-->
+			<br><br>
+			Email<br><br>
+	        <input type="email" name="email" maxlength="25" placeholder="Enter Email"><br>
+	        
+	        <!--<input type="checkbox" name="chkphoneshare">Share-->
+	        <br><br>
+			Password<br><br>
+		    <input type="password" name="txtPassword" maxlength="20" placeholder="Enter Password">
+		    <br><br>
+		    
+			<!--<br>About Response <input type="text" name="txtaboutresponse" maxlength="20">-->
+			Place Picture Link here<br><br>
+			<textarea>your link goes here...</textarea>
+			<!--<input type="checkbox" name="chkphoneshare"> Share-->
+			<br><br>
+			<input type="submit" value="Save"><br>
+			<br>
+			<label> By saving you agree to our </label><a href> Terms of Use </a> and <a href> Privacy Policy </a><br><br>
+
+			<div class="checkbox">
+      		<label><input type="checkbox" value="chkbox">By checking this I agree to share my email and phone number to other members of SVF family (optional)</label>
+    		</div> 
+		    
+		   
+		   <!--<label for="mychk">By checking this I agree to share my email and phone number to other members of SVF family (optional) </label>-->
+			
+		</form>
+	</div>
+</body>
+</html>
+
+
