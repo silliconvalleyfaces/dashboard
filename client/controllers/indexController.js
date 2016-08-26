@@ -3,14 +3,12 @@ $scope.userStatus = false;
 
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
-		console.log(data.data[0]._id);
 		if($scope.loggedInUser){
 			$scope.user_id = data.data[0]._id;
-
 		}
 		console.log('$scope.loggedInUser', $scope.loggedInUser);
 	});
-	// THIS WILL LATER BE THE REAL LOGGED IN USER'S ID
+	// // THIS WILL LATER BE THE REAL LOGGED IN USER'S ID
 	// $scope.user_id = 'placeholder';
 
 	postsFactory.getPosts(function(data){
@@ -35,7 +33,7 @@ $scope.userStatus = false;
 
 	$scope.addPost = function(){
  		console.log('hello');
- 		// PLACEHOLDER WILL LATER BE THE LOGGED IN USER'S ID
+
  		$scope.post._user_id = $scope.user_id;
  		postsFactory.addPost($scope.post, function(data){
 			console.log(data);
