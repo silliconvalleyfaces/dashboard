@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 var bcrypt = require('bcrypt');
-var password = require('password-hash-and-salt');
+// var password = require('password-hash-and-salt');
 
 var UserSchema = new mongoose.Schema({
     first_name: {
