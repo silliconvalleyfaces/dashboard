@@ -34,7 +34,7 @@ var myApp = angular.module('Myapp', ['ngRoute']);
 			.when('/wall',
 			{
 				controller: 'indexController',
-				templateUrl: "partials/wall.html"
+				templateUrl: "partials/index.html"
 			})
 			.otherwise({
             redirectTo: '/'
