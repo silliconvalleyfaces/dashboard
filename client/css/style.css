@@ -8,7 +8,7 @@ body {
 }
 
 /*#nav-color{
-	background-color: #141D3D
+    background-color: #141D3D
 }*/
 
 /*.navbar.navbar-default.navbar-static-top{
@@ -28,7 +28,19 @@ body {
     border-right: 1px solid transparent;
     border-left: 1px solid transparent;
     border-bottom: 1px solid black;
-    border-radius: none;
+    border-radius: 0;
+}
+
+.searchForm{
+    margin-top: 0;
+}
+
+.btn-lg.searchBtn{
+    border-radius: 0;
+}
+
+.btn.deleteBtn{
+    border-radius: 0;
 }
 
 .search-input:focus {
@@ -52,7 +64,7 @@ body {
 }
 
 .menu-align{
-	margin: 13px 15px 0 0;
+    margin: 13px 15px 0 0;
 }
 
 /* Custom Button Styles */
@@ -60,7 +72,7 @@ body {
 .btn-dark {
     border-radius: 0;
     color: #5679ED;
-	background-color: transparent;
+    background-color: transparent;
 }
 
 .btn-light {
@@ -73,7 +85,7 @@ body {
 .btn-dark:focus,
 .btn-dark:active {
     color: #fff;
-	background-color: #5679ED;
+    background-color: #5679ED;
 }
 
 .btn-light:hover,
