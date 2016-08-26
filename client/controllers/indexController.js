@@ -54,8 +54,8 @@ $scope.userStatus = false;
  			console.log("search results:", data);
  			$scope.posts = data;
  			$scope.feed = false;
- 		})
- 	}
+ 		});
+ 	};
 
 
 // Login and Register

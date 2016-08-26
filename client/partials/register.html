@@ -1,56 +1,61 @@
-
-
 <div class="wrapper">
-  <section id="login" class="doublediagonal">
-      <div class="container">
-          <div class="">
-              <h1>Register</h1>
-              <div class="divider"></div>
-              <p>For more info and support, contact us!</p>
-          </div>
-          <div class="row">
-              <div class="col-md-12">
-                  <div class="row">
-                      <div class="col-md-8 col-sm-8 sp-effect1">
-                          <form name="registerForm">
+    <section id="login" class="doublediagonal">
+        <div class="container">
+            <div class="">
+                <h1>Register</h1>
+                <div class="divider"></div>
+                <p>For more info and support, contact us!</p>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 sp-effect1">
+                            <form name="registerForm">
 
-                              <div class="form-group">
-                                <label for="">First Name:</label>
-                                  <input type="text" class="form-control" name="firstName" placeholder="First Name" ng-model="new_user.firstName" ng-minlength='2' required>
-                                  <span ng-show='registerForm.firstName.$touched && registerForm.firstName.$error.required' style="color:red">Name field cannot be empty!</span>
-                                  <span ng-show='registerForm.firstName.$touched && registerForm.firstName.$error.minlength' style="color:red">First name must have at least 2 chars!</span>
-                              </div>
-                              <div class="form-group" >
-                                <label for="">Last Name:</label>
-                                  <input type="text" class="form-control" name="lastName" placeholder="Last Name" ng-model="new_user.lastName" ng-minlength='2' required>
-                                  <span ng-show='registerForm.lastName.$touched && registerForm.lastName.$error.required' style="color:red">Name field cannot be empty!</span>
-                                  <span ng-show='registerForm.lastName.$touched && registerForm.lastName.$error.minlength' style="color:red">Last name must have at least 2 chars!</span>
-                              </div>
-                              <div class="form-group">
-                                <label for="">Email:</label>
-                                  <input type="email" class="form-control" name="email" placeholder="Your email" ng-model="new_user.email" required>
-                                  <span ng-show='registerForm.email.$touched && registerForm.email.$error.required' style="color:red">Email field cannot be empty!</span>
-                              </div>
-                              <div class="form-group">
-                                <label for="">Password:</label>
-                                  <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="new_user.password" required>
-                                  <span ng-show='registerForm.password.$touched && registerForm.password.$error.required' style="color:red">Password cannot be empty!</span>
-                              </div>
-                              <div class="form-group">
-                                <label for="">Confirm Password:</label>
-                                  <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" ng-model="new_user.confirmPassword" required>
-                                  <span ng-show='registerForm.confirmPassword.$touched && registerForm.confirmPassword.$error.required' style="color:red">Please confirm your password!</span>
-                              </div>
+                                <div class="form-group">
+                                    <label for="">First Name:</label>
+                                    <input type="text" class="form-control" name="firstName" placeholder="First Name" ng-model="new_user.firstName" ng-minlength='2' required>
+                                    <span ng-show='registerForm.firstName.$touched && registerForm.firstName.$error.required' style="color:red">Name field cannot be empty!</span>
+                                    <span ng-show='registerForm.firstName.$touched && registerForm.firstName.$error.minlength' style="color:red">First name must have at least 2 chars!</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Last Name:</label>
+                                    <input type="text" class="form-control" name="lastName" placeholder="Last Name" ng-model="new_user.lastName" ng-minlength='2' required>
+                                    <span ng-show='registerForm.lastName.$touched && registerForm.lastName.$error.required' style="color:red">Name field cannot be empty!</span>
+                                    <span ng-show='registerForm.lastName.$touched && registerForm.lastName.$error.minlength' style="color:red">Last name must have at least 2 chars!</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Email:</label>
+                                    <input type="email" class="form-control" name="email" placeholder="Your email" ng-model="new_user.email" required>
+                                    <span ng-show='registerForm.email.$touched && registerForm.email.$error.required' style="color:red">Email field cannot be empty!</span>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error':registerForm.password.$invalid && !registerForm.password.$pristine}">
+                                    <label for="">Password:</label>
 
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="new_user.password" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required>
 
-                              <!-- <button type="submit" class="btn btn-primary btn-lg">Submit</button> ng-disabled="registerForm.$invalid"-->
-                              <input  class="btn btn-primary btn-lg" type="submit" value="Register"  ng-click="register()">
+                                    <span ng-show='registerForm.password.$touched && registerForm.password.$error.required' style="color:red">Password cannot be empty!</span>
+                                    <p ng-show="registerForm.password.$error.minlength" class="error" style="color:red">
+                                        Password must be between 8 and 20 characters.</p>
+                                    <p ng-show="registerForm.password.$error.pattern" class="error" style="color:red">
+                                        Must contain 1 LOWER &amp; UPPERCASE letter, and 1 NON-ALPHA character (a number or a symbol.)</p>
 
-                          </form>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error': registerForm.confirmPassword.$invalid && !registerForm.confirmPassword.$pristine}">
+                                    <label for="">Confirm Password:</label>
+                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" ng-model="new_user.confirmPassword" valid-password-c="new_user.password" required>
+                                    <span ng-show='registerForm.confirmPassword.$touched && registerForm.confirmPassword.$error.required' style="color:red">Please confirm your password!</span>
+                                    <p ng-show="registerForm.confirmPassword.$error.noMatch" class="error" style="color:red">Passwords do not match. Please check again!</p>
+                                </div>
+
+                                <input class="btn btn-primary btn-lg" type="submit" value="Register" ng-disabled="registerForm.$invalid" ng-click="register()">
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
