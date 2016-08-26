@@ -59,7 +59,7 @@ module.exports = (function (){
           console.log(err);
           res.send({status:500, message: 'Sorry, the user account does not exist. Please check again!', type:'internal'});
         }
-        else if(!user.validPassword(verifyPassword) ){
+        else if(!isvalidPassword(user, req.body.password)){
           console.log(err);
           // err = "Incorrect password. Please check again!";
           res.send({status:500, message: 'Invailid password. Please check again!', type:'internal'});
