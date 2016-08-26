@@ -28,19 +28,19 @@ var UserSchema = new mongoose.Schema({
       required : true
     },
     phone : {
-      type : Number,
-      required : true,
+      type : Number
+      // required : true,
     },
     phone_share : {
      type : Boolean
    },
     profile_pic : {
-      type : String,
-      required : true
+      type : String
+      // required : true
     },
     user_level : {
-      type : Number,
-      required : true
+      type : Number
+      // required : true
     },
     _post_id: [{
       type: Schema.Types.ObjectId,
