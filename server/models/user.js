@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 var bcrypt = require('bcrypt');
-var password = require('password-hash-and-salt');
+// var password = require('password-hash-and-salt');
 
 var UserSchema = new mongoose.Schema({
     first_name: {
@@ -28,19 +28,21 @@ var UserSchema = new mongoose.Schema({
       required : true
     },
     phone : {
-      type : Number,
-      required : false,
+      type : Number
+      // required : true,
     },
     phone_share : {
      type : Boolean
    },
     profile_pic : {
       type : String,
-      required : false
+      // required : true
     },
+
     user_level : {
-      type : Number,
-      required : false
+      type : Number
+      // required : true
+
     },
     _post_id: [{
       type: Schema.Types.ObjectId,
