@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var PostSchema = new mongoose.Schema({
-    _user :  [{type: Schema.Types.ObjectId, ref: 'User'}],
-    // FOR NOW USER ID IS A PLACEHOLDER, LATER WE WILL USE THIS ONE:
-    // _user_id: [{type: Schema.Types.ObjectId, ref: 'users'}],
+    // _user :  [{type: Schema.Types.ObjectId, ref: 'User'}],
+    // // FOR NOW USER ID IS A PLACEHOLDER, LATER WE WILL USE THIS ONE:
+    _user_id: [{type: Schema.Types.ObjectId, ref: 'users'}],
     title: {
       type:  String,
       required : true,
