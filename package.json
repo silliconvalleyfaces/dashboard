@@ -2,7 +2,8 @@
   "name": "SVF",
   "version": "0.0.1",
   "dependencies": {
-    "bcrypt": "^0.8.7",
+    "angular-password": "^1.0.1",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "latest",
     "cookie-parser": "^1.4.3",
     "express": "~4.2.0",

@@ -13,6 +13,21 @@ $scope.userStatus = false;
  		$scope.posts = data;
  	});
 
+	$scope.feed = true;
+
+	$scope.search = {};
+
+	$scope.reset = function(){
+		postsFactory.getPosts(function(data){
+	 		console.log(data);
+	 		$scope.posts = data;
+	 		$scope.feed = true;
+	 		$scope.search.text = null;
+	 	});
+
+	}
+
+
 	$scope.addPost = function(){
  		console.log('hello');
  		// PLACEHOLDER WILL LATER BE THE LOGGED IN USER'S ID
@@ -36,11 +51,12 @@ $scope.userStatus = false;
  	$scope.searchPosts = function(search){
  		console.log('at the searchPosts controller function');
  		postsFactory.searchPosts(search, function(data){
- 			console.log(data);
- 		});
  			console.log("search results:", data);
+ 			$scope.posts = data;
+ 			$scope.feed = false;
+ 		})
+ 	}
 
- 	};
 
 // Login and Register
 	$scope.register = function (){
@@ -60,31 +76,16 @@ $scope.userStatus = false;
 		console.log('login information', $scope.loginInfo);
 		usersFactory.login($scope.loginInfo, function (data){
 			console.log("usersFactory.login", data);
-       if (data.data.status === 500){
+       		if (data.data.status === 500){
 				 	$scope.errorMsg = data.data.message;
-			 }
-			 else if(data.data.isLoggedIn){
-				 console.log(data);
-				 chageUserStatus();
-				//  $timeout(function () {
-				 //
-				// 		 $scope.userStatus = true;
-				 //
-				//  }, 1000);
-				//  $scope.$apply(function (){
-				// 	 $scope.userStatus = true;
-				//  });
-				 console.log(" $scope.userStatus", $scope.userStatus);
-						$location.url('/wall');
-						//
-						// $scope.$watch(function() {
-						// 		$scope.isLoggedIn = true;
-  					// 		return $scope.isLoggedIn;
-						// 	}, function(newValue, oldValue) {
-  					// 	console.log("change detected: " + newValue);
-						// 	});
+
+			}
+			else if(data.data.status === 200){
+				console.log(" $scope.userStatus", $scope.userStatus);
+				 	$location.url('/wall');
 					// $window.location.reload();
-			 }
+			}
+
 		});
 	};
 

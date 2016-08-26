@@ -1,20 +1,29 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('users');
 var passport = require('passport');
+var bCrypt = require('bcrypt-nodejs');
+
+var secretPassword = function(password){
+    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+}
+
+var isvalidPassword = function(user, password){
+    return bCrypt.compareSync(password, user.password);
+}
+
 
 module.exports = (function (){
   return {
     createUser: function (req, res){
       console.log("*@*@* Back-end controller -- users.js -- createUser ***");
       console.log('*@*@* req.body', req.body);
-      var bcryptPassword = req.body.password;
-      console.log('bcryptPassword', bcryptPassword);
-      var user = new User();
-        user.first_name = req.body.firstName;
-        user.last_name = req.body.lastName;
-        user.email = req.body.email;
-        user.password = user.generateHash(bcryptPassword);
 
+      var user = new User({
+        first_name: req.body.firstName,
+        last_name : req.body.lastName,
+        email : req.body.email,
+        password : secretPassword(req.body.password)
+      });
 
       user.save(function (err){
         if(err){
@@ -28,10 +37,6 @@ module.exports = (function (){
               console.log('req.session', req.session);
               console.log('redirect to this URL', '/#/wall/'+ req.session.userId );
               res.send({status:201, isLoggedIn: true, type:'internal'});
-            //   passport.authenticate('local')(req, res, function(){
-            //     console.log(' $$$$$$$$$  passport.authenticate');
-            //     res.redirect('/#/wall');
-            // });
         }
       });
     },
@@ -61,13 +66,18 @@ module.exports = (function (){
           // res.json(err);
         }
         else{
-          if(user.validPassword(verifyPassword) ){
-            req.session.userFirstName = user.first_name;
-            req.session.userLastName = user.last_name;
-            req.session.userId = user._id;
-            req.session.userEmail = user.email;
-            res.send({status:201, isLoggedIn: true, type:'internal'});
-            // res.redirect('/#/wall');
+
+            if(isvalidPassword(user, req.body.password)){
+
+
+          //   // eddys work
+          // if(req.body.password === user.password){
+                req.session.userFirstName = user.first_name;
+                req.session.userLastName = user.last_name;
+                req.session.userId = user._id;
+                req.session.userEmail = user.email;
+                res.send({status:200, type:'internal'});
+
           }
         }
       });
