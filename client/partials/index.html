@@ -1,6 +1,7 @@
 <form>
 	<input type="text" name="search" ng-model="search.text" placeholder="Name, Post Title, Post Content">
 	<input type="submit" name="submit" ng-click="searchPosts(search)" value="Search">
+	<button ng-if='feed == false' ng-click = 'reset()'>Back to feed</button>
 </form>
 
 

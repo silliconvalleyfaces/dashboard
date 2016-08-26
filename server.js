@@ -9,7 +9,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
+var bcrypt =  
 app.use( express.static( path.join( root, 'client' )));
 app.use(express.static(path.join(__dirname, '/client/css')));
 app.use( express.static( path.join( root, 'bower_components' )));
