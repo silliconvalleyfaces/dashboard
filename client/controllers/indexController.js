@@ -76,7 +76,7 @@ $scope.userStatus = false;
 		console.log('login information', $scope.loginInfo);
 		usersFactory.login($scope.loginInfo, function (data){
 			console.log("usersFactory.login", data);
-       		if (data.data.status === 500){
+       		if (data.data.status == null){
 				 	$scope.errorMsg = data.data.message;
 
 			}

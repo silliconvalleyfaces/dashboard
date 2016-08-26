@@ -20,16 +20,14 @@
 <!-- End of Search Bar   -->
 
 <!--  Loading posts from database-->
-    <div class="container-fluid">
-        <ul ng-repeat = 'x in posts' style="padding-left: 0;">
+    <ul ng-repeat = 'x in posts' style="padding-left: 0;">
         <div class="container-fluid">
                 <h4>{{x.title}}</h4>
                 <img class="img-responsive" ng-if="x.url" src="{{x.url}}"  alt="img">
                 {{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}
                 <button class="btn deleteBtn btn-danger pull-right" ng-click = 'deletePost(x._id)'>Delete</button>
         </div>
-        </ul>
+    </ul>
 
 
-    </div>
 </div>
