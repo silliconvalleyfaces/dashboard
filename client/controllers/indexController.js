@@ -3,10 +3,15 @@ $scope.userStatus = false;
 
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
+		console.log(data.data[0]._id);
+		if($scope.loggedInUser){
+			$scope.user_id = data.data[0]._id;
+
+		}
 		console.log('$scope.loggedInUser', $scope.loggedInUser);
 	});
 	// THIS WILL LATER BE THE REAL LOGGED IN USER'S ID
-	$scope.user_id = 'placeholder';
+	// $scope.user_id = 'placeholder';
 
 	postsFactory.getPosts(function(data){
  		console.log(data);
@@ -31,7 +36,7 @@ $scope.userStatus = false;
 	$scope.addPost = function(){
  		console.log('hello');
  		// PLACEHOLDER WILL LATER BE THE LOGGED IN USER'S ID
- 		$scope.post._user_id = 'placeholder';
+ 		$scope.post._user_id = $scope.user_id;
  		postsFactory.addPost($scope.post, function(data){
 			console.log(data);
 			$scope.post = null;
@@ -83,6 +88,15 @@ $scope.userStatus = false;
 			else if(data.data.status === 200){
 				console.log(" $scope.userStatus", $scope.userStatus);
 				 	$location.url('/wall');
+			 		usersFactory.index(function (data){
+						$scope.loggedInUser = data;
+						console.log(data.data[0]._id);
+						if($scope.loggedInUser){
+							$scope.user_id = data.data[0]._id;
+
+						}
+						console.log('$scope.loggedInUser', $scope.loggedInUser);
+					});
 					// $window.location.reload();
 			}
 
