@@ -1,14 +1,16 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('users');
 var passport = require('passport');
-var bCrypt = require('bcrypt-nodejs');
+//var bCrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcryptjs');
 
 var secretPassword = function(password){
-    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+    var salt = bcrypt.genSaltSync(10)
+    return bcrypt.hashSync(password, salt);
 }
 
-var isvalidPassword = function(user, password){
-    return bCrypt.compareSync(password, user.password);
+var isvalidPassword = function(userPassword, databasePassword){
+    return bcrypt.compareSync(userPassword, databasePassword);
 }
 
 
@@ -17,7 +19,7 @@ module.exports = (function (){
     createUser: function (req, res){
       console.log("*@*@* Back-end controller -- users.js -- createUser ***");
       console.log('*@*@* req.body', req.body);
-
+      console.log("password : secretPassword(req.body.password)",  secretPassword(req.body.password))
       var user = new User({
         first_name: req.body.firstName,
         last_name : req.body.lastName,
@@ -30,6 +32,7 @@ module.exports = (function (){
           console.log('*@*@* error ', err);
         }
         else {
+              console.log('save this user information', user)
               req.session.userFirstName = user.first_name;
               req.session.userLastName = user.last_name;
               req.session.userId = user._id;
@@ -59,7 +62,7 @@ module.exports = (function (){
           console.log(err);
           res.send({status:500, message: 'Sorry, the user account does not exist. Please check again!', type:'internal'});
         }
-        else if(!user.validPassword(verifyPassword) ){
+        else if(!isvalidPassword(req.body.password, user.password) ){
           console.log(err);
           // err = "Incorrect password. Please check again!";
           res.send({status:500, message: 'Invailid password. Please check again!', type:'internal'});
@@ -67,7 +70,7 @@ module.exports = (function (){
         }
         else{
 
-            if(isvalidPassword(user, req.body.password)){
+            if(isvalidPassword(req.body.password, user.password)){
 
 
           //   // eddys work
