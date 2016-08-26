@@ -56,7 +56,7 @@ myApp.directive('validPasswordC', function() {
 			.when('/wall',
 			{
 				controller: 'indexController',
-				templateUrl: "partials/wall.html"
+				templateUrl: "partials/index.html"
 			})
 			.otherwise({
 	            redirectTo: '/'

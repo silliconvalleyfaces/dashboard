@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
 // var password = require('password-hash-and-salt');
 
 var UserSchema = new mongoose.Schema({
@@ -35,12 +35,14 @@ var UserSchema = new mongoose.Schema({
      type : Boolean
    },
     profile_pic : {
-      type : String
+      type : String,
       // required : true
     },
+
     user_level : {
       type : Number
       // required : true
+
     },
     _post_id: [{
       type: Schema.Types.ObjectId,
@@ -62,12 +64,12 @@ UserSchema.plugin(passportLocalMongoose);
 
 //bcrype method
 // take a user's password and add salt to it
-UserSchema.methods.generateHash = function (password){
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
-};
-UserSchema.methods.validPassword = function(password){
-  return bcrypt.compareSync(password, this.password);
-};
+// UserSchema.methods.generateHash = function (password){
+//   return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
+// };
+// UserSchema.methods.validPassword = function(password){
+//   return bcrypt.compareSync(password, this.password);
+// };
 
 
 module.exports = mongoose.model('users', UserSchema);
