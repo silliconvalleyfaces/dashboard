@@ -1,12 +1,28 @@
-<body ng-controller="indexController" >
-  <h2>Wall Page</h2>
-  {{ userStatus }}
-  <div ng-if="loggedInUser.data[0] != null" class="container">
+<body ng-controller="indexController">
+    <h2>Wall Page</h2> User Status: {{ userStatus }}
+    <br>
+<!-- Search Bar   -->
+    <form>
+        <input type="text" name="search" ng-model="search.text" placeholder="Name, Post Title, Post Content">
+        <input type="submit" name="submit" ng-click="searchPosts(search)" value="Search">
+    </form>
+<!-- End of Search Bar   -->
 
+<!-- Search Bar   -->
+    <div ng-if="loggedInUser.data[0] != null" class="container">
+        ID: {{ loggedInUser.data[0]._id }}
+        <br> First Name: {{ loggedInUser.data[0].first_name }}
+        <br> Last Name: {{ loggedInUser.data[0].last_name }}
+        <br> Email: {{ loggedInUser.data[0].email }}
+        <br>
+    </div>
+<!-- End of user information -->
 
-  ID:         {{ loggedInUser.data[0]._id }}<br>
-  First Name: {{ loggedInUser.data[0].first_name }}<br>
-  Last Name:  {{ loggedInUser.data[0].last_name }}<br>
-  Email:      {{ loggedInUser.data[0].email }}<br>
+<!--  Loading posts from database-->
+    <div>
+        <ul ng-repeat='x in posts'>
+            <h4>{{x.title}}</h4> {{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}
+            <button ng-if="user_id == x._user_id" ng-click='deletePost(x._id)'>Delete Post</button>
+        </ul>
+    </div>
 </body>
-</div>

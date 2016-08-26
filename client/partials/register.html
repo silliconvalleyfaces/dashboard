@@ -38,14 +38,17 @@
                                     <p ng-show="registerForm.password.$error.minlength" class="error" style="color:red">
                                         Password must be between 8 and 20 characters.</p>
                                     <p ng-show="registerForm.password.$error.pattern" class="error" style="color:red">
-                                        Must contain 1 LOWER &amp; UPPERCASE letter, and 1 NON-ALPHA character (a number or a symbol.)</p>
+                                        Must contain:<br>
+                                        &bull;1 LOWER &amp; UPPERCASE letter <br>
+                                        &bull;1 NON-ALPHA character (a number or a symbol.)
+                                      </p>
 
                                 </div>
                                 <div class="form-group" ng-class="{'has-error': registerForm.confirmPassword.$invalid && !registerForm.confirmPassword.$pristine}">
                                     <label for="">Confirm Password:</label>
                                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" ng-model="new_user.confirmPassword" valid-password-c="new_user.password" required>
                                     <span ng-show='registerForm.confirmPassword.$touched && registerForm.confirmPassword.$error.required' style="color:red">Please confirm your password!</span>
-                                    <p ng-show="registerForm.confirmPassword.$error.noMatch" class="error" style="color:red">Passwords do not match. Please check again!</p>
+                                    <p ng-show="registerForm.confirmPassword.$error.noMatch" class="error" style="color:red">Please make sure your passwords match.</p>
                                 </div>
 
                                 <input class="btn btn-primary btn-lg" type="submit" value="Register" ng-disabled="registerForm.$invalid" ng-click="register()">
