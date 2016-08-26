@@ -2,22 +2,30 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var PostSchema = new mongoose.Schema({
-    first_name: String,
-    last_name: String,
-    _user_id: String,
+    _user :  [{type: Schema.Types.ObjectId, ref: 'User'}],
     // FOR NOW USER ID IS A PLACEHOLDER, LATER WE WILL USE THIS ONE:
     // _user_id: [{type: Schema.Types.ObjectId, ref: 'users'}],
-    title: String,
-    text: String,
-    url: String,
+    title: {
+      type:  String,
+      required : true,
+      maxlength : 50
+    },
+    text: {
+      type:  String,
+      required : true,
+      maxlength : 255
+    },
+    url: {
+      type:  String,
+      maxlength : 255
+    },
     comments: [{
-      first_name: String,
-      last_name: String,
-      text: String
-    }], 
+      type: Schema.Types.ObjectId,
+      ref: 'Comments'
+    }],
     created_at: {type: Date, default: new Date}
 });
-
+module.exports = mongoose.model('posts', PostSchema);
 mongoose.model('posts', PostSchema);
 // Validations
 // MongooseSchema.path('color').required(true, 'Color cannot be blank');
