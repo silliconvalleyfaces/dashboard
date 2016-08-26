@@ -33,6 +33,7 @@ $scope.userStatus = false;
 
 	$scope.addPost = function(){
  		console.log('hello');
+
  		$scope.post._user_id = $scope.user_id;
  		postsFactory.addPost($scope.post, function(data){
 			console.log(data);
@@ -85,6 +86,15 @@ $scope.userStatus = false;
 			else if(data.data.status === 200){
 				console.log(" $scope.userStatus", $scope.userStatus);
 				 	$location.url('/wall');
+			 		usersFactory.index(function (data){
+						$scope.loggedInUser = data;
+						console.log(data.data[0]._id);
+						if($scope.loggedInUser){
+							$scope.user_id = data.data[0]._id;
+
+						}
+						console.log('$scope.loggedInUser', $scope.loggedInUser);
+					});
 					// $window.location.reload();
 			}
 
