@@ -91,6 +91,19 @@ module.exports = (function (){
       req.session.destroy();
       console.log('session data destroied -- session data: ', req.session);
       res.redirect('/');
+    },
+    searchName: function (req,res) {
+      console.log("*@*@* Back-end controller -- users.js -- searchName ***");
+      User.find({'first_name': {'$regex': req.body.name}}, function(err, users) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json(users);
+                }
+            });
+
+
     }
+
   };
 })();

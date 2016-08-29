@@ -14,18 +14,8 @@
     <meta name="description" content="A safe place and private way to stay in touch!">
     <meta name="author" content="Coding Dojo Scrum Team">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-</head>
-<body ng-controller='indexController'>
-
-
-
-
     <!-- <link rel="shortcut icon" src="img/svfLogo.jpeg"> -->
-
     <link rel="shortcut icon" src="img/svfLogo.jpeg">
-
-
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -33,9 +23,6 @@
     <link rel="stylesheet" href="js/rs-plugin/css/settings.css">
 
     <script type="text/javascript" src="js/modernizr.custom.32033.js"></script>
-
-
-
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -71,177 +58,7 @@
             </div>
         </div>
     </div>
-
-<header>
-        <nav class="navbar navbar-default " role="navigation">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button id="circleButton" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="fa fa-bars fa-lg"></span>
-                        </button>
-                        <a class="navbar-brand" href="#/">
-                          <img src="img/svfLogo.jpeg" alt="" class="logo" >
-                        </a>
-                    </div>
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                        <ul class="nav navbar-nav navbar-right" id="navButton">
-                            <li>
-                            	<a href="#/login" ng-if="loggedInUser.data[0] == null">Login</a>
-                            </li>
-                            <li>
-                            	<a href="#/register" ng-if="loggedInUser.data[0] == null">Register</a>
-                            </li>
-                            <li ng-if="loggedInUser.data[0] != null">
-                                <img src="" alt='profile_pic'>
-                                <a href="" data-toggle='modal' data-target='#uploadModal'>Upload New Picture</a>
-                            </li>
-                            <li>
-                            <li>
-								<a href="#/wall"  ng-if="loggedInUser.data[0] != null" data-toggle="modal" data-target="#mkPostModal">Make a Post</a>
-							</li>
-							<li>
-								<a href="#/wall" ng-if="loggedInUser.data[0] != null" data-toggle="modal"  data-target="#editProfileModal">Profile</a>
-							</li>
-							<li>
-								<a href="#/wall" ng-if="loggedInUser.data[0] != null" data-toggle="modal" data-target="#findUserModal">Find a Friend</a>
-							</li>
-                            <!-- <li><a href="#/termsConditions">Terms & Conditions</a>
-                            </li> -->
-                            <!-- <li><a href="#/posts">Make a Post</a>
-                            </li>
-                            <li><a href="#/profile">Profile</a>
-                            </li>
-                            <li><a  href="#/findFriends">Find Friends</a>
-                            </li>
-                            <li><a href="#/logout">Logout</a>
-                            </li> -->
-                            <li ng-if="loggedInUser.data[0] != null"><a href="/logout">Log Out</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container-->
-        </nav>
-    <!-- Make a post modal -->
-	<div class="modal fade" id="mkPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Make a Post</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label for="title" class="col-sm-2 control-label">Title</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="postTitle" placeholder="Enter title" ng-model="post.title">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="imgURL" class="col-sm-2 control-label" >Image (url):</label>
-							<div class="col-sm-10">
-								<input class="form-control" name="url" type="text" ng-model="post.url" placeholder="http://" >
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="message" class="col-sm-2 control-label">Message</label>
-							<div class="col-sm-10">
-								<textarea class="form-control" rows="3" ng-model='post.text'></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-12">
-								<button type="button" class="btn btn-primary pull-right" ng-click='addPost()' data-dismiss = "modal">Post</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Edit Profile Modal -->
-	<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-<!-- 					<h4 class="modal-title" id="myModalLabel">Edit Profile</h4> -->
-		 		</div>
-				<div class="modal-body">
-
-					<!-- <div w3-include-html="firstProject.html"></div> -->
-
-
-
-
-
-					<!-- <p>Hi </p><link type="html" href='./firstProject.html'> -->
-				</div>
-			</div>
-		</div>
-	</div>
-
-    <!-- Upload new picture modal -->
-    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Upload a picture</h4>
-          </div>
-          <div class="modal-body">
-            <input type="file">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Upload</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-	<!-- Find User Modal -->
-	<div class="modal fade" id="findUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Find a Friend</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label for="findFriend" class="col-sm-2 control-label">Search</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="findFriend" placeholder="Provide Friend's Name">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-12">
-								<button type="submit" class="btn btn-primary pull-right" data-dismiss="modal">Search</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</header>
+<div ng-include="templateUrl"></div>  <!-- this ng-include if for switching navigation bars -->
 
         <div ng-view=''></div>
 

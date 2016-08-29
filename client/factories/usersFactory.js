@@ -25,5 +25,17 @@ myApp.factory('usersFactory', function ($http){
           callback(data);
         });
       };
+      factory.searchUsers = function (UserName, callback) {
+        console.log("*** front-end usersFactory.js -- factory.searchUsers***");
+        console.log(UserName);
+        $http.post('/usersearch',UserName)
+        .then(function (data) {
+          callback(data);
+        })
+
+
+      }
+
+
     return factory;
 });
