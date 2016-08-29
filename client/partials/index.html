@@ -1,42 +1,55 @@
 <!-- User Info -->
 <div ng-controller='indexController'>
-    <div ng-if="loggedInUser.data[0] != null" class="col-sm-12">
-        User Status: {{ userStatus }}
-        <br>ID: {{ loggedInUser.data[0]._id }}
-        <br> First Name: {{ loggedInUser.data[0].first_name }}
-        <br> Last Name: {{ loggedInUser.data[0].last_name }}
-        <br> Email: {{ loggedInUser.data[0].email }}
-        <br>
-    </div>
-  	<!-- End of user information -->
-    <!-- Search Bar   -->
-    <form class="searchForm form-horizontal col-sm-12">
-        <input type="text" id="searchField" class="search-input col-sm-9" name="search" ng-model="search.text" placeholder="Name, Post Title, Post Content">
-        <input type="submit" name="searchButton" id="searchBtn" class="btn-lg searchBtn col-sm-2 pull-right" ng-click="searchPosts(search)" value="Search">
-    </form>
-    <div class="col-sm-12">
-            <button class="btn-lg searchBtn col-sm-2 pull-right" ng-if='feed == false' ng-click = 'reset()'>Back to feed</button>
-    </div>
+	<div ng-if="loggedInUser.data[0] != null" class="col-sm-12">
+		User Status: {{ userStatus }}
+		<br>ID: {{ loggedInUser.data[0]._id }}
+		<br> First Name: {{ loggedInUser.data[0].first_name }}
+		<br> Last Name: {{ loggedInUser.data[0].last_name }}
+		<br> Email: {{ loggedInUser.data[0].email }}
+		<br>
+	</div>
+	<!-- End of user information -->
+	<!-- Search Bar   -->
+<div class="container-fluid">
+	<form class="searchForm form-horizontal col-sm-12">
+		<input type="text" id="searchField" class="search-input col-sm-9" name="search" ng-model="search.text" placeholder="Name, Post Title, Post Content">
+		<input type="submit" name="searchButton" id="searchBtn" class="btn-lg searchBtn col-sm-2 pull-right" ng-click="searchPosts(search)" value="Search">
+	</form>
+	<button class="btn-lg searchBtn col-sm-2 pull-right" ng-if='feed == false' ng-click = 'reset()'>Back to feed</button>
+</div>
 <!-- End of Search Bar   -->
 
 <!--  Loading posts from database-->
-    <ul ng-repeat = 'x in posts' style="padding-left: 0;">
-        <div class="container-fluid">
-                <h4>{{x.title}}</h4>
-                <img class="img-responsive" ng-if="x.url" src="{{x.url}}"  alt="img">
-                {{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}
-                <button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger pull-right" ng-click = 'deletePost(x._id)'>Delete</button>
-                <div ng-repeat='c in x.comments' style="margin-left: 60px;">
-<!--                     {{c}} -->
-                    <h5>{{c._user_name}} commented:</h5>
-                    <p>{{c.text}}</p><hr>
-                </div>
-                <form style="margin-left: 60px;">
-                    <textarea rows="2" cols="50" ng-model='comment[x._id].text'></textarea>
-                    <input type="submit" value="Comment" ng-click='commentPost(x._id)'></input>
-                </form>
-        </div>
-    </ul>
+	<div ng-repeat = 'x in posts' style="padding-left: 0;">
+		<div class="container-fluid">
+			<div class="col-sm-12" style="padding: 0;">
+				<div class="posts">
+					<img class="postIMG" ng-if="x.url" src="{{x.url}}"  alt="img">
+					<h4>{{x.title}}<button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger pull-right" ng-click = 'deletePost(x._id)'>Delete</button></h4>
+					<p>{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}</p>
+					<div ng-repeat='c in x.comments' style="margin-left: 60px;">
+	<!--                     {{c}} -->
+						<h5>{{c._user_name}} commented:</h5>
+						<p>{{c.text}}</p><hr>
+					</div>
+				</div>
+			</div>
+			<div id="comment" class="col-sm-12">
+				 <form class="form-horizontal">
+					<div class="form-group">
+						<textarea class="form-control" rows="3" ng-model='comment[x._id].text'></textarea>
+					</div>
+					<div class="form-group">
+						<button class="btn commentBtn pull-right" type="submit" value="Comment" ng-click='commentPost(x._id)'>Comment</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+    <script>
+
+    </script>
 
 
 </div>
