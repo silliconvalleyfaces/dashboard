@@ -79,7 +79,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 		console.log('login information', $scope.loginInfo);
 		usersFactory.login($scope.loginInfo, function (data){
 			console.log("usersFactory.login", data);
-       		if (data.data.status == null){
+       		if (data.data.status === 500){
 				 	$scope.errorMsg = data.data.message;
 
 			}
