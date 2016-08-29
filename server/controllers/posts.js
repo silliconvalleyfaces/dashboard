@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Post = mongoose.model('posts');
+var Comment = mongoose.model('comments');
 
 module.exports = (function() {
 	return {
@@ -57,6 +58,20 @@ module.exports = (function() {
  					res.json({status: 'ok'})
  				}
  			})
+ 		},
+ 		commentPost : function(req,res){
+ 			console.log(req.body, 'THIS IS REQ BODY commentPost');
+			comment = new Comment(req.body);
+			comment.save(function(err, result){
+				if(err){
+					console.log(err);
+					console.log('error creating a new comment');
+				} else {
+					console.log('this is our new comment',result);
+					res.json(result);
+				}
+			})
+			comment = '';
  		},
 
 

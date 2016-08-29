@@ -44,5 +44,12 @@ myApp.factory('postsFactory', function($http){
 		})
 	}
 
+	factory.commentPost = function(commentData, callback){
+		console.log('got to commetPost at factory');
+		$http.post('/comments', commentData).then(function(data){
+			console.log('back in the factory commentPost',data);
+		});
+	};
+
 	return factory;
 })

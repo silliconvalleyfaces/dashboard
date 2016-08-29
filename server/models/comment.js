@@ -23,9 +23,9 @@ var CommentSchema = new mongoose.Schema({
 // the following codes are for passport
 // they need to be above mongoose.model('users', CommentSchema);
 CommentSchema.plugin(passportLocalMongoose);
-module.exports = mongoose.model('Comment', CommentSchema);
+module.exports = mongoose.model('comments', CommentSchema);
 
-mongoose.model('Comment', CommentSchema);
+mongoose.model('comments', CommentSchema);
 // Validations
 // UserSchema.path('first_name').required(true, 'First name cannot be blank');
 // UserSchema.path('last_name').required(true, 'Last name cannot be blank');
