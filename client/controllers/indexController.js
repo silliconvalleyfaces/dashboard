@@ -1,4 +1,13 @@
 myApp.controller('indexController', function($scope, $location, $window, $timeout, postsFactory, usersFactory){
+// the following code is for switching navbarLogin bars based on different routes. navbar files are in '/partials/navbarLogin.html'  and '/partials/navbarWall.html'
+	$scope.$on('$locationChangeSuccess', function($routeParams) {
+        var path = $location.path();
+        var product_id = $routeParams.product_id;
+        // $scope.templateUrl = (path === '/ministore/') ? '/partials/miniStoreNav.html' : '/partials/normalNav.html';
+        // $scope.templateUrl = (path === '/ministore/main'|| path === '/ministore/customers' || path === '/ministore/orders'|| path === '/ministore/products' || path === '/ministore/products/'+product_id )  ? '/partials/miniStoreNav.html' : '/partials/normalNav.html';
+        $scope.templateUrl = (path === '/' || path === '/login' || path === '/register') ? '/partials/navbarLogin.html' : '/partials/navbarWall.html';
+    });
+// End of switching navigation bar
 
 	$scope.userStatus = false;
 	$scope.comment = {};
