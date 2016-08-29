@@ -19,7 +19,12 @@
 <body ng-controller='indexController'>
 
 
+
+
+    <!-- <link rel="shortcut icon" src="img/svfLogo.jpeg"> -->
+
     <link rel="shortcut icon" src="img/svfLogo.jpeg">
+
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -92,11 +97,10 @@
                             </li>
                             <li ng-if="loggedInUser.data[0] != null">
                                 <img src="" alt='profile_pic'>
-                                <a href="">Upload New Picture</a>
+                                <a href="" data-toggle='modal' data-target='#uploadModal'>Upload New Picture</a>
                             </li>
                             <li>
                             <li>
-
 								<a href="#/wall"  ng-if="loggedInUser.data[0] != null" data-toggle="modal" data-target="#mkPostModal">Make a Post</a>
 							</li>
 							<li>
@@ -177,18 +181,39 @@
 
 
 
-
-
-
-
-
-
-
 					<!-- <p>Hi </p><link type="html" href='./firstProject.html'> -->
 				</div>
 			</div>
 		</div>
 	</div>
+
+    <!-- Upload new picture modal -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Upload a picture</h4>
+          </div>
+          <div class="modal-body">
+            <input type="file">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Upload</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
 	<!-- Find User Modal -->
 	<div class="modal fade" id="findUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">

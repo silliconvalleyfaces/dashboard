@@ -1,12 +1,16 @@
 myApp.controller('indexController', function($scope, $location, $window, $timeout, postsFactory, usersFactory){
-$scope.userStatus = false;
+
+	$scope.userStatus = false;
+	$scope.comment = {};
 
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
 		if($scope.loggedInUser){
 			$scope.user_id = data.data[0]._id;
+			$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
 		}
 		console.log('$scope.loggedInUser', $scope.loggedInUser);
+		console.log('$scope.user_id', $scope.user_id);
 	});
 	// // THIS WILL LATER BE THE REAL LOGGED IN USER'S ID
 	// $scope.user_id = 'placeholder';
@@ -60,6 +64,19 @@ $scope.userStatus = false;
  		});
  	};
 
+ 	$scope.commentPost = function(postId){
+ 		var commentData = {
+ 			text: $scope.comment[postId].text,
+ 			_user_name: $scope.user_name,
+ 			_user: $scope.user_id,
+ 			_post : postId,
+ 		};
+ 		console.log(commentData, "COMMENT DATA")
+ 		postsFactory.commentPost(commentData, function(data){
+ 			console.log('back from commenting post', data);
+ 		});
+ 	};
+
 
 // Login and Register
 	$scope.register = function (){
@@ -86,15 +103,6 @@ $scope.userStatus = false;
 			else if(data.data.status === 200){
 				console.log(" $scope.userStatus", $scope.userStatus);
 				 	$location.url('/wall');
-			 		usersFactory.index(function (data){
-						$scope.loggedInUser = data;
-						console.log(data.data[0]._id);
-						if($scope.loggedInUser){
-							$scope.user_id = data.data[0]._id;
-
-						}
-						console.log('$scope.loggedInUser', $scope.loggedInUser);
-					});
 					// $window.location.reload();
 			}
 

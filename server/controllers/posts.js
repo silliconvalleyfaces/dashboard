@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Post = mongoose.model('posts');
+var Comment = mongoose.model('comments');
 
 module.exports = (function() {
 	return {
@@ -20,7 +21,7 @@ module.exports = (function() {
 		},
 
 		getPosts: function(req, res){
-			Post.find({}).sort({created_at: -1}).exec(function(err, posts){
+			Post.find({}).populate('comments').sort({created_at: -1}).exec(function(err, posts){
 				if(err){
 					console.log(err);
 				} else {
@@ -57,6 +58,26 @@ module.exports = (function() {
  					res.json({status: 'ok'})
  				}
  			})
+ 		},
+ 		commentPost : function(req,res){
+ 			console.log(req.body, 'THIS IS REQ BODY commentPost');
+			comment = new Comment(req.body);
+			comment.save(function(err, result){
+				if(err){
+					console.log(err);
+					console.log('error creating a new comment');
+				} else {
+					Post.findOne({_id: req.body._post}, function (err, post){
+						post.comments.push(result._id);
+						console.log('THIS IS THE comment to post',post);
+					    post.save(function (err) {
+					        if(err) {
+					            console.error('ERROR ADDING comment to post!');
+					        }
+					    });
+					});
+				}
+			})
  		},
 
 
