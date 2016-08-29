@@ -7,6 +7,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 		$scope.loggedInUser = data;
 		if($scope.loggedInUser){
 			$scope.user_id = data.data[0]._id;
+			$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
 		}
 		console.log('$scope.loggedInUser', $scope.loggedInUser);
 		console.log('$scope.user_id', $scope.user_id);
@@ -66,6 +67,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  	$scope.commentPost = function(postId){
  		var commentData = {
  			text: $scope.comment[postId].text,
+ 			_user_name: $scope.user_name,
  			_user: $scope.user_id,
  			_post : postId,
  		};

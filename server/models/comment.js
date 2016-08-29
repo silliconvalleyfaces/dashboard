@@ -8,6 +8,11 @@ var CommentSchema = new mongoose.Schema({
       required : true,
       maxlength : 255
     },
+    _user_name: {
+      type:  String,
+      required : true,
+      maxlength : 55
+    },
     _user : {
       type: Schema.Types.ObjectId,
       ref: 'users'

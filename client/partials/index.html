@@ -26,7 +26,12 @@
                 <img class="img-responsive" ng-if="x.url" src="{{x.url}}"  alt="img">
                 {{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}
                 <button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger pull-right" ng-click = 'deletePost(x._id)'>Delete</button>
-                <form style="margin-left: 30px;">
+                <div ng-repeat='c in x.comments' style="margin-left: 60px;">
+<!--                     {{c}} -->
+                    <h5>{{c._user_name}} commented:</h5>
+                    <p>{{c.text}}</p><hr>
+                </div>
+                <form style="margin-left: 60px;">
                     <textarea rows="2" cols="50" ng-model='comment[x._id].text'></textarea>
                     <input type="submit" value="Comment" ng-click='commentPost(x._id)'></input>
                 </form>
