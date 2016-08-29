@@ -21,7 +21,7 @@ module.exports = (function() {
 		},
 
 		getPosts: function(req, res){
-			Post.find({}).sort({created_at: -1}).exec(function(err, posts){
+			Post.find({}).populate('comments').sort({created_at: -1}).exec(function(err, posts){
 				if(err){
 					console.log(err);
 				} else {
@@ -67,11 +67,20 @@ module.exports = (function() {
 					console.log(err);
 					console.log('error creating a new comment');
 				} else {
-					console.log('this is our new comment',result);
-					res.json(result);
+					Post.findOne({_id: req.body._post}, function (err, post){
+						post.comments.push(result._id);
+						console.log('THIS IS THE comment to post',post);
+					    post.save(function (err) {
+					        if(err) {
+					            console.error('ERROR ADDING comment to post!');
+					        }
+					        else{
+					        	res.json(result);
+					        }
+					    });
+					});
 				}
 			})
-			comment = '';
  		},
 
 

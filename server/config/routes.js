@@ -51,6 +51,11 @@ var usersController = require('../controllers/users.js')
     console.log('req.body', req.body);
     usersController.logout(req, res);
   });
+  app.post('/usersearch', function (req,res) {
+    console.log('Back-end routes -- app.post /usersearch ');
+    console.log('req.body', req.body);
+    usersController.searchName(req, res);
+  })
   // app.post('/silliconValleyFacesWall', function (req, res){
   //   console.log('Back-end routes -- app.get /silliconValleyFacesWall ');
   //   console.log('welcome to silliconValleyFacesWall');

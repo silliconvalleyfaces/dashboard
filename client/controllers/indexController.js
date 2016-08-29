@@ -1,4 +1,12 @@
 myApp.controller('indexController', function($scope, $location, $window, $timeout, postsFactory, usersFactory){
+// the following code is for switching navbarLogin bars based on different routes. navbar files are in '/partials/navbarLogin.html'  and '/partials/navbarWall.html'
+	// $scope.$on('$locationChangeSuccess', function($routeParams) {
+  //       var path = $location.path();
+  //       var product_id = $routeParams.product_id;
+  //
+  //       $scope.templateUrl = (path === '/' || path === '/login' || path === '/register') ? '/partials/navbarLogin.html' : '/partials/navbarWall.html';
+  //   });
+// End of switching navigation bar
 
 	$scope.userStatus = false;
 	$scope.comment = {};
@@ -7,6 +15,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 		$scope.loggedInUser = data;
 		if($scope.loggedInUser){
 			$scope.user_id = data.data[0]._id;
+			$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
 		}
 		console.log('$scope.loggedInUser', $scope.loggedInUser);
 		console.log('$scope.user_id', $scope.user_id);
@@ -20,7 +29,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  	});
 
 	$scope.feed = true;
-
+	// $scope.posts = [];
 	$scope.search = {};
 
 	$scope.reset = function(){
@@ -42,6 +51,11 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 			console.log(data);
 			$scope.post = null;
 			$scope.posts.unshift(data.data);
+			console.log('DATA BACK', data.data);
+			postsFactory.getPosts(function(dat){
+		 		console.log(data);
+		 		$scope.posts = dat;
+		 	});
  		});
  	};
 
@@ -66,13 +80,19 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  	$scope.commentPost = function(postId){
  		var commentData = {
  			text: $scope.comment[postId].text,
+ 			_user_name: $scope.user_name,
  			_user: $scope.user_id,
  			_post : postId,
  		};
  		console.log(commentData, "COMMENT DATA")
  		postsFactory.commentPost(commentData, function(data){
  			console.log('back from commenting post', data);
+ 			postsFactory.getPosts(function(dat){
+	 			console.log(data);
+	 			$scope.posts = dat;
+	 		});
  		});
+
  	};
 
 
@@ -110,4 +130,15 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	chageUserStatus = function (){
 		$scope.userStatus = true;
 	};
+	//Find a Person
+	$scope.searchUsers = function(){
+ 		console.log("*** front-end indexController -- $scope.searchUsers ***");
+ 		usersFactory.searchUsers($scope.SearchName, function(data){
+ 			console.log(" users search results:", data);
+ 			$scope.users = data;
+ 			$scope.feed = false;
+ 		});
+ 	};
+
+
 });

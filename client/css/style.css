@@ -16,12 +16,50 @@ body {
     margin-bottom: 0;
 }*/
 
-
-.form-horizontal{
-    margin-top: 65px;
-    padding-bottom: 15px;
+.postIMG{
+    width: 100%;
 }
 
+
+.featured-article {
+    position: relative;
+    margin-bottom: 1em;
+}
+
+.featured-article .block-title {
+    /* Position & Box Model */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    /* background */
+    background: rgba(0,0,0,0.7);
+    /* Width/Height */
+    padding: .5em;
+    width: 100%;
+    /* Text color */
+    color: #fff;
+}
+
+.featured-article .block-title h2 {
+    margin: 0;
+}
+
+
+
+.btn.commentBtn{
+    color: white;
+    background-color: #5679ED;
+}
+
+.btn.commentBtn:hover,
+.btn.commentBtn:focus,
+.btn.commentBtn:active {
+    color: white;
+    background-color: #19254E;
+}
+
+/*Post Search CSS*/
 .search-input {
     height: 50px;
     border-top: 1px solid transparent;
@@ -35,11 +73,11 @@ body {
     margin-top: 0;
 }
 
-.btn-lg.searchBtn{
-    border-radius: 0;
+.searchForm.form-horizontal{
+    padding: 0 0 15px 0;
 }
 
-.btn.deleteBtn{
+.btn-lg.searchBtn{
     border-radius: 0;
 }
 
@@ -93,6 +131,8 @@ body {
 .btn-light:active {
     color: red;
 }
+
+
 
 .fa.fa-bars i:hover a{ /* Or use>> .tabs a:hover */
    font-size: 300%
