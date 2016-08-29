@@ -1,4 +1,5 @@
 myApp.controller('indexController', function($scope, $location, $window, $timeout, postsFactory, usersFactory){
+
 	$scope.userStatus = false;
 	$scope.comment = {};
 
@@ -100,15 +101,6 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 			else if(data.data.status === 200){
 				console.log(" $scope.userStatus", $scope.userStatus);
 				 	$location.url('/wall');
-			 		usersFactory.index(function (data){
-						$scope.loggedInUser = data;
-						console.log(data.data[0]._id);
-						if($scope.loggedInUser){
-							$scope.user_id = data.data[0]._id;
-
-						}
-						console.log('$scope.loggedInUser', $scope.loggedInUser);
-					});
 					// $window.location.reload();
 			}
 
