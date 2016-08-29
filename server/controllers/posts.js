@@ -74,6 +74,9 @@ module.exports = (function() {
 					        if(err) {
 					            console.error('ERROR ADDING comment to post!');
 					        }
+					        else{
+					        	res.json(result);
+					        }
 					    });
 					});
 				}

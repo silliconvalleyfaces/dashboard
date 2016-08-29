@@ -35,27 +35,27 @@ myApp.directive('validPasswordC', function() {
 
 			.when('/',
 			{
-				controller: 'indexController',
+				// controller: 'indexController',
 				templateUrl: "partials/login.html"
 			})
 			.when('/login',
 			{
-				controller: 'indexController',
+				// controller: 'indexController',
 				templateUrl: "partials/login.html"
 			})
 			.when('/register',
 			{
-				controller: 'indexController',
+				// controller: 'indexController',
 				templateUrl: "partials/register.html"
 			})
       .when('/termsConditions',
 			{
-				controller: 'indexController',
+				// controller: 'indexController',
 				templateUrl: "partials/termsConditions.html"
 			})
 			.when('/wall',
 			{
-				controller: 'indexController',
+				// controller: 'indexController',
 				templateUrl: "partials/index.html"
 			})
 			.otherwise({

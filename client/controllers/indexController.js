@@ -21,7 +21,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  	});
 
 	$scope.feed = true;
-
+	// $scope.posts = [];
 	$scope.search = {};
 
 	$scope.reset = function(){
@@ -43,6 +43,11 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 			console.log(data);
 			$scope.post = null;
 			$scope.posts.unshift(data.data);
+			console.log('DATA BACK', data.data);
+			postsFactory.getPosts(function(dat){
+		 		console.log(data);
+		 		$scope.posts = dat;
+		 	});
  		});
  	};
 
@@ -74,7 +79,12 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  		console.log(commentData, "COMMENT DATA")
  		postsFactory.commentPost(commentData, function(data){
  			console.log('back from commenting post', data);
+ 			postsFactory.getPosts(function(dat){
+	 			console.log(data);
+	 			$scope.posts = dat;
+	 		});
  		});
+ 		
  	};
 
 
