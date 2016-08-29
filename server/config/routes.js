@@ -18,6 +18,10 @@ var usersController = require('../controllers/users.js')
  		console.log('got to the destroy post route');
  		postsController.destroyPost(req, res);
  	})
+  app.post('/comments', function(req, res){
+    console.log('got to the make a comment route');
+    postsController.commentPost(req, res);
+  })
 
   //#############################################
       // Users routes

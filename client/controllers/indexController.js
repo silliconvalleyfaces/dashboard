@@ -1,5 +1,7 @@
 myApp.controller('indexController', function($scope, $location, $window, $timeout, postsFactory, usersFactory){
 
+	$scope.userStatus = false;
+	$scope.comment = {};
 
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
@@ -7,6 +9,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 			$scope.user_id = data.data[0]._id;
 		}
 		console.log('$scope.loggedInUser', $scope.loggedInUser);
+		console.log('$scope.user_id', $scope.user_id);
 	});
 	// // THIS WILL LATER BE THE REAL LOGGED IN USER'S ID
 	// $scope.user_id = 'placeholder';
@@ -57,6 +60,18 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  			console.log("search results:", data);
  			$scope.posts = data;
  			$scope.feed = false;
+ 		});
+ 	};
+
+ 	$scope.commentPost = function(postId){
+ 		var commentData = {
+ 			text: $scope.comment[postId].text,
+ 			_user: $scope.user_id,
+ 			_post : postId,
+ 		};
+ 		console.log(commentData, "COMMENT DATA")
+ 		postsFactory.commentPost(commentData, function(data){
+ 			console.log('back from commenting post', data);
  		});
  	};
 
