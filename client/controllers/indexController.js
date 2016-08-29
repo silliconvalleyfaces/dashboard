@@ -104,4 +104,15 @@ $scope.userStatus = false;
 	chageUserStatus = function (){
 		$scope.userStatus = true;
 	};
+	//Find a Person
+	$scope.searchUsers = function(){
+ 		console.log("*** front-end indexController -- $scope.searchUsers ***");
+ 		usersFactory.searchUsers($scope.SearchName, function(data){
+ 			console.log(" users search results:", data);
+ 			$scope.users = data;
+ 			$scope.feed = false;
+ 		});
+ 	};
+
+
 });
