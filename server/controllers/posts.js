@@ -96,18 +96,11 @@ module.exports = (function() {
 						if(err){
 							console.log('error finding post', erro);
 						} else {
-							console.log('comments before splice',post.comments);
 							for(var i = 0; i < post.comments.length; i++){
-								console.log('HELLO')
-								console.log(post.comments[i]);
-								console.log(commentId);
 								if(post.comments[i].equals(commentId)){
-									console.log('THEY ARE EQUAL!!');
 									post.comments.splice(i, 1);
-									console.log('comments after splice',post.comments)
-									// res.json({status: 'ok'});
+									res.json({status: 'ok'});
 								}
-
 							}
 							
 						};

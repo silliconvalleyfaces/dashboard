@@ -31,7 +31,8 @@
 					<div ng-repeat='c in x.comments' style="margin-left: 60px;">
 	<!--                     {{c}} -->
 						<h5>{{c._user_name}} commented:</h5>
-						<p>{{c.text}}</p><hr>
+						<p>{{c.text}}</p>
+						<button ng-if='user_id == c._user' class="btn deleteBtn btn-danger pull-right" ng-click = 'deleteComment(c._id)'>Delete</button><br><hr>
 					</div>
 				</div>
 			</div>

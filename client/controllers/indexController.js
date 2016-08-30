@@ -97,7 +97,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  		postsFactory.deleteComment(commentId, function(status){
  			console.log('status deleting comment:', status);
  			postsFactory.getPosts(function(dat){
-	 			console.log(data);
+	 			console.log('THIS ARE THE POSTS',dat);
 	 			$scope.posts = dat;
 	 		});
  		});
