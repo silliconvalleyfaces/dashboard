@@ -82,6 +82,39 @@ module.exports = (function() {
 				}
 			})
  		},
+ 		destroyComment: function(req, res){
+
+ 			Comment.findOne({_id: req.params.id}, function (err, comment){
+				if(err){
+					console.log('error finding comment', err);
+				} else {
+					var commentId = comment._id;
+					var postId = comment._post;
+					console.log('THIS IS COME', postId);
+					comment.remove();
+					Post.findOne({_id: postId}, function (erro, post){
+						if(err){
+							console.log('error finding post', erro);
+						} else {
+							console.log('comments before splice',post.comments);
+							for(var i = 0; i < post.comments.length; i++){
+								console.log('HELLO')
+								console.log(post.comments[i]);
+								console.log(commentId);
+								if(post.comments[i].equals(commentId)){
+									console.log('THEY ARE EQUAL!!');
+									post.comments.splice(i, 1);
+									console.log('comments after splice',post.comments)
+									// res.json({status: 'ok'});
+								}
+
+							}
+							
+						};
+					});
+				};
+			});
+ 		},
 
 
 	}

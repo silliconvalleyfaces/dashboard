@@ -52,5 +52,16 @@ myApp.factory('postsFactory', function($http){
 		});
 	};
 
+	factory.deleteComment = function(commentId, callback){
+		console.log('deletecomment at factory', commentId);
+		$http.post('/comments/' + commentId + '/destroy').then(function(data){
+			if(data.error){
+				callback(data);
+			} else {
+				callback(data);
+			}
+		});
+	};
+
 	return factory;
 })

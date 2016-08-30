@@ -20,8 +20,6 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 		console.log('$scope.loggedInUser', $scope.loggedInUser);
 		console.log('$scope.user_id', $scope.user_id);
 	});
-	// // THIS WILL LATER BE THE REAL LOGGED IN USER'S ID
-	// $scope.user_id = 'placeholder';
 
 	postsFactory.getPosts(function(data){
  		console.log(data);
@@ -93,6 +91,16 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	 		});
  		});
 
+ 	};
+
+ 	$scope.deleteComment = function(commentId){
+ 		postsFactory.deleteComment(commentId, function(status){
+ 			console.log('status deleting comment:', status);
+ 			postsFactory.getPosts(function(dat){
+	 			console.log(data);
+	 			$scope.posts = dat;
+	 		});
+ 		});
  	};
 
 
