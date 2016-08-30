@@ -26,8 +26,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Email:</label>
-                                    <input type="email" class="form-control" name="email" placeholder="Your email" ng-model="new_user.email" required>
+                                    <input type="email" class="form-control" name="email" placeholder="Your email" ng-model="new_user.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required>
                                     <span ng-show='registerForm.email.$touched && registerForm.email.$error.required' style="color:red">Email field cannot be empty!</span>
+                                    <span ng-show='registerForm.email.$touched && registerForm.email.$error.pattern' style="color:red">Not a valid email! Please provide a valid email.</span>
                                 </div>
                                 <div class="form-group" ng-class="{'has-error':registerForm.password.$invalid && !registerForm.password.$pristine}">
                                     <label for="">Password:</label>
@@ -54,6 +55,8 @@
                                 <input class="btn btn-primary btn-lg" type="submit" value="Register" ng-disabled="registerForm.$invalid" ng-click="register()">
 
                             </form>
+                            <br>
+                            <h4 style="color:red">{{ errorMsg }}</h4>
 
                         </div>
                     </div>

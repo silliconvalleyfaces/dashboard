@@ -1,4 +1,5 @@
-myApp.controller('indexController', function($scope, $location, $window, $timeout, postsFactory, usersFactory){
+myApp.controller('indexController', function($scope, $location, $window, $timeout, $cookies, authFact, postsFactory, usersFactory){
+
 // the following code is for switching navbarLogin bars based on different routes. navbar files are in '/partials/navbarLogin.html'  and '/partials/navbarWall.html'
 	// $scope.$on('$locationChangeSuccess', function($routeParams) {
   //       var path = $location.path();
@@ -13,12 +14,17 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
-		if($scope.loggedInUser){
+		if($scope.loggedInUser.data.length > 0){
+			// $scope.userStatus = true;
 			$scope.user_id = data.data[0]._id;
 			$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
+
+			// var userObj = $cookies.put('userObj', data.data[0]);
+			// console.log('cookie information - userObj: ', userObj);
 		}
 		console.log('$scope.loggedInUser', $scope.loggedInUser);
 		console.log('$scope.user_id', $scope.user_id);
+
 	});
 	// // THIS WILL LATER BE THE REAL LOGGED IN USER'S ID
 	// $scope.user_id = 'placeholder';
@@ -41,6 +47,8 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	 	});
 
 	}
+
+
 
 
 	$scope.addPost = function(){
@@ -95,16 +103,21 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
  	};
 
-
+//##############################################
 // Login and Register
+//##############################################
 	$scope.register = function (){
 		console.log("*** front-end indexController -- $scope.register ***");
 		console.log('new_user information', $scope.new_user);
 		usersFactory.createUser($scope.new_user, function(data){
 			console.log(data);
 			if(data.data.isLoggedIn){
+				console.log("data.data: ", data.data);
+					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
-					// $window.location.reload();
+			}
+			else if(data.data.status === 500){
+				$scope.errorMsg = data.data.message;
 			}
 		});
 	};
@@ -119,12 +132,18 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
 			}
 			else if(data.data.status === 200){
-				console.log(" $scope.userStatus", $scope.userStatus);
-				 	$location.url('/wall');
+				console.log("data.data: ", data);
+					authFact.setAccessToken(data.data.authentication);
+					$location.url('/wall');
 					// $window.location.reload();
 			}
 
 		});
+	};
+
+	$scope.logout = function(){
+		$cookies.remove('accessToken');
+		$cookies.remove('userObj');
 	};
 
 	chageUserStatus = function (){
@@ -141,4 +160,20 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  	};
 
 
+});
+
+myApp.constant('AUTH_EVENTS', {
+  loginSuccess: 'auth-login-success',
+  loginFailed: 'auth-login-failed',
+  logoutSuccess: 'auth-logout-success',
+  sessionTimeout: 'auth-session-timeout',
+  notAuthenticated: 'auth-not-authenticated',
+  notAuthorized: 'auth-not-authorized'
+});
+
+myApp.constant('USER_ROLES', {
+  all: '*',
+  admin: 'admin',
+  editor: 'editor',
+  guest: 'guest'
 });

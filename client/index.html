@@ -34,9 +34,11 @@
     <script src="angular/angular.js"></script>
     <script src="angular-route/angular-route.js"></script>
     <script src = "app.js"></script>
+    <script src = "angular-cookie.js"></script>
     <script src = "/controllers/indexController.js"></script>
     <script src = "/factories/postsFactory.js"></script>
     <script src = "/factories/usersFactory.js"></script>
+    <script src = "/factories/authFact.js"></script>   <!-- Authentication -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="https://use.fontawesome.com/3b9b16c0a6.js"></script>
@@ -107,7 +109,7 @@
                             </li>
                             <li><a href="#/logout">Logout</a>
                             </li> -->
-                            <li ng-if="loggedInUser.data[0] != null"><a href="/logout">Log Out</a>
+                            <li ng-if ="loggedInUser.data[0] != null"><a href="/logout" ng-click="logout()">Log Out</a>
                             </li>
                         </ul>
                     </div>
