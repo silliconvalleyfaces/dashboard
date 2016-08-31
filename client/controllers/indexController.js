@@ -17,6 +17,8 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	console.log("$scope.isLogged()", $scope.isLogged() );
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
+		$scope.edit=data.data[0];
+		console.log("data.data[0]",data.data[0]);
 		if($scope.loggedInUser.data.length > 0){
 			$scope.userStatus = true;
 			$scope.user_id = data.data[0]._id;
