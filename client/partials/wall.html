@@ -12,8 +12,8 @@
 <!-- Search Bar   -->
     <div ng-if="loggedInUser.data[0] != null" class="container">
         ID: {{ loggedInUser.data[0]._id }}
-        <br> First Name: {{ loggedInUser.data[0].first_name }}
-        <br> Last Name: {{ loggedInUser.data[0].last_name }}
+        <br> First Name: {{ loggedInUser.data[0].first_name | capitalize }}
+        <br> Last Name: {{ loggedInUser.data[0].last_name | capitalize }}
         <br> Email: {{ loggedInUser.data[0].email }}
         <br>
     </div>

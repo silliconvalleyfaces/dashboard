@@ -9,7 +9,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var bcrypt =  
+var bcrypt =
 app.use( express.static( path.join( root, 'client' )));
 app.use(express.static(path.join(__dirname, '/client/css')));
 app.use( express.static( path.join( root, 'bower_components' )));
@@ -27,10 +27,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // passport config
-var users = require('./server/models/user.js');
-passport.use(new LocalStrategy(users.authenticate()));
-passport.serializeUser(users.serializeUser());
-passport.deserializeUser(users.deserializeUser());
+// var users = require('./server/models/user.js');
+// passport.use(new LocalStrategy(users.authenticate()));
+// passport.serializeUser(users.serializeUser());
+// passport.deserializeUser(users.deserializeUser());
 
 
 require('./server/config/db.js');

@@ -3,7 +3,7 @@
 <!--[if IE 7]><html lang="en" class="no-js ie7"><![endif]-->
 <!--[if IE 8]><html lang="en" class="no-js ie8"><![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" class="no-js" ng-app = 'Myapp'>
+<html lang="en" class="no-js" ng-app='Myapp'>
 <!--<![endif]-->
 
 <head>
@@ -33,16 +33,19 @@
     <link rel='stylesheet' href='../../../style.css'>
     <script src="angular/angular.js"></script>
     <script src="angular-route/angular-route.js"></script>
-    <script src = "app.js"></script>
-    <script src = "/controllers/indexController.js"></script>
-    <script src = "/factories/postsFactory.js"></script>
-    <script src = "/factories/usersFactory.js"></script>
+    <script src="app.js"></script>
+    <script src="angular-cookie.js"></script>
+    <script src="/controllers/indexController.js"></script>
+    <script src="/factories/postsFactory.js"></script>
+    <script src="/factories/usersFactory.js"></script>
+    <script src="/factories/authFact.js"></script>
+    <!-- Authentication -->
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="https://use.fontawesome.com/3b9b16c0a6.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/3b9b16c0a6.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
 
 </head>
 
@@ -50,55 +53,56 @@
 
     <div class="pre-loader">
         <div class="load-con">
-            <img src="img/svfLogo3.jpeg" class="animated fadeInDown" alt=""> <!-- Logo piceture here -->
+            <img src="img/svfLogo3.jpeg" class="animated fadeInDown" alt="">
+            <!-- Logo piceture here -->
             <div class="spinner">
-              <div class="bounce1"></div>
-              <div class="bounce2"></div>
-              <div class="bounce3"></div>
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
             </div>
         </div>
     </div>
-  <!-- this ng-include if for switching navigation bars -->
-  <!-- <div ng-include="templateUrl"></div> -->
-<header>
+    <!-- this ng-include if for switching navigation bars -->
+    <!-- <div ng-include="templateUrl"></div> -->
+    <header>
         <nav class="navbar navbar-default " role="navigation">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button id="circleButton" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="fa fa-bars fa-lg"></span>
-                        </button>
-                        <a class="navbar-brand" href="#/">
-                          <img src="img/svfLogo.jpeg" alt="" class="logo" >
-                        </a>
-                    </div>
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button id="circleButton" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="fa fa-bars fa-lg"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/">
+                        <img src="img/svfLogo.jpeg" alt="" class="logo">
+                    </a>
+                </div>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-switch on="isLogged()">
 
-                        <ul class="nav navbar-nav navbar-right" id="navButton">
+                    <ul class="nav navbar-nav navbar-right" id="navButton">
+                        <li>
+                            <a href="#/login" ng-switch-when=" undefined ">Login</a>
+                        </li>
+                        <li>
+                            <a href="#/register" ng-switch-when=" undefined ">Register</a>
+                        </li>
+                        <li ng-switch-when="true">
+                            <img src="" alt='profile_pic'>
+                            <a href="" data-toggle='modal' data-target='#uploadModal'>Upload New Picture</a>
+                        </li>
+                        <li>
                             <li>
-                            	<a href="#/login" ng-if="loggedInUser.data[0] == null">Login</a>
+                                <a href="#/wall" ng-switch-when="true" data-toggle="modal" data-target="#mkPostModal">Make a Post</a>
                             </li>
                             <li>
-                            	<a href="#/register" ng-if="loggedInUser.data[0] == null">Register</a>
+                                <a href="#/wall" ng-switch-when="true" data-toggle="modal" data-target="#editProfileModal">Edit Profile</a>
                             </li>
-                            <li ng-if="loggedInUser.data[0] != null">
-                                <img src="" alt='profile_pic'>
-                                <a href="" data-toggle='modal' data-target='#uploadModal'>Upload New Picture</a>
-                                
-                                
+
+                            <li>
+                                <a href="#/wall" ng-switch-when="true" data-toggle="modal" data-target="#findUserModal">Find a Friend</a>
                             </li>
-                            <li>
-                            <li>
-								<a href="#/wall"  ng-if="loggedInUser.data[0] != null" data-toggle="modal" data-target="#mkPostModal">Make a Post</a>
-							</li>
-							<li>
-								<a href="#/wall" ng-if="loggedInUser.data[0] != null" data-toggle="modal"  data-target="#editProfileModal">Profile</a>
-							</li>
-							<li>
-								<a href="#/wall" ng-if="loggedInUser.data[0] != null" data-toggle="modal" data-target="#findUserModal">Find a Friend</a>
-							</li>
+                            <!-- <p>{{edit.first_name}}</p> -->
                             <!-- <li><a href="#/termsConditions">Terms & Conditions</a>
                             </li> -->
                             <!-- <li><a href="#/posts">Make a Post</a>
@@ -109,92 +113,136 @@
                             </li>
                             <li><a href="#/logout">Logout</a>
                             </li> -->
-                            <li ng-if="loggedInUser.data[0] != null"><a href="/logout">Log Out</a>
+                            <!--  purposely leave logout button there. just in case you reload the page, but forgot to remove cookie -->
+                            <li><a href="" ng-click="logout()">Log Out</a>
                             </li>
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
+                    </ul>
                 </div>
-                <!-- /.container-->
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-->
         </nav>
-    <!-- Make a post modal -->
-	<div class="modal fade" id="mkPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Make a Post</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label for="title" class="col-sm-2 control-label">Title</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="postTitle" placeholder="Enter title" ng-model="post.title">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="imgURL" class="col-sm-2 control-label" >Image (url):</label>
-							<div class="col-sm-10">
-								<input class="form-control" name="url" type="text" ng-model="post.url" placeholder="http://" >
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="message" class="col-sm-2 control-label">Message</label>
-							<div class="col-sm-10">
-								<textarea class="form-control" rows="3" ng-model='post.text'></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-12">
-								<button type="button" class="btn btn-primary pull-right" ng-click='addPost()' data-dismiss = "modal">Post</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Edit Profile Modal -->
-	<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-<!-- 					<h4 class="modal-title" id="myModalLabel">Edit Profile</h4> -->
-		 		</div>
-				<div class="modal-body">
-
-					<!-- <div w3-include-html="firstProject.html"></div> -->
-
-
-
-
-
-					<!-- <p>Hi </p><link type="html" href='./firstProject.html'> -->
-				</div>
-			</div>
-		</div>
-	</div>
-
-    <!-- Upload new picture modal -->
-    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Upload a picture</h4>
-          </div>
-          <div class="modal-body">
-            <input type="file">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Upload</button>
-          </div>
+        <!-- Make a post modal -->
+        <div class="modal fade" id="mkPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Make a Post</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="title" class="col-sm-2 control-label">Title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="postTitle" placeholder="Enter title" ng-model="post.title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="imgURL" class="col-sm-2 control-label">Image (url):</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="url" type="text" ng-model="post.url" placeholder="http://">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="col-sm-2 control-label">Message</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="3" ng-model='post.text'></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-primary pull-right" ng-click='addPost()' data-dismiss="modal">Post</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+        <!-- Edit Profile Modal -->
+        <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        				<h4 class="modal-title" id="myModalLabel">Edit Profile</h4> 
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- <div w3-include-html="firstProject.html"></div> -->
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="title" class="col-sm-2 control-label">First Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="postTitle"  ng-model="edit.first_name">
+                                </div>
+                                
+
+                            </div>
+                            <div class="form-group">
+                                <label for="title" class="col-sm-2 control-label">Last Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="postTitle"  ng-model="edit.last_name">
+                                </div>
+                                
+
+                            </div>
+                            <div class="form-group">
+                                <label for="imgURL" class="col-sm-2 control-label">Email:</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="url" type="text" ng-model="edit.email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="imgURL" class="col-sm-2 control-label">Phone:</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="url" type="text" ng-model="edit.phone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                        <br>
+                <label for="share" class="col-sm-2 control-label">Share:</label>
+                <div class="col-sm-10">
+                <label class="checkbox-inline"><input type="checkbox" value="">Email</label>
+                <label class="checkbox-inline"><input type="checkbox" value="">Phone</label> </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-primary pull-right" ng-click='editProfile()' data-dismiss="modal">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+
+
+
+                        <!-- <p>Hi </p><link type="html" href='./firstProject.html'> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload new picture modal -->
+        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Upload a picture</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="file">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Upload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -204,61 +252,63 @@
 
 
 
-	<!-- Find User Modal -->
-	<div class="modal fade" id="findUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Find a Friend</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label for="findFriend" class="col-sm-2 control-label">Search</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="findFriend" placeholder="Provide Friend's Name">
-								<label class="radio-inline"><input type="radio" >First Name</label>
-								<label class="radio-inline"><input type="radio" >Last Name</label>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-12">
-								<button type="submit" ng-click=searchUsers() class="btn btn-primary pull-right" data-dismiss="modal">Search</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+        <!-- Find User Modal -->
+        <div class="modal fade" id="findUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Find a Friend</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="findFriend" class="col-sm-2 control-label">Search</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="findFriend" placeholder="Provide Friend's Name" ng-model="SearchName.name">
+                                    <label class="radio-inline">
+                                        <input type="radio">First Name</label>
+                                    <label class="radio-inline">
+                                        <input type="radio">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" ng-click=searchUsers() class="btn btn-primary pull-right" data-dismiss="modal">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</header>
+    </header>
 
-        <div ng-view=''></div>
+    <div ng-view=''></div>
 
     <div class="wrapper">
 
 
-<footer>
-        <div class="container">
+        <footer>
+            <div class="container">
 
-            <a href="#" class="scrollpoint sp-effect3">
-                <img src="img/svfLogo.jpeg" alt="" class="logo">
-            </a>
-            <!-- <div class="social">
+                <a href="#/" class="scrollpoint sp-effect3">
+                    <img src="img/svfLogo.jpeg" alt="" class="logo">
+                </a>
+                <!-- <div class="social">
                 <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-twitter fa-lg"></i></a>
                 <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-google-plus fa-lg"></i></a>
                 <a href="#" class="scrollpoint sp-effect3"><i class="fa fa-facebook fa-lg"></i></a>
             </div> -->
-            <div class="rights">
-                <p>Copyright &copy; 2016</p>
-                <!-- <p>Template by <a href="http://www.scoopthemes.com" target="_blank">ScoopThemes</a></p> -->
-                <h4><a href="#/termsConditions">Terms and Conditions</a></h4>
+                <div class="rights">
+                    <p>Copyright &copy; 2016</p>
+                    <!-- <p>Template by <a href="http://www.scoopthemes.com" target="_blank">ScoopThemes</a></p> -->
+                    <h4><a href="#/termsConditions">Terms and Conditions</a></h4>
 
+                </div>
             </div>
-        </div>
-</footer>
+        </footer>
 
     </div>
 
@@ -275,24 +325,25 @@
     <script src="js/scripts.js"></script>
     <script>
         $(document).ready(function() {
-        	$('#comment').css('visibility', 'hidden');
+            $('#comment').css('visibility', 'hidden');
             appMaster.preLoader();
         });
         $('.navbarItem').click(function() {
-          console.log('navbarItem clicked');
-          $('#bs-example-navbar-collapse-1').hide();
-        })
-        // $("#circleButton").click(function() {
-        //   console.log('bs-example-navbar-collapse-1');
-        //   $('#bs-example-navbar-collapse-1').slideToggle('fast');
-        // })
-       
+                console.log('navbarItem clicked');
+                $('#bs-example-navbar-collapse-1').hide();
+            })
+            // $("#circleButton").click(function() {
+            //   console.log('bs-example-navbar-collapse-1');
+            //   $('#bs-example-navbar-collapse-1').slideToggle('fast');
+            // })
     </script>
 
 
 
-<script src="http://www.w3schools.com/lib/w3data.js"></script>
-<script> w3IncludeHTML(); </script>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+    <script>
+        w3IncludeHTML();
+    </script>
 
 
 </body>

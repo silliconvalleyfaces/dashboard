@@ -1,5 +1,5 @@
 
-<div class="wrapper" ng-controller="indexController">
+<div class="wrapper" >
   <section id="login" class="doublediagonal">
       <div class="container">
           <div class="">
@@ -21,7 +21,7 @@
                                 <label for="">Password:</label>
                                   <input type="password" class="form-control" ng-model="loginInfo.password">
                               </div>
-                                <input  class="btn btn-primary btn-lg" type="submit" value="Login"  ng-click="login()">
+                                <input  class="btn btn-primary btn-lg" type="submit" value="Login"  ng-click="login(loginInfo)">
                           </form>
                           <br>
                           <h4 style="color:red">{{ errorMsg }}</h4>

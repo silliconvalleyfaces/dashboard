@@ -7,6 +7,7 @@ myApp.factory('postsFactory', function($http){
 	factory.getPosts = function(callback){
 		$http.get('/posts').then(function(data){
 			posts = data.data;
+			console.log("factory.getPosts: ", posts);
 			callback(data.data);
 		});
 	}
@@ -25,7 +26,7 @@ myApp.factory('postsFactory', function($http){
 	factory.searchPosts = function(search, callback){
  		$http.post('/search', search).then(function(output){
  			if(output.error){
- 				console.log(output.error); 
+ 				console.log(output.error);
  			}
  			else{
  				callback(output.data);
@@ -49,6 +50,17 @@ myApp.factory('postsFactory', function($http){
 		$http.post('/comments', commentData).then(function(data){
 			console.log('back in the factory commentPost',data);
 			callback(data);
+		});
+	};
+
+	factory.deleteComment = function(commentId, callback){
+		console.log('deletecomment at factory', commentId);
+		$http.post('/comments/' + commentId + '/destroy').then(function(data){
+			if(data.error){
+				callback(data);
+			} else {
+				callback(data);
+			}
 		});
 	};
 

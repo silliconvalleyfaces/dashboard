@@ -82,6 +82,32 @@ module.exports = (function() {
 				}
 			})
  		},
+ 		destroyComment: function(req, res){
+
+ 			Comment.findOne({_id: req.params.id}, function (err, comment){
+				if(err){
+					console.log('error finding comment', err);
+				} else {
+					var commentId = comment._id;
+					var postId = comment._post;
+					console.log('THIS IS COME', postId);
+					comment.remove();
+					Post.findOne({_id: postId}, function (erro, post){
+						if(err){
+							console.log('error finding post', erro);
+						} else {
+							for(var i = 0; i < post.comments.length; i++){
+								if(post.comments[i].equals(commentId)){
+									post.comments.splice(i, 1);
+									res.json({status: 'ok'});
+								}
+							}
+							
+						};
+					});
+				};
+			});
+ 		},
 
 
 	}

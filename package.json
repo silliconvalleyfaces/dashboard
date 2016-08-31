@@ -4,6 +4,7 @@
   "dependencies": {
     "angular-password": "^1.0.1",
     "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "~4.2.0",
     "express-session": "^1.14.1",
