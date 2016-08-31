@@ -7,6 +7,7 @@ myApp.factory('postsFactory', function($http){
 	factory.getPosts = function(callback){
 		$http.get('/posts').then(function(data){
 			posts = data.data;
+			console.log("factory.getPosts: ", posts);
 			callback(data.data);
 		});
 	}

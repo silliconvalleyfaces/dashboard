@@ -54,12 +54,12 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
  		$scope.post._user_id = $scope.user_id;
  		postsFactory.addPost($scope.post, function(data){
-			console.log(data);
+			console.log("postsFactory.addPost(", data);
 			$scope.post = null;
 			$scope.posts.unshift(data.data);
 			console.log('DATA BACK', data.data);
 			postsFactory.getPosts(function(dat){
-		 		console.log(data);
+
 		 		$scope.posts = dat;
 		 	});
  		});
@@ -149,8 +149,10 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	};
 
 	$scope.logout = function(){
-		$cookies.remove('accessToken');
-		$cookies.remove('userObj');
+		// $cookies.remove('accessToken');
+		// $cookies.remove('userObj');
+		usersFactory.logout();
+		$location.url('/')
 	};
 
 	chageUserStatus = function (){
