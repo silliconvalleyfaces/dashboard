@@ -1,4 +1,4 @@
-myApp.factory('usersFactory', function ($http){
+myApp.factory('usersFactory', function ($http, $cookies){
     var users = [];
     var factory = {};
 // get logged in user information
@@ -23,6 +23,13 @@ myApp.factory('usersFactory', function ($http){
         $http.post('/login', userInfo)
         .then(function (data){
           callback(data);
+        });
+      };
+      factory.logout = function (){
+        $http.get('/logout')
+        .then(function (){
+          $cookies.remove('accessToken');
+          $cookies.remove('userObj');
         });
       };
       factory.searchUsers = function (UserName, callback) {

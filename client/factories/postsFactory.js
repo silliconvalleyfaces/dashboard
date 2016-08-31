@@ -7,6 +7,7 @@ myApp.factory('postsFactory', function($http){
 	factory.getPosts = function(callback){
 		$http.get('/posts').then(function(data){
 			posts = data.data;
+			console.log("factory.getPosts: ", posts);
 			callback(data.data);
 		});
 	}
@@ -25,7 +26,7 @@ myApp.factory('postsFactory', function($http){
 	factory.searchPosts = function(search, callback){
  		$http.post('/search', search).then(function(output){
  			if(output.error){
- 				console.log(output.error); 
+ 				console.log(output.error);
  			}
  			else{
  				callback(output.data);

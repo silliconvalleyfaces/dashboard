@@ -52,7 +52,8 @@ var usersController = require('../controllers/users.js')
   });
   app.get('/logout', function (req, res){
     console.log('Back-end routes -- app.get /logout ');
-    console.log('req.body', req.body);
+    console.log('logout route -- req.body', req.body);
+  
     usersController.logout(req, res);
   });
   app.post('/usersearch', function (req,res) {
@@ -64,4 +65,5 @@ var usersController = require('../controllers/users.js')
   //   console.log('Back-end routes -- app.get /silliconValleyFacesWall ');
   //   console.log('welcome to silliconValleyFacesWall');
   // });
+
 }

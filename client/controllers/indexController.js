@@ -1,4 +1,5 @@
-myApp.controller('indexController', function($scope, $location, $window, $timeout, postsFactory, usersFactory){
+myApp.controller('indexController', function($scope, $location, $window, $timeout, $cookies, authFact, postsFactory, usersFactory){
+
 // the following code is for switching navbarLogin bars based on different routes. navbar files are in '/partials/navbarLogin.html'  and '/partials/navbarWall.html'
 	// $scope.$on('$locationChangeSuccess', function($routeParams) {
   //       var path = $location.path();
@@ -10,15 +11,20 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
 	$scope.userStatus = false;
 	$scope.comment = {};
-
+	$scope.isLogged = function (){
+		return authFact.getAccessToken();
+	};
+	console.log("$scope.isLogged()", $scope.isLogged() );
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
-		if($scope.loggedInUser){
+		if($scope.loggedInUser.data.length > 0){
+			$scope.userStatus = true;
 			$scope.user_id = data.data[0]._id;
 			$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
 		}
 		console.log('$scope.loggedInUser', $scope.loggedInUser);
 		console.log('$scope.user_id', $scope.user_id);
+
 	});
 
 	postsFactory.getPosts(function(data){
@@ -41,17 +47,19 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	}
 
 
+
+
 	$scope.addPost = function(){
  		console.log('hello');
 
  		$scope.post._user_id = $scope.user_id;
  		postsFactory.addPost($scope.post, function(data){
-			console.log(data);
+			console.log("postsFactory.addPost(", data);
 			$scope.post = null;
 			$scope.posts.unshift(data.data);
 			console.log('DATA BACK', data.data);
 			postsFactory.getPosts(function(dat){
-		 		console.log(data);
+
 		 		$scope.posts = dat;
 		 	});
  		});
@@ -104,15 +112,23 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  	};
 
 
+//##############################################
 // Login and Register
+//##############################################
+
+
 	$scope.register = function (){
 		console.log("*** front-end indexController -- $scope.register ***");
 		console.log('new_user information', $scope.new_user);
 		usersFactory.createUser($scope.new_user, function(data){
 			console.log(data);
 			if(data.data.isLoggedIn){
+				console.log("data.data: ", data.data);
+					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
-					// $window.location.reload();
+			}
+			else if(data.data.status === 500){
+				$scope.errorMsg = data.data.message;
 			}
 		});
 	};
@@ -124,15 +140,19 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 			console.log("usersFactory.login", data);
        		if (data.data.status === 500){
 				 	$scope.errorMsg = data.data.message;
-
 			}
 			else if(data.data.status === 200){
-				console.log(" $scope.userStatus", $scope.userStatus);
-				 	$location.url('/wall');
-					// $window.location.reload();
+					authFact.setAccessToken(data.data.authentication);
+					$location.url('/wall');
 			}
-
 		});
+	};
+
+	$scope.logout = function(){
+		// $cookies.remove('accessToken');
+		// $cookies.remove('userObj');
+		usersFactory.logout();
+		$location.url('/')
 	};
 
 	chageUserStatus = function (){
@@ -149,4 +169,20 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  	};
 
 
+});
+
+myApp.constant('AUTH_EVENTS', {
+  loginSuccess: 'auth-login-success',
+  loginFailed: 'auth-login-failed',
+  logoutSuccess: 'auth-logout-success',
+  sessionTimeout: 'auth-session-timeout',
+  notAuthenticated: 'auth-not-authenticated',
+  notAuthorized: 'auth-not-authorized'
+});
+
+myApp.constant('USER_ROLES', {
+  all: '*',
+  admin: 'admin',
+  editor: 'editor',
+  guest: 'guest'
 });

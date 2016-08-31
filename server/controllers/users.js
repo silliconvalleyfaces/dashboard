@@ -19,29 +19,38 @@ module.exports = (function (){
     createUser: function (req, res){
       console.log("*@*@* Back-end controller -- users.js -- createUser ***");
       console.log('*@*@* req.body', req.body);
-      console.log("password : secretPassword(req.body.password)",  secretPassword(req.body.password))
-      var user = new User({
-        first_name: req.body.firstName,
-        last_name : req.body.lastName,
-        email : req.body.email,
-        password : secretPassword(req.body.password)
+      console.log("password : secretPassword(req.body.password)",  secretPassword(req.body.password));
+
+      User.findOne({email: req.body.email}, function (err, foundUser){
+        if(foundUser){
+          res.send({status:500, message: 'Sorry, the email has been used. Please use another email!', type:'internal'});
+        }
+        else{
+          var user = new User({
+            first_name: req.body.firstName,
+            last_name : req.body.lastName,
+            email : req.body.email,
+            password : secretPassword(req.body.password)
+          });
+
+          user.save(function (err){
+            if(err){
+              console.log('*@*@* error ', err);
+            }
+            else {
+                  console.log('save this user information', user);
+                  req.session.userFirstName = user.first_name;
+                  req.session.userLastName = user.last_name;
+                  req.session.userId = user._id;
+                  req.session.userEmail = user.email;
+                  console.log('req.session', req.session);
+
+                  res.send({status:201, isLoggedIn: true, authentication: true, type:'internal'});
+            }
+          });
+        }
       });
 
-      user.save(function (err){
-        if(err){
-          console.log('*@*@* error ', err);
-        }
-        else {
-              console.log('save this user information', user)
-              req.session.userFirstName = user.first_name;
-              req.session.userLastName = user.last_name;
-              req.session.userId = user._id;
-              req.session.userEmail = user.email;
-              console.log('req.session', req.session);
-              console.log('redirect to this URL', '/#/wall/'+ req.session.userId );
-              res.send({status:201, isLoggedIn: true, type:'internal'});
-        }
-      });
     },
     userInformation: function (req, res){
       console.log("*@*@* Back-end controller -- users.js -- userInformation ***");
@@ -71,16 +80,14 @@ module.exports = (function (){
         else{
 
             if(isvalidPassword(req.body.password, user.password)){
-
-
+                  console.log("user", user);
           //   // eddys work
           // if(req.body.password === user.password){
                 req.session.userFirstName = user.first_name;
                 req.session.userLastName = user.last_name;
                 req.session.userId = user._id;
                 req.session.userEmail = user.email;
-                res.send({status:200, type:'internal'});
-
+                res.send({status:200, authentication: true, type:'internal'});
           }
         }
       });
