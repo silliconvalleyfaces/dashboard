@@ -11,16 +11,16 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
 	$scope.userStatus = false;
 	$scope.comment = {};
-
+	$scope.isLogged = function (){
+		return authFact.getAccessToken();
+	};
+	console.log("$scope.isLogged()", $scope.isLogged() );
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
 		if($scope.loggedInUser.data.length > 0){
-			// $scope.userStatus = true;
+			$scope.userStatus = true;
 			$scope.user_id = data.data[0]._id;
 			$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
-
-			// var userObj = $cookies.put('userObj', data.data[0]);
-			// console.log('cookie information - userObj: ', userObj);
 		}
 		console.log('$scope.loggedInUser', $scope.loggedInUser);
 		console.log('$scope.user_id', $scope.user_id);
@@ -115,6 +115,8 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 //##############################################
 // Login and Register
 //##############################################
+
+
 	$scope.register = function (){
 		console.log("*** front-end indexController -- $scope.register ***");
 		console.log('new_user information', $scope.new_user);
@@ -138,15 +140,11 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 			console.log("usersFactory.login", data);
        		if (data.data.status === 500){
 				 	$scope.errorMsg = data.data.message;
-
 			}
 			else if(data.data.status === 200){
-				console.log("data.data: ", data);
 					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
-					// $window.location.reload();
 			}
-
 		});
 	};
 

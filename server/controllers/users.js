@@ -44,7 +44,7 @@ module.exports = (function (){
                   req.session.userId = user._id;
                   req.session.userEmail = user.email;
                   console.log('req.session', req.session);
-                  console.log('redirect to this URL', '/#/wall/'+ req.session.userId );
+
                   res.send({status:201, isLoggedIn: true, authentication: true, type:'internal'});
             }
           });
@@ -80,8 +80,7 @@ module.exports = (function (){
         else{
 
             if(isvalidPassword(req.body.password, user.password)){
-
-
+                  console.log("user", user);
           //   // eddys work
           // if(req.body.password === user.password){
                 req.session.userFirstName = user.first_name;
@@ -89,7 +88,6 @@ module.exports = (function (){
                 req.session.userId = user._id;
                 req.session.userEmail = user.email;
                 res.send({status:200, authentication: true, type:'internal'});
-
           }
         }
       });
