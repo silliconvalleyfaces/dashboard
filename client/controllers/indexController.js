@@ -61,7 +61,6 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 			$scope.posts.unshift(data.data);
 			console.log('DATA BACK', data.data);
 			postsFactory.getPosts(function(dat){
-
 		 		$scope.posts = dat;
 		 	});
  		});
