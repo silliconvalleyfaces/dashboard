@@ -36,6 +36,7 @@
     <script src="app.js"></script>
     <script src="angular-cookie.js"></script>
     <script src="/controllers/indexController.js"></script>
+    <script src="/controllers/MyCtrl.js"></script>
     <script src="/factories/postsFactory.js"></script>
     <script src="/factories/usersFactory.js"></script>
     <script src="/factories/authFact.js"></script>
@@ -50,7 +51,6 @@
 </head>
 
 <body ng-controller='indexController'>
-
     <div class="pre-loader">
         <div class="load-con">
             <img src="img/svfLogo3.jpeg" class="animated fadeInDown" alt="">
@@ -234,11 +234,57 @@
                         <h4 class="modal-title" id="myModalLabel">Upload a picture</h4>
                     </div>
                     <div class="modal-body">
-                        <input type="file">
+                        <form ng-controller='MyCtrl' name="myForm">
+                            Photo: 
+                            <input 
+                                type="file"
+                                ngf-select ng-model="picFile" 
+                                name="file" 
+                                accept="image/*"
+                                ngf-pattern="'image/*'"
+                                ngf-accept="'image/*'" 
+                                ngf-max-size="20MB" 
+                                ngf-resize="{width: 100, height: 100}"
+                                required
+                            >
+                            <i ng-show="myForm.file.$error.required">
+                                *required
+                            </i>
+                            <br>
+                            <i ng-show="myForm.file.$error.maxSize">
+                                File too large 
+                                {{errorFile.size / 1000000|number:1}}MB: max 2M
+                            </i>
+                            <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> 
+                            <button ng-click="picFile = null" ng-show="picFile">
+                                Remove
+                            </button>
+                            <br>
+                            <button ng-disabled="!myForm.$valid" 
+                            ng-click="uploadPic(picFile)">
+                                Submit
+                            </button>
+                            <span class="progress" ng-show="picFile.progress >= 0">
+                                <div style="width:{{picFile.progress}}%" 
+                                ng-bind="picFile.progress + '%'"></div>
+                            </span>
+                            <span ng-show="picFile.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+
+                        <!--     <button type="submit" ng-click="up.submit()">
+                                submit
+                            </button>
+                            <p>{{up.progress}}</p>
+ -->                        </form>
+
+
+
+
+
+
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Upload</button>
+
                     </div>
                 </div>
             </div>
