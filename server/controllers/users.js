@@ -108,9 +108,18 @@ module.exports = (function (){
                     res.json(users);
                 }
             });
+    },
+    getUsers: function(req, res){
+      console.log('GOT TO GET USERS CONTROLLER');
+      User.find({}, function(err, users){
+        if(err){
+          console.log(err);
+        }else{
+          res.json(users);
+        }
+      })
+    },
 
-
-    }
 
   };
 })();

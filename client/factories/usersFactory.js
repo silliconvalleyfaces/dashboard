@@ -38,11 +38,15 @@ myApp.factory('usersFactory', function ($http, $cookies){
         $http.post('/usersearch',UserName)
         .then(function (data) {
           callback(data);
-        })
+        });
+      };
 
-
-      }
-
+      factory.getUsers = function(callback){
+        console.log('get users, users factory');
+        $http.get('/users').then(function(data){
+          callback(data);
+        });
+      };
 
     return factory;
 });

@@ -49,6 +49,10 @@ myApp.directive('validPasswordC', function() {
                 controller: 'indexController',
                 templateUrl: "partials/termsConditions.html"
             })
+            .when('/admin', {
+                controller: 'adminController',
+                templateUrl: "partials/admin.html"
+            })
             .when('/wall', {
                 controller: 'indexController',
                 templateUrl: "partials/index.html",
