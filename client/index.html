@@ -299,7 +299,36 @@
 
 
 
-        <!-- Find User Modal -->
+<!--  Loading posts from database-->
+	<div ng-repeat = 'x in posts' style="padding-left: 0;">
+		<div class="container-fluid">
+			<div class="col-sm-12" style="padding: 10px;">
+
+					<h4>{{x.title}}</h4>
+					<img class="postIMG" ng-if="x.url" src="{{x.url}}"  alt="img">
+					<p>{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}} <a ng-if='user_id == x._user_id' class="btn btn-danger" ng-click = 'deletePost(x._id)'>Delete</a></p>
+<!-- 					<div class="form-group">
+						<button id="comments" class="btn btn-primary" ng-click="toggle()">Comments</button>
+					</div> -->
+
+					<div id="commentsFeed" class="col-sm-12" ng-repeat='c in x.comments' >
+	<!--                     {{c}} -->
+						<h5>{{c._user_name}} commented:</h5>
+						<p>{{c.text}}</p><hr>
+					</div>
+					<div class="form-group">
+						<textarea class="form-control" rows="3" ng-model='comment[x._id].text' required></textarea>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-primary pull-right" type="submit" value="Comment" ng-click='commentPost(x._id)'>Post</button>
+					</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+ <!-- Find User Modal -->
         <div class="modal fade" id="findUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -308,20 +337,26 @@
                         <h4 class="modal-title" id="myModalLabel">Find a Friend</h4>
                     </div>
                     <div class="modal-body">
+                       	<div class="col-sm-12" ng-repeat="userList in users">
+                       	<div ng-repeat="user in userList ">
+                       		<p>{{user.first_name}} {{user.last_name}}</p>
+                       	</div>
+
+                        </div>
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="findFriend" class="col-sm-2 control-label">Search</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="findFriend" placeholder="Provide Friend's Name" ng-model="SearchName.name">
+<!--                                     <label class="radio-inline">
+                                        <input type="radio" name="first_name" ng-value="first_name" ng-model="SearchName.name">First Name</label>
                                     <label class="radio-inline">
-                                        <input type="radio">First Name</label>
-                                    <label class="radio-inline">
-                                        <input type="radio">Last Name</label>
+                                        <input type="radio" name="last_name" ng-value="last_name" ng-model="SearchName.name" ">Last Name</label> -->
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button type="submit" ng-click=searchUsers() class="btn btn-primary pull-right" data-dismiss="modal">Search</button>
+                                    <button type="submit" ng-click=searchUsers() class="btn btn-primary pull-right" >Search</button>
                                 </div>
                             </div>
                         </form>
@@ -329,6 +364,7 @@
                 </div>
             </div>
         </div>
+
 
     </header>
 
