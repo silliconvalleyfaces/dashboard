@@ -112,6 +112,15 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  		});
  	};
 
+$scope.editProfile = function(){
+		console.log("*** made it to editProfile ***");
+		console.log("edit.phone:", $scope.edit.phoneShare);
+		console.log("edit.phone:", $scope.edit.emailShare);
+		usersFactory.updateUser($scope.edit, function(data){
+			console.log(data);
+		});
+
+	}
 
 //##############################################
 // Login and Register
