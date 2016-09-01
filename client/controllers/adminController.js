@@ -13,6 +13,15 @@ myApp.controller('adminController', function($scope, $location, $window, $timeou
 		$scope.users = data.data;
 	});
 
+	$scope.deleteUser = function(userId){
+		usersFactory.deleteUser(userId, function(data){
+			console.log('removed this user:', data);
+			usersFactory.getUsers(function(dat){
+				console.log('THIS ARE THE USERS:',dat);
+				$scope.users = dat.data;
+			});
+		});
+	};
 
 
 });

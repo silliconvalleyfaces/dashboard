@@ -138,6 +138,16 @@ module.exports = (function (){
         }
       })
     },
+    destroyUser: function(req,res) {
+      User.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+          console.log('error deleting user:', err);
+        }
+        else{
+          res.json({status: 'ok'})
+        }
+      })
+    },
 
 
   };

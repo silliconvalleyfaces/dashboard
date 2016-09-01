@@ -56,6 +56,16 @@ myApp.factory('usersFactory', function ($http, $cookies){
           callback(data);
         });
       };
+      factory.deleteUser = function(userId, callback){
+        console.log('deleteuser at factory', userId)
+        $http.post('/users/' + userId + '/destroy').then(function(data){
+          if(data.error){
+            callback(data);
+          } else {
+            callback(data);
+          }
+        })
+      }
 
     return factory;
 });

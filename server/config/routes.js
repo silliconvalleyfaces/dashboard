@@ -70,6 +70,10 @@ var usersController = require('../controllers/users.js')
     console.log('get users route');
     usersController.getUsers(req, res);
   });
+  app.post('/users/:id/destroy', function(req, res){
+    console.log('got to the destroy user route');
+    usersController.destroyUser(req, res);
+  })
   // app.post('/silliconValleyFacesWall', function (req, res){
   //   console.log('Back-end routes -- app.get /silliconValleyFacesWall ');
   //   console.log('welcome to silliconValleyFacesWall');
