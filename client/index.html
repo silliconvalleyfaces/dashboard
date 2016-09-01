@@ -234,42 +234,38 @@
                         <h4 class="modal-title" id="myModalLabel">Upload a picture</h4>
                     </div>
                     <div class="modal-body">
-                        <form ng-controller='MyCtrl' name="myForm">
+                        <form name="upload_form">
                             Photo: 
                             <input 
-                                type="file"
-                                ngf-select ng-model="picFile" 
-                                name="file" 
-                                accept="image/*"
-                                ngf-pattern="'image/*'"
-                                ngf-accept="'image/*'" 
-                                ngf-max-size="20MB" 
-                                ngf-resize="{width: 100, height: 100}"
-                                required
-                            >
-                            <i ng-show="myForm.file.$error.required">
+                type="file" 
+                ngf-select 
+                ng-model="file" 
+                name="file" 
+                ngf-pattern="'image/*'"
+                accept="image/*" 
+                ngf-max-size="20MB" 
+                />                            <i ng-show="myForm.file.$error.required">
                                 *required
                             </i>
                             <br>
-                            <i ng-show="myForm.file.$error.maxSize">
+                      <!--       <i ng-show="myForm.file.$error.maxSize">
                                 File too large 
                                 {{errorFile.size / 1000000|number:1}}MB: max 2M
-                            </i>
-                            <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> 
-                            <button ng-click="picFile = null" ng-show="picFile">
+                            </i> -->
+                      <!--       <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb">  -->
+                            <!-- <button ng-click="picFile = null" ng-show="picFile">
                                 Remove
-                            </button>
+                            </button> -->
                             <br>
-                            <button ng-disabled="!myForm.$valid" 
-                            ng-click="uploadPic(picFile)">
-                                Submit
-                            </button>
-                            <span class="progress" ng-show="picFile.progress >= 0">
+                            <button type="submit" ng-click="submit()">submit</button>
+
+
+                            <!-- <span class="progress" ng-show="picFile.progress >= 0">
                                 <div style="width:{{picFile.progress}}%" 
                                 ng-bind="picFile.progress + '%'"></div>
                             </span>
                             <span ng-show="picFile.result">Upload Successful</span>
-                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span> -->
 
                         <!--     <button type="submit" ng-click="up.submit()">
                                 submit

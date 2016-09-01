@@ -61,7 +61,7 @@ var upload = multer({ //multer settings
 app.post('/upload', function(req, res) {
 	console.log('at the route to upload photos to s3')
     upload(req,res,function(err){
-    	console.log(req.body); 
+    	console.log(req.data); 
         if(err){
         	console.log('error', err);
              res.json({error_code:1,err_desc:err});
