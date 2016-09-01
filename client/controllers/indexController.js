@@ -1,5 +1,24 @@
-myApp.controller('indexController', function($scope, $location, $window, $timeout, $cookies, authFact, postsFactory, usersFactory){
+myApp.controller('indexController', function($scope, Upload, $location, $window, $timeout, $cookies, authFact, postsFactory, usersFactory){
+//upload photo s3 api
 
+$scope.uploadPic = function(file) {
+	console.log(file)
+    file.upload = Upload.upload({
+      url: '/upload',
+      data: {file: file},
+    });
+    file.upload.then(function (response) {
+      $timeout(function () {
+        file.result = response.data;
+      });
+    }, function (response) {
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+}
 // the following code is for switching navbarLogin bars based on different routes. navbar files are in '/partials/navbarLogin.html'  and '/partials/navbarWall.html'
 	// $scope.$on('$locationChangeSuccess', function($routeParams) {
   //       var path = $location.path();
@@ -112,6 +131,15 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  		});
  	};
 
+$scope.editProfile = function(){
+		console.log("*** made it to editProfile ***");
+		console.log("edit.phone:", $scope.edit.phoneShare);
+		console.log("edit.phone:", $scope.edit.emailShare);
+		usersFactory.updateUser($scope.edit, function(data){
+			console.log(data);
+		});
+
+	}
 
 //##############################################
 // Login and Register

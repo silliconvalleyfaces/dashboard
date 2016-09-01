@@ -27,6 +27,11 @@ var usersController = require('../controllers/users.js')
     postsController.commentPost(req, res);
   })
 
+  app.post('/updateUser', function (req,res) {
+    console.log('req.body', req.body);
+    usersController.updateUser(req, res);
+  })
+
   //#############################################
       // Users routes
   //#############################################
