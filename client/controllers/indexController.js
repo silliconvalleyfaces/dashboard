@@ -96,20 +96,17 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	 	});
 
 	}
-
-
-
-
 	$scope.addPost = function(){
- 		console.log('hello');
+ 		// console.log('hello');
 
  		$scope.post._user_id = $scope.user_id;
  		postsFactory.addPost($scope.post, function(data){
 			// console.log("postsFactory.addPost(", data);
 			$scope.post = null;
-			$scope.posts.unshift(data.data);
-			// console.log('DATA BACK', data.data);
+			// $scope.posts.unshift(data.data);
+			console.log('DATA BACK', data.data);
 			postsFactory.getPosts(function(dat){
+		 		console.log('does this work?')
 		 		$scope.posts = dat;
 		 	});
  		});
