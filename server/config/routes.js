@@ -27,6 +27,11 @@ var usersController = require('../controllers/users.js')
     postsController.commentPost(req, res);
   })
 
+  app.post('/updateUser', function (req,res) {
+    console.log('req.body', req.body);
+    usersController.updateUser(req, res);
+  })
+
   //#############################################
       // Users routes
   //#############################################
@@ -61,9 +66,14 @@ var usersController = require('../controllers/users.js')
     console.log('req.body', req.body);
     usersController.searchName(req, res);
   })
+  app.get('/users', function (req, res){
+    console.log('get users route');
+    usersController.getUsers(req, res);
+  });
   // app.post('/silliconValleyFacesWall', function (req, res){
   //   console.log('Back-end routes -- app.get /silliconValleyFacesWall ');
   //   console.log('welcome to silliconValleyFacesWall');
   // });
+
 
 }

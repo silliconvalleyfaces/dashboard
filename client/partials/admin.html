@@ -1,0 +1,10 @@
+<div>
+	<div ng-if='flagged' ng-repeat='p in flaggedPosts'></div>
+	<div ng-repeat='u in users'>{{u}}
+		<h5>{{u.first_name}} {{u.last_name}}</h5>
+		<div>
+			<h6>{{u.email}}</h6>
+			<h6 ng-if='u.phone'>{{u.phone}}</h6>
+		</div>
+	</div>
+</div>

@@ -36,6 +36,7 @@
     <script src="app.js"></script>
     <script src="angular-cookie.js"></script>
     <script src="/controllers/indexController.js"></script>
+    <script src="/controllers/adminController.js"></script>
     <script src="/controllers/MyCtrl.js"></script>
     <script src="/factories/postsFactory.js"></script>
     <script src="/factories/usersFactory.js"></script>
@@ -88,7 +89,7 @@
                             <a href="#/register" ng-switch-when=" undefined ">Register</a>
                         </li>
                         <li ng-switch-when="true">
-                            <img src="" alt='profile_pic'>
+                            <!-- <img src="" alt='profile_pic'> -->
                             <a href="" data-toggle='modal' data-target='#uploadModal'>Upload New Picture</a>
                         </li>
                         <li>
@@ -204,8 +205,8 @@
                         <br>
                 <label for="share" class="col-sm-2 control-label">Share:</label>
                 <div class="col-sm-10">
-                <label class="checkbox-inline"><input type="checkbox" value="">Email</label>
-                <label class="checkbox-inline"><input type="checkbox" value="">Phone</label> </div>
+                <label class="checkbox-inline"><input type="checkbox" value="" ng-model="edit.emailShare">Email</label>
+                <label class="checkbox-inline"><input type="checkbox" value="" ng-model="edit.phoneShare">Phone</label> </div>
                             </div>
                             
                             <div class="form-group">
