@@ -294,36 +294,6 @@
 
 
 
-
-<!--  Loading posts from database-->
-	<div ng-repeat = 'x in posts' style="padding-left: 0;">
-		<div class="container-fluid">
-			<div class="col-sm-12" style="padding: 10px;">
-
-					<h4>{{x.title}}</h4>
-					<img class="postIMG" ng-if="x.url" src="{{x.url}}"  alt="img">
-					<p>{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}} <a ng-if='user_id == x._user_id' class="btn btn-danger" ng-click = 'deletePost(x._id)'>Delete</a></p>
-<!-- 					<div class="form-group">
-						<button id="comments" class="btn btn-primary" ng-click="toggle()">Comments</button>
-					</div> -->
-
-					<div id="commentsFeed" class="col-sm-12" ng-repeat='c in x.comments' >
-	<!--                     {{c}} -->
-						<h5>{{c._user_name}} commented:</h5>
-						<p>{{c.text}}</p><hr>
-					</div>
-					<div class="form-group">
-						<textarea class="form-control" rows="3" ng-model='comment[x._id].text' required></textarea>
-					</div>
-					<div class="form-group">
-						<button class="btn btn-primary pull-right" type="submit" value="Comment" ng-click='commentPost(x._id)'>Post</button>
-					</div>
-
-			</div>
-		</div>
-	</div>
-</div>
-
  <!-- Find User Modal -->
         <div class="modal fade" id="findUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
