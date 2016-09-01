@@ -1,69 +1,34 @@
-myApp.controller('indexController', function($scope, Upload, $location, $window, $timeout, $cookies, authFact, postsFactory, usersFactory){
+myApp.controller('indexController', function($scope, $location, $window, $timeout, $cookies, authFact, postsFactory, usersFactory){
 //upload photo s3 api
 
-    $scope.submit = function(){ //function to call on form submit
-        if ($scope.upload_form.file.$valid && $scope.file) { //check if from is valid
-            $scope.upload($scope.file); //call upload function
-        }
-    }
+    // $scope.submit = function(){ //function to call on form submit
+    //     if ($scope.upload_form.file.$valid && $scope.file) { //check if from is valid
+    //         $scope.upload($scope.file); //call upload function
+    //     }
+    // }
     
-    $scope.upload = function (file) {
-        console.log(file); 
+    // $scope.upload = function (file) {
+    //     console.log(file); 
 
-        Upload.upload({
-            url: '/upload', //webAPI exposed to upload the file
-            data:{file:file} //pass file as data, should be user ng-model
-        }).then(function (resp) { //upload function returns a promise
-            if(resp.data.error_code === 0){ //validate success
-                $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
-            } else {
-                $window.alert('an error occured');
-            }
-        }, function (resp) { //catch error
-            console.log('Error status: ' + resp.status);
-            $window.alert('Error status: ' + resp.status);
-        }, function (evt) { 
-            console.log(evt);
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-            $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
-        });
-    };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //     Upload.upload({
+    //         url: '/upload', //webAPI exposed to upload the file
+    //         data:{file:file} //pass file as data, should be user ng-model
+    //     }).then(function (resp) { //upload function returns a promise
+    //         if(resp.data.error_code === 0){ //validate success
+    //             $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+    //         } else {
+    //             $window.alert('an error occured');
+    //         }
+    //     }, function (resp) { //catch error
+    //         console.log('Error status: ' + resp.status);
+    //         $window.alert('Error status: ' + resp.status);
+    //     }, function (evt) { 
+    //         console.log(evt);
+    //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    //         $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+    //     });
+    // };
 
 
 // $scope.uploadPic = function(file) {
@@ -98,23 +63,23 @@ myApp.controller('indexController', function($scope, Upload, $location, $window,
 	$scope.isLogged = function (){
 		return authFact.getAccessToken();
 	};
-	console.log("$scope.isLogged()", $scope.isLogged() );
+	// console.log("$scope.isLogged()", $scope.isLogged() );
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
 		$scope.edit = data.data[0];
-		console.log("data.data[0]",data.data[0]);
+		// console.log("data.data[0]",data.data[0]);
 		if($scope.loggedInUser.data.length > 0){
 			$scope.userStatus = true;
 			$scope.user_id = data.data[0]._id;
 			$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
 		}
-		console.log('$scope.loggedInUser', $scope.loggedInUser);
-		console.log('$scope.user_id', $scope.user_id);
+		// console.log('$scope.loggedInUser', $scope.loggedInUser);
+		// console.log('$scope.user_id', $scope.user_id);
 
 	});
 
 	postsFactory.getPosts(function(data){
- 		console.log(data);
+ 		// console.log(data);
  		$scope.posts = data;
  	});
 
@@ -124,7 +89,7 @@ myApp.controller('indexController', function($scope, Upload, $location, $window,
 
 	$scope.reset = function(){
 		postsFactory.getPosts(function(data){
-	 		console.log(data);
+	 		// console.log(data);
 	 		$scope.posts = data;
 	 		$scope.feed = true;
 	 		$scope.search.text = null;
@@ -140,10 +105,10 @@ myApp.controller('indexController', function($scope, Upload, $location, $window,
 
  		$scope.post._user_id = $scope.user_id;
  		postsFactory.addPost($scope.post, function(data){
-			console.log("postsFactory.addPost(", data);
+			// console.log("postsFactory.addPost(", data);
 			$scope.post = null;
 			$scope.posts.unshift(data.data);
-			console.log('DATA BACK', data.data);
+			// console.log('DATA BACK', data.data);
 			postsFactory.getPosts(function(dat){
 		 		$scope.posts = dat;
 		 	});
@@ -153,16 +118,16 @@ myApp.controller('indexController', function($scope, Upload, $location, $window,
  	$scope.deletePost = function(postId){
  		postsFactory.deletePost(postId, function(status){
  			postsFactory.getPosts(function(data){
-		 		console.log(data);
+		 		// console.log(data);
 		 		$scope.posts = data;
 		 	});
  		});
  	};
 
  	$scope.searchPosts = function(search){
- 		console.log('at the searchPosts controller function');
+ 		// console.log('at the searchPosts controller function');
  		postsFactory.searchPosts(search, function(data){
- 			console.log("search results:", data);
+ 			// console.log("search results:", data);
  			$scope.posts = data;
  			$scope.feed = false;
  		});
@@ -175,11 +140,11 @@ myApp.controller('indexController', function($scope, Upload, $location, $window,
  			_user: $scope.user_id,
  			_post : postId,
  		};
- 		console.log(commentData, "COMMENT DATA")
+ 		// console.log(commentData, "COMMENT DATA")
  		postsFactory.commentPost(commentData, function(data){
- 			console.log('back from commenting post', data);
+ 			// console.log('back from commenting post', data);
  			postsFactory.getPosts(function(dat){
-	 			console.log(data);
+	 			// console.log(data);
 	 			$scope.posts = dat;
 	 		});
  		});
@@ -188,18 +153,18 @@ myApp.controller('indexController', function($scope, Upload, $location, $window,
 
  	$scope.deleteComment = function(commentId){
  		postsFactory.deleteComment(commentId, function(status){
- 			console.log('status deleting comment:', status);
+ 			// console.log('status deleting comment:', status);
  			postsFactory.getPosts(function(dat){
-	 			console.log('THIS ARE THE POSTS',dat);
+	 			// console.log('THIS ARE THE POSTS',dat);
 	 			$scope.posts = dat;
 	 		});
  		});
  	};
 
 $scope.editProfile = function(){
-		console.log("*** made it to editProfile ***");
-		console.log("edit.phone:", $scope.edit.phoneShare);
-		console.log("edit.phone:", $scope.edit.emailShare);
+		// console.log("*** made it to editProfile ***");
+		// console.log("edit.phone:", $scope.edit.phoneShare);
+		// console.log("edit.phone:", $scope.edit.emailShare);
 		usersFactory.updateUser($scope.edit, function(data){
 			console.log(data);
 		});
@@ -215,9 +180,9 @@ $scope.editProfile = function(){
 		console.log("*** front-end indexController -- $scope.register ***");
 		console.log('new_user information', $scope.new_user);
 		usersFactory.createUser($scope.new_user, function(data){
-			console.log(data);
+			// console.log(data);
 			if(data.data.isLoggedIn){
-				console.log("data.data: ", data.data);
+				// console.log("data.data: ", data.data);
 					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
 			}
@@ -228,8 +193,8 @@ $scope.editProfile = function(){
 	};
 
 	$scope.login = function (){
-		console.log("*** front-end indexController -- $scope.login ***");
-		console.log('login information', $scope.loginInfo);
+		// console.log("*** front-end indexController -- $scope.login ***");
+		// console.log('login information', $scope.loginInfo);
 		usersFactory.login($scope.loginInfo, function (data){
 			console.log("usersFactory.login", data);
        		if (data.data.status === 500){
