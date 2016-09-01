@@ -16,7 +16,7 @@
  		<input type="submit" name="searchButton" id="searchBtn" class="btn-lg searchBtn col-sm-2 pull-right" ng-click="searchPosts(search)" value="Search">
  	</form>
  	<button class="btn-lg searchBtn col-sm-2 pull-right" ng-if='feed == false' ng-click = 'reset()'>Back to feed</button>
- -</div>
+ </div>
   <!-- End of Search Bar   -->
   
   <!--  Loading posts from database-->
@@ -26,16 +26,16 @@
  			<div class="col-sm-12" style="padding: 0;">
  				<div class="posts">
   					<img class="postIMG" ng-if="x.url" src="{{x.url}}"  alt="img">
- 					<h4>{{x.title}}<button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger pull-right" ng-click = 'deletePost(x._id)'>Delete</button></h4>
- 					<p>{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}</p>
+ 					<h4>{{x.title}}</h4>
+ 					<p>{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}<button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'>Delete</button></p>
  					<div ng-repeat='c in x.comments' style="margin-left: 60px;">
 				</div>
  
  					<div id="commentsFeed" class="col-sm-12" ng-repeat='c in x.comments' >
   	<!--                     {{c}} -->
   						<h5>{{c._user_name}} commented:</h5>
- 						<p>{{c.text}}</p>
- 						<button ng-if='user_id == c._user' class="btn deleteBtn btn-danger pull-right" ng-click = 'deleteComment(c._id)'>Delete</button><br><hr>
+ 						<p>{{c.text}} <button ng-if='user_id == c._user' class="btn deleteBtn btn-danger" ng-click = 'deleteComment(c._id)'>Delete</button></p>
+ 						<br><hr>
   					</div>
  				</div>
  			</div>
