@@ -17,6 +17,15 @@ myApp.factory('usersFactory', function ($http, $cookies){
           callback(data);
         });
       };
+
+      factory.updateUser = function (userInfo, callback){
+        console.log("*** front-end usersFactory.js -- factory.createUser ***");
+        console.log(userInfo);
+        $http.post('/updateUser', userInfo)
+        .then(function(data){
+          callback(data);
+        });
+      };
       factory.login = function (userInfo, callback){
         console.log("*** front-end usersFactory.js -- factory.login***");
         console.log(userInfo);
@@ -41,11 +50,25 @@ myApp.factory('usersFactory', function ($http, $cookies){
         $http.post('/usersearch',UserName)
         .then(function (data) {
           callback(data);
+        });
+      };
+
+      factory.getUsers = function(callback){
+        console.log('get users, users factory');
+        $http.get('/users').then(function(data){
+          callback(data);
+        });
+      };
+      factory.deleteUser = function(userId, callback){
+        console.log('deleteuser at factory', userId)
+        $http.post('/users/' + userId + '/destroy').then(function(data){
+          if(data.error){
+            callback(data);
+          } else {
+            callback(data);
+          }
         })
-
-
       }
-
 
     return factory;
 });

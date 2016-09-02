@@ -1,5 +1,54 @@
 myApp.controller('indexController', function($scope, $location, $window, $timeout, $cookies, authFact, postsFactory, usersFactory){
+//upload photo s3 api
 
+    // $scope.submit = function(){ //function to call on form submit
+    //     if ($scope.upload_form.file.$valid && $scope.file) { //check if from is valid
+    //         $scope.upload($scope.file); //call upload function
+    //     }
+    // }
+
+    // $scope.upload = function (file) {
+    //     console.log(file);
+
+    //     Upload.upload({
+    //         url: '/upload', //webAPI exposed to upload the file
+    //         data:{file:file} //pass file as data, should be user ng-model
+    //     }).then(function (resp) { //upload function returns a promise
+    //         if(resp.data.error_code === 0){ //validate success
+    //             $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+    //         } else {
+    //             $window.alert('an error occured');
+    //         }
+    //     }, function (resp) { //catch error
+    //         console.log('Error status: ' + resp.status);
+    //         $window.alert('Error status: ' + resp.status);
+    //     }, function (evt) {
+    //         console.log(evt);
+    //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    //         $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+    //     });
+    // };
+
+
+// $scope.uploadPic = function(file) {
+// 	console.log(file)
+//     file.upload = Upload.upload({
+//       url: '/upload',
+//       data: {file: file},
+//     });
+//     file.upload.then(function (response) {
+//       $timeout(function () {
+//         file.result = response.data;
+//       });
+//     }, function (response) {
+//       if (response.status > 0)
+//         $scope.errorMsg = response.status + ': ' + response.data;
+//     }, function (evt) {
+//       // Math.min is to fix IE which reports 200% sometimes
+//       file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+//     });
+// }
 // the following code is for switching navbarLogin bars based on different routes. navbar files are in '/partials/navbarLogin.html'  and '/partials/navbarWall.html'
 	// $scope.$on('$locationChangeSuccess', function($routeParams) {
   //       var path = $location.path();
@@ -16,8 +65,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	$scope.isLogged = function (){
 		return authFact.getAccessToken();
 	};
-	// var userCookie = $cookies.getObject('userCookie');
-	// console.log("$cookie.getUserCookie('userCookie') = ", userCookie);
+
 
 	if(authFact.getUserCookie()){
 		// var userCookie = authFact.getUserCookie();
@@ -49,8 +97,9 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	//
 	// });
 
+
 	postsFactory.getPosts(function(data){
- 		console.log(data);
+ 		// console.log(data);
  		$scope.posts = data;
  	});
 
@@ -60,28 +109,33 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
 	$scope.reset = function(){
 		postsFactory.getPosts(function(data){
-	 		console.log(data);
+	 		// console.log(data);
 	 		$scope.posts = data;
 	 		$scope.feed = true;
 	 		$scope.search.text = null;
 	 	});
 
 	}
+<<<<<<< HEAD
 
 
 
 
 	$scope.addPost = function(user_id){
  		console.log('hello', user_id);
+=======
+	$scope.addPost = function(){
+ 		// console.log('hello');
+>>>>>>> bbd5b82551098f9b3e2ea811796f8dd2bb3dd5f7
 
  		$scope.post._user_id = user_id;
  		postsFactory.addPost($scope.post, function(data){
-			console.log("postsFactory.addPost(", data);
+			// console.log("postsFactory.addPost(", data);
 			$scope.post = null;
-			$scope.posts.unshift(data.data);
+			// $scope.posts.unshift(data.data);
 			console.log('DATA BACK', data.data);
 			postsFactory.getPosts(function(dat){
-
+		 		console.log('does this work?')
 		 		$scope.posts = dat;
 		 	});
  		});
@@ -90,16 +144,16 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  	$scope.deletePost = function(postId){
  		postsFactory.deletePost(postId, function(status){
  			postsFactory.getPosts(function(data){
-		 		console.log(data);
+		 		// console.log(data);
 		 		$scope.posts = data;
 		 	});
  		});
  	};
 
  	$scope.searchPosts = function(search){
- 		console.log('at the searchPosts controller function');
+ 		// console.log('at the searchPosts controller function');
  		postsFactory.searchPosts(search, function(data){
- 			console.log("search results:", data);
+ 			// console.log("search results:", data);
  			$scope.posts = data;
  			$scope.feed = false;
  		});
@@ -112,11 +166,11 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  			_user: $scope.user_id,
  			_post : postId,
  		};
- 		console.log(commentData, "COMMENT DATA")
+ 		// console.log(commentData, "COMMENT DATA")
  		postsFactory.commentPost(commentData, function(data){
- 			console.log('back from commenting post', data);
+ 			// console.log('back from commenting post', data);
  			postsFactory.getPosts(function(dat){
-	 			console.log(data);
+	 			// console.log(data);
 	 			$scope.posts = dat;
 	 		});
  		});
@@ -125,14 +179,23 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
  	$scope.deleteComment = function(commentId){
  		postsFactory.deleteComment(commentId, function(status){
- 			console.log('status deleting comment:', status);
+ 			// console.log('status deleting comment:', status);
  			postsFactory.getPosts(function(dat){
-	 			console.log('THIS ARE THE POSTS',dat);
+	 			// console.log('THIS ARE THE POSTS',dat);
 	 			$scope.posts = dat;
 	 		});
  		});
  	};
 
+$scope.editProfile = function(){
+		// console.log("*** made it to editProfile ***");
+		// console.log("edit.phone:", $scope.edit.phoneShare);
+		// console.log("edit.phone:", $scope.edit.emailShare);
+		usersFactory.updateUser($scope.edit, function(data){
+			console.log(data);
+		});
+
+	}
 
 //##############################################
 // Login and Register
@@ -143,11 +206,15 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 		console.log("*** front-end indexController -- $scope.register ***");
 		console.log('new_user information', $scope.new_user);
 		usersFactory.createUser($scope.new_user, function(data){
-			console.log(data);
+			// console.log(data);
 			if(data.data.isLoggedIn){
+<<<<<<< HEAD
 				console.log("data.data: ", data.data);
 					// authFact.setUserCookieId(data.data.userCookie._id);
 					authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name, data.data.userCookie.email);
+=======
+				// console.log("data.data: ", data.data);
+>>>>>>> bbd5b82551098f9b3e2ea811796f8dd2bb3dd5f7
 					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
 			}
@@ -158,8 +225,8 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	};
 
 	$scope.login = function (){
-		console.log("*** front-end indexController -- $scope.login ***");
-		console.log('login information', $scope.loginInfo);
+		// console.log("*** front-end indexController -- $scope.login ***");
+		// console.log('login information', $scope.loginInfo);
 		usersFactory.login($scope.loginInfo, function (data){
 			console.log("usersFactory.login", data);
        		if (data.data.status === 500){

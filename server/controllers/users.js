@@ -52,6 +52,25 @@ module.exports = (function (){
       });
 
     },
+    updateUser: function (req, res){
+      console.log("*@*@* Back-end controller -- users.js -- userInformation ***");
+      console.log('req.session: ',req.session);
+      User.findOne({_id:req.session.userId}, function(err, user) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    user.first_name = req.body.first_name;
+                    user.last_name = req.body.last_name;
+                    user.email = req.body.email;
+                    user.phone = req.body.phone;
+                    user.email_share = req.body.emailShare;
+                    user.phone_share = req.body.phoneShare;
+                    user.save(function(err){
+                        res.json(user);
+                    });
+                }
+            });
+    },
     userInformation: function (req, res){
       console.log("*@*@* Back-end controller -- users.js -- userInformation ***");
       console.log('req.session: ',req.session);
@@ -108,9 +127,28 @@ module.exports = (function (){
                     res.json(users);
                 }
             });
+    },
+    getUsers: function(req, res){
+      console.log('GOT TO GET USERS CONTROLLER');
+      User.find({}, function(err, users){
+        if(err){
+          console.log(err);
+        }else{
+          res.json(users);
+        }
+      })
+    },
+    destroyUser: function(req,res) {
+      User.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+          console.log('error deleting user:', err);
+        }
+        else{
+          res.json({status: 'ok'})
+        }
+      })
+    },
 
-
-    }
 
   };
 })();

@@ -1,0 +1,11 @@
+<div>
+	<div ng-if='flagged' ng-repeat='p in flaggedPosts'></div>
+	<div ng-repeat='u in users'>{{u}}
+		<h5>{{u.first_name}} {{u.last_name}}</h5>
+		<div>
+			<h6>{{u.email}}</h6>
+			<h6 ng-if='u.phone'>{{u.phone}}</h6>
+		</div>
+		<button class="btn deleteBtn btn-danger pull-right" ng-click = 'deleteUser(u._id)'>Delete User</button><br><hr>
+	</div>
+</div>

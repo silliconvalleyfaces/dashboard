@@ -37,6 +37,8 @@
     <script src="app.js"></script>
     <script src="angular-cookie.js"></script>
     <script src="/controllers/indexController.js"></script>
+    <script src="/controllers/adminController.js"></script>
+    <script src="/controllers/MyCtrl.js"></script>
     <script src="/factories/postsFactory.js"></script>
     <script src="/factories/usersFactory.js"></script>
     <script src="/factories/authFact.js"></script>
@@ -51,7 +53,6 @@
 </head>
 
 <body ng-controller='indexController'>
-
     <div class="pre-loader">
         <div class="load-con">
             <img src="img/svfLogo3.jpeg" class="animated fadeInDown" alt="">
@@ -89,7 +90,7 @@
                             <a href="#/register" ng-switch-when=" undefined ">Register</a>
                         </li>
                         <li ng-switch-when="true">
-                            <img src="" alt='profile_pic'>
+                            <!-- <img src="" alt='profile_pic'> -->
                             <a href="" data-toggle='modal' data-target='#uploadModal'>Upload New Picture</a>
                         </li>
                         <li>
@@ -97,11 +98,13 @@
                                 <a href="#/wall" ng-switch-when="true" data-toggle="modal" data-target="#mkPostModal">Make a Post</a>
                             </li>
                             <li>
-                                <a href="#/wall" ng-switch-when="true" data-toggle="modal" data-target="#editProfileModal">Profile</a>
+                                <a href="#/wall" ng-switch-when="true" data-toggle="modal" data-target="#editProfileModal">Edit Profile</a>
                             </li>
+
                             <li>
                                 <a href="#/wall" ng-switch-when="true" data-toggle="modal" data-target="#findUserModal">Find a Friend</a>
                             </li>
+                            <!-- <p>{{edit.first_name}}</p> -->
                             <!-- <li><a href="#/termsConditions">Terms & Conditions</a>
                             </li> -->
                             <!-- <li><a href="#/posts">Make a Post</a>
@@ -165,11 +168,54 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <!-- 					<h4 class="modal-title" id="myModalLabel">Edit Profile</h4> -->
+                        				<h4 class="modal-title" id="myModalLabel">Edit Profile</h4> 
                     </div>
                     <div class="modal-body">
 
                         <!-- <div w3-include-html="firstProject.html"></div> -->
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="title" class="col-sm-2 control-label">First Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="postTitle"  ng-model="edit.first_name">
+                                </div>
+                                
+
+                            </div>
+                            <div class="form-group">
+                                <label for="title" class="col-sm-2 control-label">Last Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="postTitle"  ng-model="edit.last_name">
+                                </div>
+                                
+
+                            </div>
+                            <div class="form-group">
+                                <label for="imgURL" class="col-sm-2 control-label">Email:</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="url" type="text" ng-model="edit.email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="imgURL" class="col-sm-2 control-label">Phone:</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="url" type="text" ng-model="edit.phone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                        <br>
+                <label for="share" class="col-sm-2 control-label">Share:</label>
+                <div class="col-sm-10">
+                <label class="checkbox-inline"><input type="checkbox" value="" ng-model="edit.emailShare">Email</label>
+                <label class="checkbox-inline"><input type="checkbox" value="" ng-model="edit.phoneShare">Phone</label> </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-primary pull-right" ng-click='editProfile()' data-dismiss="modal">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
 
 
 
@@ -190,11 +236,53 @@
                         <h4 class="modal-title" id="myModalLabel">Upload a picture</h4>
                     </div>
                     <div class="modal-body">
-                        <input type="file">
+                        <form name="upload_form">
+                            Photo: 
+                            <input 
+                type="file" 
+                ngf-select 
+                ng-model="file" 
+                name="file" 
+                ngf-pattern="'image/*'"
+                accept="image/*" 
+                ngf-max-size="20MB" 
+                />                            <i ng-show="myForm.file.$error.required">
+                                *required
+                            </i>
+                            <br>
+                      <!--       <i ng-show="myForm.file.$error.maxSize">
+                                File too large 
+                                {{errorFile.size / 1000000|number:1}}MB: max 2M
+                            </i> -->
+                      <!--       <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb">  -->
+                            <!-- <button ng-click="picFile = null" ng-show="picFile">
+                                Remove
+                            </button> -->
+                            <br>
+                            <button type="submit" ng-click="submit()">submit</button>
+
+
+                            <!-- <span class="progress" ng-show="picFile.progress >= 0">
+                                <div style="width:{{picFile.progress}}%" 
+                                ng-bind="picFile.progress + '%'"></div>
+                            </span>
+                            <span ng-show="picFile.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span> -->
+
+                        <!--     <button type="submit" ng-click="up.submit()">
+                                submit
+                            </button>
+                            <p>{{up.progress}}</p>
+ -->                        </form>
+
+
+
+
+
+
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Upload</button>
+
                     </div>
                 </div>
             </div>
@@ -207,8 +295,7 @@
 
 
 
-
-        <!-- Find User Modal -->
+ <!-- Find User Modal -->
         <div class="modal fade" id="findUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -217,20 +304,26 @@
                         <h4 class="modal-title" id="myModalLabel">Find a Friend</h4>
                     </div>
                     <div class="modal-body">
+                       	<div class="col-sm-12" ng-repeat="userList in users">
+                       	<div ng-repeat="user in userList ">
+                       		<p>{{user.first_name}} {{user.last_name}}</p>
+                       	</div>
+
+                        </div>
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="findFriend" class="col-sm-2 control-label">Search</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="findFriend" placeholder="Provide Friend's Name" ng-model="SearchName.name">
+<!--                                     <label class="radio-inline">
+                                        <input type="radio" name="first_name" ng-value="first_name" ng-model="SearchName.name">First Name</label>
                                     <label class="radio-inline">
-                                        <input type="radio">First Name</label>
-                                    <label class="radio-inline">
-                                        <input type="radio">Last Name</label>
+                                        <input type="radio" name="last_name" ng-value="last_name" ng-model="SearchName.name" ">Last Name</label> -->
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button type="submit" ng-click=searchUsers() class="btn btn-primary pull-right" data-dismiss="modal">Search</button>
+                                    <button type="submit" ng-click=searchUsers() class="btn btn-primary pull-right" >Search</button>
                                 </div>
                             </div>
                         </form>
@@ -238,6 +331,7 @@
                 </div>
             </div>
         </div>
+
 
     </header>
 
@@ -267,6 +361,10 @@
         </footer>
 
     </div>
+
+    <!-- <script src="angular(.min).js"></script> -->  
+    <script src="ng-file-upload-shim/ng-file-upload-shim.min.js"></script> 
+    <script src="ng-file-upload/ng-file-upload.min.js"></script>
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/slick.min.js"></script>

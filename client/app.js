@@ -1,4 +1,4 @@
-var myApp = angular.module('Myapp', ['ngRoute', 'ngCookies']);
+var myApp = angular.module('Myapp', ['ngRoute', 'ngCookies', 'ngFileUpload']);
 // var usersController = require('../../ server/controllers/users.js');
 // We instantiate our application and we inject ngrouter so that it's available
 // and so that we can use it to set up our routes below.
@@ -48,6 +48,10 @@ myApp.directive('validPasswordC', function() {
             .when('/termsConditions', {
                 controller: 'indexController',
                 templateUrl: "partials/termsConditions.html"
+            })
+            .when('/admin', {
+                controller: 'adminController',
+                templateUrl: "partials/admin.html"
             })
             .when('/wall', {
                 controller: 'indexController',

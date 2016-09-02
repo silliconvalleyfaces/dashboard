@@ -7,13 +7,13 @@ myApp.factory('postsFactory', function($http){
 	factory.getPosts = function(callback){
 		$http.get('/posts').then(function(data){
 			posts = data.data;
-			console.log("factory.getPosts: ", posts);
+			// console.log("factory.getPosts: ", posts);
 			callback(data.data);
 		});
 	}
 
 	factory.addPost = function(info, callback){
-		console.log('info:', info)
+		// console.log('info:', info)
 		$http.post('/posts', info).then(function(data){
 			if(data.error){
 				callback(data);
