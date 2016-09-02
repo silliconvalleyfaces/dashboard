@@ -11,34 +11,43 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
 
 	$scope.comment = {};
+	var userCookie = authFact.getUserCookie();
+	console.log('globla var userCookie: ', userCookie);
 	$scope.isLogged = function (){
 		return authFact.getAccessToken();
 	};
+	// var userCookie = $cookies.getObject('userCookie');
+	// console.log("$cookie.getUserCookie('userCookie') = ", userCookie);
 
 	if(authFact.getUserCookie()){
-		var userCookie = authFact.getUserCookie();
-		console.log("var userCookie = authFact.getUserCookie();", userCookie);
-		console.log(userCookie[0]);
-		console.log(userCookie[1]);
-		console.log(userCookie[2]);
+		// var userCookie = authFact.getUserCookie();
+		console.log("var userCookie = authFact.getUserCookie() = ", userCookie);
+		console.log(userCookie.user._id);
+		console.log(userCookie.user.first_name);
+		console.log(userCookie.user.last_name);
+		console.log(userCookie.user.email);
+
+		$scope.user_id = 	userCookie.user._id;
+		$scope.user_name = userCookie.user.first_name + " " + userCookie.user.last_name;
+		$scope.user_email = userCookie.user.email;
+		console.log("$scope.user_id = ",$scope.user_id);
+		console.log("$scope.user_name = ", $scope.user_name);
+		console.log("$scope.user_email = ", $scope.user_email);
+
 	}
 
 
-	// console.log("authFact.getUserCookieId: ", authFact.getUserCookieId());
-	// console.log("authFact.getUserCookie: ", userCookie);
-	// console.log("$scope.isLogged()", $scope.isLogged() );
-
-	usersFactory.index(function (data){
-		$scope.loggedInUser = data;
-		if($scope.loggedInUser.data.length > 0){
-			$scope.userStatus = true;
-			$scope.user_id = 	authFact.getUserCookieId();
-			$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
-		}
-		// console.log('$scope.loggedInUser', $scope.loggedInUser);
-		// console.log('$scope.user_id', $scope.user_id);
-
-	});
+	// usersFactory.index(function (data){
+	// 	$scope.loggedInUser = data;
+	// 	if($scope.loggedInUser.data.length > 0){
+	// 		$scope.userStatus = true;
+	// 		$scope.user_id = 	authFact.getUserCookieId();
+	// 		$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
+	// 	}
+	// 	console.log('$scope.loggedInUser', $scope.loggedInUser);
+	// 	console.log('$scope.user_id', $scope.user_id);
+	//
+	// });
 
 	postsFactory.getPosts(function(data){
  		console.log(data);
@@ -62,10 +71,10 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
 
 
-	$scope.addPost = function(){
- 		console.log('hello');
+	$scope.addPost = function(user_id){
+ 		console.log('hello', user_id);
 
- 		$scope.post._user_id = $scope.user_id;
+ 		$scope.post._user_id = user_id;
  		postsFactory.addPost($scope.post, function(data){
 			console.log("postsFactory.addPost(", data);
 			$scope.post = null;
@@ -137,7 +146,8 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 			console.log(data);
 			if(data.data.isLoggedIn){
 				console.log("data.data: ", data.data);
-					authFact.setUserCookieId(data.data.userCookie._id);
+					// authFact.setUserCookieId(data.data.userCookie._id);
+					authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name, data.data.userCookie.email);
 					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
 			}
@@ -156,9 +166,9 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 				 	$scope.errorMsg = data.data.message;
 			}
 			else if(data.data.status === 200){
-					authFact.setUserCookieId(data.data.userCookie._id);
+					// authFact.setUserCookieId(data.data.userCookie._id);
 					console.log('authFact.setUserCookie');
-					authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name);
+					authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name, data.data.userCookie.email);
 					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
 			}
@@ -167,10 +177,10 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
 
 	$scope.logout = function(){
-		$scope.user_id = "";
-		$scope.user_name = "";
+		$scope.user_id = null;
+		$scope.user_name = null;
 		usersFactory.logout();
-		$location.url('/')
+		$location.url('/');
 	};
 
 	chageUserStatus = function (){
