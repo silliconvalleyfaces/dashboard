@@ -1,3 +1,8 @@
+
+
+
+
+
 <!-- User Info -->
 <div ng-controller='indexController'>
 	<div ng-if="loggedInUser.data[0] != null" class="col-sm-12">
@@ -26,6 +31,7 @@
 			<div class="col-sm-12" style="padding: 0;">
 				<div class="posts">
 					<img class="postIMG" ng-if="x.url" src="{{x.url}}"  alt="img">
+					{{ x }}
 					<h4>{{x.title}}<button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger pull-right" ng-click = 'deletePost(x._id)'>Delete</button></h4>
 					<p>{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}</p>
 					<div ng-repeat='c in x.comments' style="margin-left: 60px;">
@@ -49,6 +55,7 @@
 			</div>
 		</div>
 	</div>
+
     <script>
 
     </script>

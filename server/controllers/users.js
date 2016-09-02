@@ -45,7 +45,7 @@ module.exports = (function (){
                   req.session.userEmail = user.email;
                   console.log('req.session', req.session);
 
-                  res.send({status:201, isLoggedIn: true, authentication: true, type:'internal'});
+                  res.send({status:201, userCookie: user, isLoggedIn: true, authentication: true, type:'internal'});
             }
           });
         }
@@ -87,7 +87,7 @@ module.exports = (function (){
                 req.session.userLastName = user.last_name;
                 req.session.userId = user._id;
                 req.session.userEmail = user.email;
-                res.send({status:200, authentication: true, type:'internal'});
+                res.send({status:200, userCookie: user, authentication: true, type:'internal'});
           }
         }
       });

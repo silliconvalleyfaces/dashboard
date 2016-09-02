@@ -9,21 +9,34 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
   //   });
 // End of switching navigation bar
 
-	$scope.userStatus = false;
+
 	$scope.comment = {};
 	$scope.isLogged = function (){
 		return authFact.getAccessToken();
 	};
-	console.log("$scope.isLogged()", $scope.isLogged() );
+
+	if(authFact.getUserCookie()){
+		var userCookie = authFact.getUserCookie();
+		console.log("var userCookie = authFact.getUserCookie();", userCookie);
+		console.log(userCookie[0]);
+		console.log(userCookie[1]);
+		console.log(userCookie[2]);
+	}
+
+
+	// console.log("authFact.getUserCookieId: ", authFact.getUserCookieId());
+	// console.log("authFact.getUserCookie: ", userCookie);
+	// console.log("$scope.isLogged()", $scope.isLogged() );
+
 	usersFactory.index(function (data){
 		$scope.loggedInUser = data;
 		if($scope.loggedInUser.data.length > 0){
 			$scope.userStatus = true;
-			$scope.user_id = data.data[0]._id;
+			$scope.user_id = 	authFact.getUserCookieId();
 			$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
 		}
-		console.log('$scope.loggedInUser', $scope.loggedInUser);
-		console.log('$scope.user_id', $scope.user_id);
+		// console.log('$scope.loggedInUser', $scope.loggedInUser);
+		// console.log('$scope.user_id', $scope.user_id);
 
 	});
 
@@ -124,6 +137,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 			console.log(data);
 			if(data.data.isLoggedIn){
 				console.log("data.data: ", data.data);
+					authFact.setUserCookieId(data.data.userCookie._id);
 					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
 			}
@@ -142,15 +156,19 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 				 	$scope.errorMsg = data.data.message;
 			}
 			else if(data.data.status === 200){
+					authFact.setUserCookieId(data.data.userCookie._id);
+					console.log('authFact.setUserCookie');
+					authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name);
 					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
 			}
 		});
 	};
 
+
 	$scope.logout = function(){
-		// $cookies.remove('accessToken');
-		// $cookies.remove('userObj');
+		$scope.user_id = "";
+		$scope.user_name = "";
 		usersFactory.logout();
 		$location.url('/')
 	};
