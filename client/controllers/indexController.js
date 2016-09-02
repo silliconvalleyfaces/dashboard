@@ -116,17 +116,11 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	 	});
 
 	}
-<<<<<<< HEAD
 
 
-
-
-	$scope.addPost = function(user_id){
- 		console.log('hello', user_id);
-=======
 	$scope.addPost = function(){
  		// console.log('hello');
->>>>>>> bbd5b82551098f9b3e2ea811796f8dd2bb3dd5f7
+
 
  		$scope.post._user_id = user_id;
  		postsFactory.addPost($scope.post, function(data){
@@ -208,13 +202,11 @@ $scope.editProfile = function(){
 		usersFactory.createUser($scope.new_user, function(data){
 			// console.log(data);
 			if(data.data.isLoggedIn){
-<<<<<<< HEAD
-				console.log("data.data: ", data.data);
+
+				// console.log("data.data: ", data.data);
 					// authFact.setUserCookieId(data.data.userCookie._id);
 					authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name, data.data.userCookie.email);
-=======
-				// console.log("data.data: ", data.data);
->>>>>>> bbd5b82551098f9b3e2ea811796f8dd2bb3dd5f7
+
 					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
 			}
