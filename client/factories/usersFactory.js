@@ -31,14 +31,17 @@ myApp.factory('usersFactory', function ($http, $cookies){
         console.log(userInfo);
         $http.post('/login', userInfo)
         .then(function (data){
+          console.log('factory.login callback data', data);
           callback(data);
+
         });
       };
       factory.logout = function (){
         $http.get('/logout')
         .then(function (){
           $cookies.remove('accessToken');
-          $cookies.remove('userObj');
+          $cookies.remove('userCookieId');
+          $cookies.remove('userCookie');
         });
       };
       factory.searchUsers = function (UserName, callback) {

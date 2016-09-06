@@ -6,9 +6,9 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
     //         $scope.upload($scope.file); //call upload function
     //     }
     // }
-    
+
     // $scope.upload = function (file) {
-    //     console.log(file); 
+    //     console.log(file);
 
     //     Upload.upload({
     //         url: '/upload', //webAPI exposed to upload the file
@@ -22,7 +22,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
     //     }, function (resp) { //catch error
     //         console.log('Error status: ' + resp.status);
     //         $window.alert('Error status: ' + resp.status);
-    //     }, function (evt) { 
+    //     }, function (evt) {
     //         console.log(evt);
     //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
     //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
@@ -58,25 +58,45 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
   //   });
 // End of switching navigation bar
 
-	$scope.userStatus = false;
+
 	$scope.comment = {};
+	var userCookie = authFact.getUserCookie();
+	console.log('globla var userCookie: ', userCookie);
 	$scope.isLogged = function (){
 		return authFact.getAccessToken();
 	};
-	// console.log("$scope.isLogged()", $scope.isLogged() );
-	usersFactory.index(function (data){
-		$scope.loggedInUser = data;
-		$scope.edit = data.data[0];
-		// console.log("data.data[0]",data.data[0]);
-		if($scope.loggedInUser.data.length > 0){
-			$scope.userStatus = true;
-			$scope.user_id = data.data[0]._id;
-			$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
-		}
-		// console.log('$scope.loggedInUser', $scope.loggedInUser);
-		// console.log('$scope.user_id', $scope.user_id);
 
-	});
+
+	if(authFact.getUserCookie()){
+		// var userCookie = authFact.getUserCookie();
+		console.log("var userCookie = authFact.getUserCookie() = ", userCookie);
+		console.log(userCookie.user._id);
+		console.log(userCookie.user.first_name);
+		console.log(userCookie.user.last_name);
+		console.log(userCookie.user.email);
+
+		$scope.user_id = 	userCookie.user._id;
+		$scope.user_name = userCookie.user.first_name + " " + userCookie.user.last_name;
+		$scope.user_email = userCookie.user.email;
+		console.log("$scope.user_id = ",$scope.user_id);
+		console.log("$scope.user_name = ", $scope.user_name);
+		console.log("$scope.user_email = ", $scope.user_email);
+
+	}
+
+
+	// usersFactory.index(function (data){
+	// 	$scope.loggedInUser = data;
+	// 	if($scope.loggedInUser.data.length > 0){
+	// 		$scope.userStatus = true;
+	// 		$scope.user_id = 	authFact.getUserCookieId();
+	// 		$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
+	// 	}
+	// 	console.log('$scope.loggedInUser', $scope.loggedInUser);
+	// 	console.log('$scope.user_id', $scope.user_id);
+	//
+	// });
+
 
 	postsFactory.getPosts(function(data){
  		// console.log(data);
@@ -96,10 +116,13 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	 	});
 
 	}
+
+
 	$scope.addPost = function(){
  		// console.log('hello');
 
- 		$scope.post._user_id = $scope.user_id;
+
+ 		$scope.post._user_id = user_id;
  		postsFactory.addPost($scope.post, function(data){
 			// console.log("postsFactory.addPost(", data);
 			$scope.post = null;
@@ -179,7 +202,11 @@ $scope.editProfile = function(){
 		usersFactory.createUser($scope.new_user, function(data){
 			// console.log(data);
 			if(data.data.isLoggedIn){
+
 				// console.log("data.data: ", data.data);
+					// authFact.setUserCookieId(data.data.userCookie._id);
+					authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name, data.data.userCookie.email);
+
 					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
 			}
@@ -198,17 +225,21 @@ $scope.editProfile = function(){
 				 	$scope.errorMsg = data.data.message;
 			}
 			else if(data.data.status === 200){
+					// authFact.setUserCookieId(data.data.userCookie._id);
+					console.log('authFact.setUserCookie');
+					authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name, data.data.userCookie.email);
 					authFact.setAccessToken(data.data.authentication);
 					$location.url('/wall');
 			}
 		});
 	};
 
+
 	$scope.logout = function(){
-		// $cookies.remove('accessToken');
-		// $cookies.remove('userObj');
+		$scope.user_id = null;
+		$scope.user_name = null;
 		usersFactory.logout();
-		$location.url('/')
+		$location.url('/');
 	};
 
 	chageUserStatus = function (){
