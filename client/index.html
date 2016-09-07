@@ -38,6 +38,7 @@
     <script src="angular-cookie.js"></script>
     <script src="/controllers/indexController.js"></script>
     <script src="/controllers/adminController.js"></script>
+    <script src="/controllers/loginController.js"></script>
     <script src="/controllers/MyCtrl.js"></script>
     <script src="/factories/postsFactory.js"></script>
     <script src="/factories/usersFactory.js"></script>
@@ -66,7 +67,7 @@
     </div>
     <!-- this ng-include if for switching navigation bars -->
     <!-- <div ng-include="templateUrl"></div> -->
-    <header>
+    <header >
         <nav class="navbar navbar-default " role="navigation">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -116,7 +117,7 @@
                             <li><a href="#/logout">Logout</a>
                             </li> -->
                             <!--  purposely leave logout button there. just in case you reload the page, but forgot to remove cookie -->
-                            <li><a href="" ng-click="logout()">Log Out</a>
+                            <li ><a href="" ng-click="logout()">Log Out</a>
                             </li>
                     </ul>
                 </div>
@@ -154,7 +155,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button type="button" class="btn btn-primary pull-right" ng-click='addPost()' data-dismiss="modal">Post</button>
+                                    <button type="button" class="btn btn-primary pull-right" ng-click='addPost(user_id)' data-dismiss="modal">Post</button>
                                 </div>
                             </div>
                         </form>
@@ -168,7 +169,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        				<h4 class="modal-title" id="myModalLabel">Edit Profile</h4> 
+                        				<h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
                     </div>
                     <div class="modal-body">
 
@@ -177,29 +178,29 @@
                             <div class="form-group">
                                 <label for="title" class="col-sm-2 control-label">First Name:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="postTitle"  ng-model="edit.first_name">
+                                    <input type="text" class="form-control" id="postTitle"  ng-model="first_name">
                                 </div>
-                                
+
 
                             </div>
                             <div class="form-group">
                                 <label for="title" class="col-sm-2 control-label">Last Name:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="postTitle"  ng-model="edit.last_name">
+                                    <input type="text" class="form-control" id="postTitle"  ng-model="last_name">
                                 </div>
-                                
+
 
                             </div>
                             <div class="form-group">
                                 <label for="imgURL" class="col-sm-2 control-label">Email:</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="url" type="text" ng-model="edit.email">
+                                    <input class="form-control" name="url" type="text" ng-model="user_email">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="imgURL" class="col-sm-2 control-label">Phone:</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="url" type="text" ng-model="edit.phone">
+                                    <input class="form-control" name="url" type="text" ng-model="phone">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -209,7 +210,7 @@
                 <label class="checkbox-inline"><input type="checkbox" value="" ng-model="edit.emailShare">Email</label>
                 <label class="checkbox-inline"><input type="checkbox" value="" ng-model="edit.phoneShare">Phone</label> </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <button type="button" class="btn btn-primary pull-right" ng-click='editProfile()' data-dismiss="modal">Save Changes</button>
@@ -237,21 +238,21 @@
                     </div>
                     <div class="modal-body">
                         <form name="upload_form">
-                            Photo: 
-                            <input 
-                type="file" 
-                ngf-select 
-                ng-model="file" 
-                name="file" 
+                            Photo:
+                            <input
+                type="file"
+                ngf-select
+                ng-model="file"
+                name="file"
                 ngf-pattern="'image/*'"
-                accept="image/*" 
-                ngf-max-size="20MB" 
+                accept="image/*"
+                ngf-max-size="20MB"
                 />                            <i ng-show="myForm.file.$error.required">
                                 *required
                             </i>
                             <br>
                       <!--       <i ng-show="myForm.file.$error.maxSize">
-                                File too large 
+                                File too large
                                 {{errorFile.size / 1000000|number:1}}MB: max 2M
                             </i> -->
                       <!--       <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb">  -->
@@ -263,7 +264,7 @@
 
 
                             <!-- <span class="progress" ng-show="picFile.progress >= 0">
-                                <div style="width:{{picFile.progress}}%" 
+                                <div style="width:{{picFile.progress}}%"
                                 ng-bind="picFile.progress + '%'"></div>
                             </span>
                             <span ng-show="picFile.result">Upload Successful</span>
@@ -362,8 +363,8 @@
 
     </div>
 
-    <!-- <script src="angular(.min).js"></script> -->  
-    <script src="ng-file-upload-shim/ng-file-upload-shim.min.js"></script> 
+    <!-- <script src="angular(.min).js"></script> -->
+    <script src="ng-file-upload-shim/ng-file-upload-shim.min.js"></script>
     <script src="ng-file-upload/ng-file-upload.min.js"></script>
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

@@ -27,13 +27,13 @@
 
   <!--  Loading posts from database-->
 
-  	<div ng-repeat = 'x in posts' style="padding-left: 0;">
+  	<div ng-repeat = 'x in posts | orderBy: "" : true' style="padding-left: 0;">
   		<div class="container-fluid">
  			<div class="col-sm-12" style="padding: 0;">
  				<div class="posts">
   					<img class="postIMG" ng-if="x.url" src="{{x.url}}"  alt="img">
  					<h4>{{x.title}}</h4>
- 					<p>{{x.text}} - {{x.created_at | date: 'MMMM, dd, yyyy @ h:mm a'}}<button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'>Delete</button></p>
+ 					<p>{{x.text}} - {{x.createdAt | date: 'MMMM, dd, yyyy @ h:mm a'}}<button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'>Delete</button></p>
  					<div ng-repeat='c in x.comments' style="margin-left: 60px;">
 				</div>
 

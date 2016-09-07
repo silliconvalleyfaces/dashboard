@@ -25,8 +25,9 @@ var PostSchema = new mongoose.Schema({
       type: Schema.Types.ObjectId,
       ref: 'comments'
     }],
-    created_at: {type: Date, default: new Date}
-});
+    // created_at: {type: Date, default: new Date};
+
+},{timestamps: true});
 module.exports = mongoose.model('posts', PostSchema);
 mongoose.model('posts', PostSchema);
 // Validations

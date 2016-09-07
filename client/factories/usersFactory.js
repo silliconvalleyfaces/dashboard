@@ -40,7 +40,6 @@ myApp.factory('usersFactory', function ($http, $cookies){
         $http.get('/logout')
         .then(function (){
           $cookies.remove('accessToken');
-          $cookies.remove('userCookieId');
           $cookies.remove('userCookie');
         });
       };

@@ -54,8 +54,9 @@ module.exports = (function (){
     },
     updateUser: function (req, res){
       console.log("*@*@* Back-end controller -- users.js -- userInformation ***");
-      console.log('req.session: ',req.session);
-      User.findOne({_id:req.session.userId}, function(err, user) {
+      console.log('req.body: ',req.body);
+      // replace session.userId with cookieId
+      User.findOne({_id:req.body.user_id}, function(err, user) {
                 if (err) {
                     console.log(err);
                 } else {
