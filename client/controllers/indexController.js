@@ -190,14 +190,14 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  		});
  	};
 
-$scope.editProfile = function(){
-	$scope.edit = {
-		"user_id": userCookie.user._id,
-		"first_name": $scope.first_name,
-		"last_name": $scope.last_name,
-		"email": $scope.user_email,
-		"phone": $scope.phone
-	};
+	$scope.editProfile = function(){
+		$scope.edit = {
+			"user_id": userCookie.user._id,
+			"first_name": $scope.first_name,
+			"last_name": $scope.last_name,
+			"email": $scope.user_email,
+			"phone": $scope.phone
+		};
 
 		console.log("*** made it to editProfile ***");
 		console.log("$scope.edit: ", $scope.edit);
@@ -220,18 +220,18 @@ $scope.editProfile = function(){
 // Login and Register
 //##############################################
 
-$scope.logout = function(){
+	$scope.logout = function(){
 
-  // $rootScope.user_id = 	null;
-  // $rootScope.user_name = null;
-  // $rootScope.first_name = null;
-  // $rootScope.last_name = null;
-  // $rootScope.user_email = null;
-	$rootScope = {};
-	console.log('user is login out $rootScope = ', $rootScope);
-  usersFactory.logout();
-  $location.url('/');
-};
+	  // $rootScope.user_id = 	null;
+	  // $rootScope.user_name = null;
+	  // $rootScope.first_name = null;
+	  // $rootScope.last_name = null;
+	  // $rootScope.user_email = null;
+		$rootScope = {};
+		console.log('user is login out $rootScope = ', $rootScope);
+	  usersFactory.logout();
+	  $location.url('/');
+	};
 
 
 	chageUserStatus = function (){
@@ -246,6 +246,13 @@ $scope.logout = function(){
  			$scope.feed = false;
  		});
  	};
+
+ 	$scope.removeProfile = function(userId){
+		usersFactory.deleteUser(userId, function(data){
+			console.log('removed this user:', data);
+			$location.url('/');
+		});
+	};
 
 
 });
