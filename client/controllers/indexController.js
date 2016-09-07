@@ -230,7 +230,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 		$rootScope = {};
 		console.log('user is login out $rootScope = ', $rootScope);
 	  usersFactory.logout();
-	  $location.url('/');
+	  $location.url('/login');
 	};
 
 

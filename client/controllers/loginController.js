@@ -11,7 +11,7 @@ $scope.register = function (){
         authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name, data.data.userCookie.email);
 
         authFact.setAccessToken(data.data.authentication);
-        $location.url('/wall');
+        $location.url('/');
         // $window.location.reload();
     }
     else if(data.data.status === 500){
@@ -33,7 +33,7 @@ $scope.login = function (){
         console.log('authFact.setUserCookie');
         authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name, data.data.userCookie.email);
         authFact.setAccessToken(data.data.authentication);
-        $location.url('/wall');
+        $location.url('/');
         // $window.location.reload();
     }
   });

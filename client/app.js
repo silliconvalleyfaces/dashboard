@@ -32,11 +32,6 @@ myApp.directive('validPasswordC', function() {
 (function() {
     myApp.config(function($routeProvider) {
         $routeProvider
-
-            .when('/', {
-                controller: 'loginController',
-                templateUrl: "partials/login.html"
-            })
             .when('/login', {
                 controller: 'loginController',
                 templateUrl: "partials/login.html"
@@ -53,13 +48,13 @@ myApp.directive('validPasswordC', function() {
                 controller: 'adminController',
                 templateUrl: "partials/admin.html"
             })
-            .when('/wall', {
+            .when('/', {
                 controller: 'indexController',
                 templateUrl: "partials/index.html",
                 authenticate: true
             })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/login'
             });
     });
 
@@ -77,7 +72,7 @@ myApp.run(["$rootScope", "$location", "authFact", function ($rootScope, $locatio
        var userAuth = authFact.getAccessToken();
        console.log('userAuth: ', userAuth);
        if(!userAuth){
-         $location.path('/');
+         $location.path('/login');
        }
        
      }
