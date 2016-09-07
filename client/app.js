@@ -34,15 +34,15 @@ myApp.directive('validPasswordC', function() {
         $routeProvider
 
             .when('/', {
-                controller: 'indexController',
+                controller: 'loginController',
                 templateUrl: "partials/login.html"
             })
             .when('/login', {
-                controller: 'indexController',
+                controller: 'loginController',
                 templateUrl: "partials/login.html"
             })
             .when('/register', {
-                controller: 'indexController',
+                controller: 'loginController',
                 templateUrl: "partials/register.html"
             })
             .when('/termsConditions', {
@@ -79,6 +79,7 @@ myApp.run(["$rootScope", "$location", "authFact", function ($rootScope, $locatio
        if(!userAuth){
          $location.path('/');
        }
+       
      }
   });
 }]);

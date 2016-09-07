@@ -1,4 +1,4 @@
-myApp.controller('indexController', function($scope, $location, $window, $timeout, $cookies, authFact, postsFactory, usersFactory){
+myApp.controller('indexController', function($scope, $rootScope, $location, $window, $timeout, $cookies, authFact, postsFactory, usersFactory){
 //upload photo s3 api
 
     // $scope.submit = function(){ //function to call on form submit
@@ -62,6 +62,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	$scope.comment = {};
 	var userCookie = authFact.getUserCookie();
 	console.log('globla var userCookie: ', userCookie);
+	console.log("rootScope: ", $rootScope);
 	$scope.isLogged = function (){
 		return authFact.getAccessToken();
 	};
@@ -69,19 +70,21 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 
 	if(authFact.getUserCookie()){
 		// var userCookie = authFact.getUserCookie();
-		console.log("var userCookie = authFact.getUserCookie() = ", userCookie);
-		console.log(userCookie.user._id);
-		console.log(userCookie.user.first_name);
-		console.log(userCookie.user.last_name);
-		console.log(userCookie.user.email);
+		// console.log("var userCookie = authFact.getUserCookie() = ", userCookie);
+		// console.log(userCookie.user._id);
+		// console.log(userCookie.user.first_name);
+		// console.log(userCookie.user.last_name);
+		// console.log(userCookie.user.email);
+		$rootScope.user_id = 	userCookie.user._id;
+		$rootScope.user_name = userCookie.user.first_name + " " + userCookie.user.last_name;
+		$rootScope.first_name = userCookie.user.first_name ;
+		$rootScope.last_name = userCookie.user.last_name;
+		$rootScope.user_email = userCookie.user.email;
+		$rootScope.phone = userCookie.user.phone;
 
-		$scope.user_id = 	userCookie.user._id;
-		$scope.user_name = userCookie.user.first_name + " " + userCookie.user.last_name;
-		$scope.user_email = userCookie.user.email;
-		console.log("$scope.user_id = ",$scope.user_id);
-		console.log("$scope.user_name = ", $scope.user_name);
-		console.log("$scope.user_email = ", $scope.user_email);
-
+		// console.log("$scope.user_id = ",$scope.user_id);
+		// console.log("$scope.user_name = ", $scope.user_name);
+		// console.log("$scope.user_email = ", $scope.user_email);
 	}
 
 
@@ -96,10 +99,15 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	// 	console.log('$scope.user_id', $scope.user_id);
 	//
 	// });
-
+	refreshPosts = function (){
+		postsFactory.getPosts(function(data){
+	 		console.log(data);
+	 		$scope.posts = data;
+	 	});
+	};
 
 	postsFactory.getPosts(function(data){
- 		// console.log(data);
+ 		console.log(data);
  		$scope.posts = data;
  	});
 
@@ -118,20 +126,20 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
 	}
 
 
-	$scope.addPost = function(){
- 		// console.log('hello');
-
-
+	$scope.addPost = function(user_id){
+		// console.log("user_id", user_id);
+ 	// 	console.log('$rootScope.user_id;', $rootScope.user_id);
  		$scope.post._user_id = user_id;
  		postsFactory.addPost($scope.post, function(data){
-			// console.log("postsFactory.addPost(", data);
+			console.log("postsFactory.addPost(", data);
 			$scope.post = null;
 			// $scope.posts.unshift(data.data);
 			console.log('DATA BACK', data.data);
-			postsFactory.getPosts(function(dat){
-		 		console.log('does this work?')
-		 		$scope.posts = dat;
-		 	});
+			// postsFactory.getPosts(function(dat){
+			// 		console.log('does this work?')
+			// 		$scope.posts = dat;
+			// 	});
+			refreshPosts();
  		});
  	};
 
@@ -164,6 +172,7 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  		postsFactory.commentPost(commentData, function(data){
  			// console.log('back from commenting post', data);
  			postsFactory.getPosts(function(dat){
+				$scope.comment = "";
 	 			// console.log(data);
 	 			$scope.posts = dat;
 	 		});
@@ -182,65 +191,48 @@ myApp.controller('indexController', function($scope, $location, $window, $timeou
  	};
 
 $scope.editProfile = function(){
-		// console.log("*** made it to editProfile ***");
+	$scope.edit = {
+		"user_id": userCookie.user._id,
+		"first_name": $scope.first_name,
+		"last_name": $scope.last_name,
+		"email": $scope.user_email,
+		"phone": $scope.phone
+	};
+
+		console.log("*** made it to editProfile ***");
+		console.log("$scope.edit: ", $scope.edit);
 		// console.log("edit.phone:", $scope.edit.phoneShare);
 		// console.log("edit.phone:", $scope.edit.emailShare);
 		usersFactory.updateUser($scope.edit, function(data){
 			console.log(data);
+			$rootScope.user_id = 	data.data._id;
+			$scope.user_name = data.data.first_name + " "+ data.data.last_name;
+			$scope.first_name = data.data.first_name;
+			$scope.last_name = data.data.last_name;
+			$scope.user_email = data.data.email;
+			console.log('after edit user,, $scope.user_id: ', $rootScope.user_id);
+			// $cookies.remove('userCookie');
+			// authFact.setUserCookie(data.data._id, data.data.first_name, data.data.last_name, data.data.email);
 		});
-
 	}
 
 //##############################################
 // Login and Register
 //##############################################
 
+$scope.logout = function(){
 
-	$scope.register = function (){
-		console.log("*** front-end indexController -- $scope.register ***");
-		console.log('new_user information', $scope.new_user);
-		usersFactory.createUser($scope.new_user, function(data){
-			// console.log(data);
-			if(data.data.isLoggedIn){
+  // $rootScope.user_id = 	null;
+  // $rootScope.user_name = null;
+  // $rootScope.first_name = null;
+  // $rootScope.last_name = null;
+  // $rootScope.user_email = null;
+	$rootScope = {};
+	console.log('user is login out $rootScope = ', $rootScope);
+  usersFactory.logout();
+  $location.url('/');
+};
 
-				// console.log("data.data: ", data.data);
-					// authFact.setUserCookieId(data.data.userCookie._id);
-					authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name, data.data.userCookie.email);
-
-					authFact.setAccessToken(data.data.authentication);
-					$location.url('/wall');
-			}
-			else if(data.data.status === 500){
-				$scope.errorMsg = data.data.message;
-			}
-		});
-	};
-
-	$scope.login = function (){
-		// console.log("*** front-end indexController -- $scope.login ***");
-		// console.log('login information', $scope.loginInfo);
-		usersFactory.login($scope.loginInfo, function (data){
-			console.log("usersFactory.login", data);
-       		if (data.data.status === 500){
-				 	$scope.errorMsg = data.data.message;
-			}
-			else if(data.data.status === 200){
-					// authFact.setUserCookieId(data.data.userCookie._id);
-					console.log('authFact.setUserCookie');
-					authFact.setUserCookie(data.data.userCookie._id, data.data.userCookie.first_name, data.data.userCookie.last_name, data.data.userCookie.email);
-					authFact.setAccessToken(data.data.authentication);
-					$location.url('/wall');
-			}
-		});
-	};
-
-
-	$scope.logout = function(){
-		$scope.user_id = null;
-		$scope.user_name = null;
-		usersFactory.logout();
-		$location.url('/');
-	};
 
 	chageUserStatus = function (){
 		$scope.userStatus = true;
