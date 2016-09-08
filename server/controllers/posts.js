@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Post = mongoose.model('posts');
 var Comment = mongoose.model('comments');
+var User = mongoose.model('users')
 
 module.exports = (function() {
 	return {
@@ -21,7 +22,7 @@ module.exports = (function() {
 		},
 
 		getPosts: function(req, res){
-			Post.find({}).populate('comments').sort({created_at: -1}).exec(function(err, posts){
+			Post.find({}).populate('comments').populate('_user_id').sort({created_at: -1}).exec(function(err, posts){
 				if(err){
 					console.log(err);
 				} else {
@@ -32,10 +33,10 @@ module.exports = (function() {
 		},
 
 		searchPosts: function(req, res){
- 			console.log(req.body.text); 
+ 			console.log(req.body.text);
  			Post.find({$or: [
- 					 {"first_name": new RegExp(req.body.text, "i")}, 
- 					 {"last_name": new RegExp(req.body.text, "i")}, 
+ 					 {"first_name": new RegExp(req.body.text, "i")},
+ 					 {"last_name": new RegExp(req.body.text, "i")},
  					 {"text": new RegExp(req.body.text, "i")},
  					 {"title": new RegExp(req.body.text, "i")}
 
@@ -58,6 +59,27 @@ module.exports = (function() {
  					res.json({status: 'ok'})
  				}
  			})
+ 		},
+		flagPost: function(req, res){
+ 			Post.findOne({_id: req.params.id}, function(err, post){
+				post.flagged = true
+				console.log('THIS IS THE post to flag',post);
+					post.save(function (err) {
+							if(err) {
+									console.error('ERROR flagging post!');
+							}
+							else{
+								Post.find({}).populate('comments').sort({created_at: -1}).exec(function(err, posts){
+									if(err){
+										console.log(err);
+									} else {
+										console.log(posts);
+										res.json(posts);
+									}
+								})
+							}
+					});
+			});
  		},
  		commentPost : function(req,res){
  			console.log(req.body, 'THIS IS REQ BODY commentPost');
@@ -102,7 +124,7 @@ module.exports = (function() {
 									res.json({status: 'ok'});
 								}
 							}
-							
+
 						};
 					});
 				};

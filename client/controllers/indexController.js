@@ -109,6 +109,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	postsFactory.getPosts(function(data){
  		console.log(data);
  		$scope.posts = data;
+ 
  	});
 
 	$scope.feed = true;
@@ -145,6 +146,16 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 
  	$scope.deletePost = function(postId){
  		postsFactory.deletePost(postId, function(status){
+ 			postsFactory.getPosts(function(data){
+		 		// console.log(data);
+		 		$scope.posts = data;
+		 	});
+ 		});
+ 	};
+
+	$scope.flagPost = function(postId){
+		console.log("flag post pressed",postId);
+ 		postsFactory.flagPost(postId, function(status){
  			postsFactory.getPosts(function(data){
 		 		// console.log(data);
 		 		$scope.posts = data;
