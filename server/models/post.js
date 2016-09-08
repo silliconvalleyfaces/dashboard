@@ -25,6 +25,9 @@ var PostSchema = new mongoose.Schema({
       type: Schema.Types.ObjectId,
       ref: 'comments'
     }],
+    flagged: {
+      type: Boolean
+    },
     // created_at: {type: Date, default: new Date};
 
 },{timestamps: true});

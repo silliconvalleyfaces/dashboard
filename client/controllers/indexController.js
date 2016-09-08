@@ -152,6 +152,16 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  		});
  	};
 
+	$scope.flagPost = function(postId){
+		console.log("flag post pressed",postId);
+ 		postsFactory.flagPost(postId, function(status){
+ 			postsFactory.getPosts(function(data){
+		 		// console.log(data);
+		 		$scope.posts = data;
+		 	});
+ 		});
+ 	};
+
  	$scope.searchPosts = function(search){
  		// console.log('at the searchPosts controller function');
  		postsFactory.searchPosts(search, function(data){

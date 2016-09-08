@@ -34,6 +34,10 @@
   					<img class="postIMG" ng-if="x.url" src="{{x.url}}"  alt="img">
  					<h4>{{x.title}}</h4>
  					<p>{{x.text}} - {{x.createdAt | date: 'MMMM, dd, yyyy @ h:mm a'}}<button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'>Delete</button></p>
+          <button ng-if ="x.flagged !== true" type="button" class="btn btn-danger" aria-label="Left Align" ng-click='flagPost(x._id)'>
+            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" ></span> Flag Post
+          </button>
+          <p ng-if ="x.flagged == true" class="label label-danger">This post has been flagged and is under review by the moderator</p>
  					<div ng-repeat='c in x.comments' style="margin-left: 60px;">
 				</div>
 

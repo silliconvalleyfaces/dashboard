@@ -18,10 +18,15 @@ var usersController = require('../controllers/users.js')
  		console.log('got to the destroy post route');
  		postsController.destroyPost(req, res);
  	})
+  app.post('/posts/:id/flag', function(req, res){
+ 		console.log('got to the flag post route');
+ 		postsController.flagPost(req, res);
+ 	})
   app.post('/comments/:id/destroy', function(req, res){
     console.log('got to the destroy comment route');
     postsController.destroyComment(req, res);
   })
+
   app.post('/comments', function(req, res){
     console.log('got to the make a comment route');
     postsController.commentPost(req, res);
@@ -58,7 +63,7 @@ var usersController = require('../controllers/users.js')
   app.get('/logout', function (req, res){
     console.log('Back-end routes -- app.get /logout ');
     console.log('logout route -- req.body', req.body);
-  
+
     usersController.logout(req, res);
   });
   app.post('/usersearch', function (req,res) {
