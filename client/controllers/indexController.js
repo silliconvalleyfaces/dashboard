@@ -250,7 +250,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  	$scope.removeProfile = function(userId){
 		usersFactory.deleteUser(userId, function(data){
 			console.log('removed this user:', data);
-			$location.url('/');
+			$location.url('/login');
 		});
 	};
 
