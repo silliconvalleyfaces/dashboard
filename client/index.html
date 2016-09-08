@@ -67,7 +67,7 @@
     </div>
     <!-- this ng-include if for switching navigation bars -->
     <!-- <div ng-include="templateUrl"></div> -->
-    <header >
+    <header>
         <nav class="navbar navbar-default " role="navigation">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -96,14 +96,14 @@
                         </li>
                         <li>
                             <li>
-                                <a href="#/wall" ng-switch-when="true" data-toggle="modal" data-target="#mkPostModal">Make a Post</a>
+                                <a href="#/" ng-switch-when="true" data-toggle="modal" data-target="#mkPostModal">Make a Post</a>
                             </li>
                             <li>
-                                <a href="#/wall" ng-switch-when="true" data-toggle="modal" data-target="#editProfileModal">Edit Profile</a>
+                                <a href="#/" ng-switch-when="true" data-toggle="modal" data-target="#editProfileModal">Edit Profile</a>
                             </li>
 
                             <li>
-                                <a href="#/wall" ng-switch-when="true" data-toggle="modal" data-target="#findUserModal">Find a Friend</a>
+                                <a href="#/" ng-switch-when="true" data-toggle="modal" data-target="#findUserModal">Find a Friend</a>
                             </li>
                             <!-- <p>{{edit.first_name}}</p> -->
                             <!-- <li><a href="#/termsConditions">Terms & Conditions</a>
@@ -117,7 +117,7 @@
                             <li><a href="#/logout">Logout</a>
                             </li> -->
                             <!--  purposely leave logout button there. just in case you reload the page, but forgot to remove cookie -->
-                            <li ><a href="" ng-click="logout()">Log Out</a>
+                            <li><a href="" ng-click="logout()">Log Out</a>
                             </li>
                     </ul>
                 </div>
@@ -169,7 +169,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        				<h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+                        <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
                     </div>
                     <div class="modal-body">
 
@@ -178,7 +178,7 @@
                             <div class="form-group">
                                 <label for="title" class="col-sm-2 control-label">First Name:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="postTitle"  ng-model="first_name">
+                                    <input type="text" class="form-control" id="postTitle" ng-model="first_name">
                                 </div>
 
 
@@ -186,7 +186,7 @@
                             <div class="form-group">
                                 <label for="title" class="col-sm-2 control-label">Last Name:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="postTitle"  ng-model="last_name">
+                                    <input type="text" class="form-control" id="postTitle" ng-model="last_name">
                                 </div>
 
 
@@ -204,13 +204,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                        <br>
-                <label for="share" class="col-sm-2 control-label">Share:</label>
-                <div class="col-sm-10">
-                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="edit.emailShare">Email</label>
-                    <label class="checkbox-inline"><input type="checkbox" value="" ng-model="edit.phoneShare">Phone</label> 
-                </div>
-                <h6><a style="color: red; cursor: pointer;" ng-click="removeProfile(user_id)">Remove Profile</a></h6>
+                                <br>
+                                <label for="share" class="col-sm-2 control-label">Share:</label>
+                                <div class="col-sm-10">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="" ng-model="edit.emailShare">Email</label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value="" ng-model="edit.phoneShare">Phone</label>
+                                </div>
+                                <h6><a style="color: red; cursor: pointer;" ng-click="removeProfile(user_id)">Remove Profile</a></h6>
 
                             </div>
 
@@ -220,10 +222,6 @@
                                 </div>
                             </div>
                         </form>
-
-
-
-
 
                         <!-- <p>Hi </p><link type="html" href='./firstProject.html'> -->
                     </div>
@@ -242,23 +240,15 @@
                     <div class="modal-body">
                         <form name="upload_form">
                             Photo:
-                            <input
-                type="file"
-                ngf-select
-                ng-model="file"
-                name="file"
-                ngf-pattern="'image/*'"
-                accept="image/*"
-                ngf-max-size="20MB"
-                />                            <i ng-show="myForm.file.$error.required">
+                            <input type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" /> <i ng-show="myForm.file.$error.required">
                                 *required
                             </i>
                             <br>
-                      <!--       <i ng-show="myForm.file.$error.maxSize">
+                            <!--       <i ng-show="myForm.file.$error.maxSize">
                                 File too large
                                 {{errorFile.size / 1000000|number:1}}MB: max 2M
                             </i> -->
-                      <!--       <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb">  -->
+                            <!--       <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb">  -->
                             <!-- <button ng-click="picFile = null" ng-show="picFile">
                                 Remove
                             </button> -->
@@ -273,11 +263,12 @@
                             <span ng-show="picFile.result">Upload Successful</span>
                             <span class="err" ng-show="errorMsg">{{errorMsg}}</span> -->
 
-                        <!--     <button type="submit" ng-click="up.submit()">
+                            <!--     <button type="submit" ng-click="up.submit()">
                                 submit
                             </button>
                             <p>{{up.progress}}</p>
- -->                        </form>
+ -->
+                        </form>
 
 
 
@@ -299,7 +290,7 @@
 
 
 
- <!-- Find User Modal -->
+        <!-- Find User Modal -->
         <div class="modal fade" id="findUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -308,10 +299,10 @@
                         <h4 class="modal-title" id="myModalLabel">Find a Friend</h4>
                     </div>
                     <div class="modal-body">
-                       	<div class="col-sm-12" ng-repeat="userList in users">
-                       	<div ng-repeat="user in userList ">
-                       		<p>{{user.first_name}} {{user.last_name}}</p>
-                       	</div>
+                        <div class="col-sm-12" ng-repeat="userList in users">
+                            <div ng-repeat="user in userList ">
+                                <p>{{user.first_name}} {{user.last_name}}</p>
+                            </div>
 
                         </div>
                         <form class="form-horizontal">
@@ -319,7 +310,7 @@
                                 <label for="findFriend" class="col-sm-2 control-label">Search</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="findFriend" placeholder="Provide Friend's Name" ng-model="SearchName.name">
-<!--                                     <label class="radio-inline">
+                                    <!--                                     <label class="radio-inline">
                                         <input type="radio" name="first_name" ng-value="first_name" ng-model="SearchName.name">First Name</label>
                                     <label class="radio-inline">
                                         <input type="radio" name="last_name" ng-value="last_name" ng-model="SearchName.name" ">Last Name</label> -->
@@ -327,7 +318,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button type="submit" ng-click=searchUsers() class="btn btn-primary pull-right" >Search</button>
+                                    <button type="submit" ng-click=searchUsers() class="btn btn-primary pull-right">Search</button>
                                 </div>
                             </div>
                         </form>
@@ -390,7 +381,6 @@
             //   console.log('bs-example-navbar-collapse-1');
             //   $('#bs-example-navbar-collapse-1').slideToggle('fast');
             // })
-
     </script>
 
 
