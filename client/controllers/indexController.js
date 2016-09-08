@@ -109,6 +109,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	postsFactory.getPosts(function(data){
  		console.log(data);
  		$scope.posts = data;
+ 
  	});
 
 	$scope.feed = true;

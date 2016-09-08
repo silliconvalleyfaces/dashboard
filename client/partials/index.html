@@ -33,7 +33,8 @@
  				<div class="posts">
           <h4>{{x.title}}</h4>
   					<img class="postIMG" ng-if="x.url" src="{{x.url}}"  alt="img">
- 					<p>{{x.text}} - {{x.createdAt | date: 'MMMM, dd, yyyy @ h:mm a'}} Written By: {{ x._user_id.first_name }} {{x._user_id.last_name}}<button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'>Delete</button></p>
+ 					<p>{{x.text}} - {{x.createdAt | date: 'MMMM, dd, yyyy @ h:mm a'}} Written By: {{ x._user_id.first_name }} {{x._user_id.last_name}}</p>
+          <button ng-if='user_id == x._user_id._id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'>Delete</button>
           <button ng-if ="x.flagged !== true" type="button" class="btn btn-danger" aria-label="Left Align" ng-click='flagPost(x._id)'>
             <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" ></span> Flag Post
           </button>
