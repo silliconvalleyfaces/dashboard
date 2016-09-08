@@ -31,9 +31,9 @@
   		<div class="container-fluid">
  			<div class="col-sm-12" style="padding: 0;">
  				<div class="posts">
+          <h4>{{x.title}}</h4>
   					<img class="postIMG" ng-if="x.url" src="{{x.url}}"  alt="img">
- 					<h4>{{x.title}}</h4>
- 					<p>{{x.text}} - {{x.createdAt | date: 'MMMM, dd, yyyy @ h:mm a'}}<button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'>Delete</button></p>
+ 					<p>{{x.text}} - {{x.createdAt | date: 'MMMM, dd, yyyy @ h:mm a'}} Written By: {{ x._user_id.first_name }} {{x._user_id.last_name}}<button ng-if='user_id == x._user_id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'>Delete</button></p>
           <button ng-if ="x.flagged !== true" type="button" class="btn btn-danger" aria-label="Left Align" ng-click='flagPost(x._id)'>
             <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" ></span> Flag Post
           </button>

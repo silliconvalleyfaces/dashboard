@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Post = mongoose.model('posts');
 var Comment = mongoose.model('comments');
+var User = mongoose.model('users')
 
 module.exports = (function() {
 	return {
@@ -21,7 +22,7 @@ module.exports = (function() {
 		},
 
 		getPosts: function(req, res){
-			Post.find({}).populate('comments').sort({created_at: -1}).exec(function(err, posts){
+			Post.find({}).populate('comments').populate('_user_id').sort({created_at: -1}).exec(function(err, posts){
 				if(err){
 					console.log(err);
 				} else {
