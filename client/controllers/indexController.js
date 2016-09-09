@@ -72,6 +72,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 
 	//#######################################################
 	//use the following code if any conflict occurred
+	// Check if user data is in cookies and assign user data to $rootScope.user
 	if(authFact.getUserCookie()){
 		console.log("@~@~@~@~@ got user cookies");
 		$rootScope.user = userCookie.user;
@@ -150,20 +151,21 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 //#######################################################
 //use the following code if any conflict occurred
  	$scope.commentPost = function(postId){
+		console.log("$scope.commentPost - postId = ", postId);
+		console.log("$scope.commentPost - $scope.comment[postId] = ", $scope.comment[postId]);
+		console.log("$scope.commentPost - $scope.comment[postId].text = ", $scope.comment[postId].text);
  		var commentData = {
  			text: $scope.comment[postId].text,
  			_user_name: $rootScope.user.first_name+ " "+$rootScope.user.last_name ,
- 			_user: $rootScope.user_id,
+ 			_user: $rootScope.user._id,
  			_post : postId,
  		};
- 		// console.log(commentData, "COMMENT DATA")
- 		postsFactory.commentPost(commentData, function(data){
- 			// console.log('back from commenting post', data);
- 			postsFactory.getPosts(function(dat){
-				$scope.comment = "";
-	 			// console.log(data);
-	 			$scope.posts = dat;
-	 		});
+
+//#######################################################
+//use the following code if any conflict occurred		
+ 		postsFactory.commentPost(commentData, function(){
+			refreshPosts();
+			$scope.comment = {};
  		});
  	};
 //use the above code if any conflict occurred
@@ -179,8 +181,8 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  		});
  	};
 
-	//#######################################################
-	//use the following code if any conflict occurred
+//#######################################################
+//use the following code if any conflict occurred
 	$scope.editProfile = function(user_id, first_name, last_name, user_email, phone){
 		console.log("$scope.editProfile - editing the user with user_id: ", user_id);
 		$scope.edit = {
@@ -202,8 +204,8 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 			console.log('after edit user -- $rootScope.user: ', $rootScope.user);
 		});
 	}
-	//use the above code if any conflict occurred
-	//#######################################################
+//use the above code if any conflict occurred
+//#######################################################
 
 
 //##############################################

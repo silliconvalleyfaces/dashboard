@@ -89,6 +89,7 @@ module.exports = (function() {
 					console.log(err);
 					console.log('error creating a new comment');
 				} else {
+					console.log("commentPost - getResult = ", result, "\n ######################################" );
 					Post.findOne({_id: req.body._post}, function (err, post){
 						post.comments.push(result._id);
 						console.log('THIS IS THE comment to post',post);
