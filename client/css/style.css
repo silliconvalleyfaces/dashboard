@@ -20,9 +20,10 @@ body {
     width: 100%;
 }
 
+
 .btn.btn-danger{
     border-style: none;
-    border-radius: #d9534f;
+    border-radius: 0;
     color: #d9534f;
     font-weight: bold;
     background-color: white;
@@ -30,10 +31,26 @@ body {
 .btn.btn-danger:hover,
 .btn.btn-danger:focus,
 .btn.btn-danger:active{
-    text-decoration: underline;
+
+    border-bottom: 1px solid #d9534f;
     color: #d9534f;
     font-weight: bold;
     background-color: white;
+}
+
+.btn.editBtn{
+    border-style: none;
+    border-radius: 0;
+    color: #5679ED;
+    font-weight: bold;
+    background-color: white;
+}
+.btn.editBtn:hover,
+.btn.editBtn:focus,
+.btn.editBtn:active{
+    border-bottom: 1px solid #5679ED;
+    color: #5679ED;
+    font-weight: bold;
 }
 
 .btn.comments:hover {
@@ -43,6 +60,7 @@ body {
 }
 
 .btn.commentBtn{
+    border-radius: 0;    
     color: white;
     background-color: #5679ED;
 }
