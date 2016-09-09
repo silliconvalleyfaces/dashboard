@@ -155,7 +155,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button type="button" class="btn btn-primary pull-right" ng-click='addPost(user_id)' data-dismiss="modal">Post</button>
+                                    <button type="button" class="btn btn-primary pull-right" ng-click='addPost(user._id)' data-dismiss="modal">Post</button>
                                 </div>
                             </div>
                         </form>
@@ -212,13 +212,13 @@
                                     <label class="checkbox-inline">
                                         <input type="checkbox" value="" ng-model="edit.phoneShare">Phone</label>
                                 </div>
-                                <h6><a style="color: red; cursor: pointer;" ng-click="removeProfile(user_id)">Remove Profile</a></h6>
+                                <h6><a style="color: red; cursor: pointer;" ng-click="removeProfile(user._id)">Remove Profile</a></h6>
 
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button type="button" class="btn btn-primary pull-right" ng-click='editProfile(user_id, user.first_name, user.last_name, user.email, user.phone)' data-dismiss="modal">Save Changes</button>
+                                    <button type="button" class="btn btn-primary pull-right" ng-click='editProfile(user._id, user.first_name, user.last_name, user.email, user.phone)' data-dismiss="modal">Save Changes</button>
                                 </div>
                             </div>
                         </form>

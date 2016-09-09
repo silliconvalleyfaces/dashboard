@@ -2,21 +2,15 @@
  <!-- User Info -->
   <div ng-controller='indexController'>
  	<div ng-if="loggedInUser.data[0] != null" class="col-sm-12">
- 		<!-- User Status: {{ userStatus }}
-  		<br>ID: {{ loggedInUser.data[0]._id }}
-  		<br> First Name: {{ loggedInUser.data[0].first_name }}
-  		<br> Last Name: {{ loggedInUser.data[0].last_name }}
-  		<br> Email: {{ loggedInUser.data[0].email }}
- -		<br> -->
+
  	</div>
 	<div class="">
-		<br>ID: {{ user_id }}
-		<br> User Name: {{ user_name }}
-    <br> {{ first_name }} {{ last_name }}
-		<br> Email: {{ user_email }}
-    <br>
-    <hr>
-    $rootScope.user
+    <p style="color: red">$rootScope.user - user information is stored in $rootScope.user</p>
+    <p>user ID = $rootScope.user._id </p>
+    <p>user first name = $rootScope.user.first_name</p>
+    <p>user last name  = $rootScope.user.last_name</p>
+    <p>user email      = $rootScope.user.email</p>
+    <p>user phoone #   = $rootScope.user.phone</p>
     <br>ID: {{ user._id }}
 		<br> User Name: {{ user.first_name }} {{ user.last_name }}
 		<br> Email: {{ user.email }}

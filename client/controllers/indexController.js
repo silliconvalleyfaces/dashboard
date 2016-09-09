@@ -74,12 +74,6 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	//use the following code if any conflict occurred
 	if(authFact.getUserCookie()){
 		console.log("@~@~@~@~@ got user cookies");
-		$rootScope.user_id = 	userCookie.user._id; //dont change this line for now
-		// $rootScope.user_name = userCookie.user.first_name + " " + userCookie.user.last_name;
-		// $rootScope.first_name = userCookie.user.first_name ;
-		// $rootScope.last_name = userCookie.user.last_name;
-		// $rootScope.user_email = userCookie.user.email;
-		// $rootScope.phone = userCookie.user.phone;
 		$rootScope.user = userCookie.user;
 	}
 	//#######################################################
@@ -115,18 +109,12 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 
 
 	$scope.addPost = function(user_id){
-		// console.log("user_id", user_id);
- 	// 	console.log('$rootScope.user_id;', $rootScope.user_id);
  		$scope.post._user_id = user_id;
  		postsFactory.addPost($scope.post, function(data){
 			console.log("postsFactory.addPost(", data);
 			$scope.post = null;
 			// $scope.posts.unshift(data.data);
 			console.log('DATA BACK', data.data);
-			// postsFactory.getPosts(function(dat){
-			// 		console.log('does this work?')
-			// 		$scope.posts = dat;
-			// 	});
 			refreshPosts();
  		});
  	};
@@ -159,8 +147,8 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  		});
  	};
 
-	//#######################################################
-	//use the following code if any conflict occurred
+//#######################################################
+//use the following code if any conflict occurred
  	$scope.commentPost = function(postId){
  		var commentData = {
  			text: $scope.comment[postId].text,
@@ -178,8 +166,8 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	 		});
  		});
  	};
-	//use the above code if any conflict occurred
-	//#######################################################
+//use the above code if any conflict occurred
+//#######################################################
 
  	$scope.deleteComment = function(commentId){
  		postsFactory.deleteComment(commentId, function(status){
@@ -225,10 +213,6 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	$scope.logout = function(){
 
 	  $rootScope.user_id = 	undefined;
-	  // $rootScope.user_name = undefined;
-	  // $rootScope.first_name = undefined;
-	  // $rootScope.last_name = undefined;
-	  // $rootScope.user_email = undefined;
 		$rootScope.user = undefined;
 		// $rootScope = {};
 		console.log('before the user logout = ', $rootScope);
@@ -241,9 +225,6 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	};
 
 
-	chageUserStatus = function (){
-		$scope.userStatus = true;
-	};
 	//Find a Person
 	$scope.searchUsers = function(){
  		console.log("*** front-end indexController -- $scope.searchUsers ***");
