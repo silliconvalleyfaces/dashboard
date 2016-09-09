@@ -1,6 +1,6 @@
 
  <!-- User Info -->
-  <div ng-controller='indexController'>
+  <div class="container-fluid" ng-controller='indexController'>
  	<div ng-if="loggedInUser.data[0] != null" class="col-sm-12">
 
  	</div>
@@ -18,7 +18,7 @@
 	</div>
   	<!-- End of user information -->
   	<!-- Search Bar   -->
- <div class="container-fluid">
+ <div class="container">
  	<form class="searchForm form-horizontal col-sm-12">
  		<input type="text" id="searchField" class="search-input col-sm-9" name="search" ng-model="search.text" placeholder="Name, Post Title, Post Content">
  		<input type="submit" name="searchButton" id="searchBtn" class="btn-lg searchBtn col-sm-2 pull-right" ng-click="searchPosts(search)" value="Search">
@@ -30,13 +30,17 @@
   <!--  Loading posts from database-->
 
   	<div ng-repeat = 'x in posts | orderBy: "" : true' style="padding-left: 0;">
-  		<div class="container-fluid">
+  		<div class="container">
  			<div class="col-sm-12" style="padding: 0;">
- 				<div class="posts">
+ 				<div class="form-group">
           <h4>{{x.title}}</h4>
-  					<img class="postIMG" ng-if="x.url" src="{{x.url}}"  alt="img">
+  					<img class="img-responsive" ng-if="x.url" src="{{x.url}}"  alt="img">
+            <div ng-if="x.urlVideo" class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" ng-src="{{x.urlVideo | trusted}}" frameborder="0" allowfullscreen></iframe>
+            </div>
  					<p>{{x.text}} - {{x.createdAt | date: 'MMMM, dd, yyyy @ h:mm a'}} Written By: {{ x._user_id.first_name }} {{x._user_id.last_name}}</p>
-          <button ng-if='user_id == x._user_id._id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'>Delete</button>
+          <button ng-if='user_id == x.rootScope.user._user_id._id' class="btn editBtn" href="#/" data-toggle="modal" data-target="#editPostModal">Edit</button>
+          <button ng-if='user_id == x.rootScope.user._user_id._id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'>Delete</button>
           <button ng-if ="x.flagged !== true" type="button" class="btn btn-danger" aria-label="Left Align" ng-click='flagPost(x._id)'>
             <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" ></span> Flag Post
           </button>
@@ -64,11 +68,43 @@
 
   			</div>
   		</div>
-  	</div>
-     <script>
-
-     </script>
-
-
-
- </div>
+      <!-- Edit post modal -->
+      <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Edit Post</h4>
+                  </div>
+                  <div class="modal-body">
+                      <form class="form-horizontal">
+                          <div class="form-group">
+                              <label for="title" class="col-sm-2 control-label">Title</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" ng-model="post.title" placeholder="{{x.title}}" >
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="imgURL" class="col-sm-2 control-label">Image (url):</label>
+                              <div class="col-sm-10">
+                                  <input class="form-control" name="url" type="text" ng-model="post.url" placeholder="{{x.url}}">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="message" class="col-sm-2 control-label">Message</label>
+                              <div class="col-sm-10">
+                                  <textarea class="form-control" rows="3" ng-model='post.text' placeholder="{{x.text}}"></textarea>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <div class="col-sm-12">
+                                  <button type="button" class="btn btn-primary pull-right" ng-click='editPost()' data-dismiss="modal">Post</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
