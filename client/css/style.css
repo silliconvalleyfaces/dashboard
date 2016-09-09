@@ -73,6 +73,11 @@ body {
 }
 
 /*Search Post CSS*/
+
+#searchField{
+    padding: 0;
+}
+
 .search-input {
     height: 50px;
     border-top: 1px solid transparent;

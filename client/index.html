@@ -35,6 +35,7 @@
     <script src="angular/angular.js"></script>
     <script src="angular-route/angular-route.js"></script>
     <script src="app.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="angular-cookie.js"></script>
     <script src="/controllers/indexController.js"></script>
     <script src="/controllers/adminController.js"></script>
@@ -145,6 +146,12 @@
                                 <label for="imgURL" class="col-sm-2 control-label">Image (url):</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" name="url" type="text" ng-model="post.url" placeholder="http://">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="videoURL" class="col-sm-2 control-label">Video (url):</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="urlVideo" type="text" ng-model="post.urlVideo" placeholder="http://www.youtube.com/">
                                 </div>
                             </div>
                             <div class="form-group">

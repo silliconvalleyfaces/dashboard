@@ -1,4 +1,4 @@
-myApp.controller('indexController', function($scope, $rootScope, $location, $window, $timeout, $cookies, authFact, postsFactory, usersFactory){
+myApp.controller('indexController', function($scope, $rootScope, $location, $window, $timeout, $cookies, $sce, authFact, postsFactory, usersFactory){
 //upload photo s3 api
 
     // $scope.submit = function(){ //function to call on form submit
@@ -68,6 +68,10 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 
 	$scope.isLogged = function (){
 		return authFact.getAccessToken();
+	};
+
+	$scope.trustSrc = function(src){
+		return $sce.trustAsResourceUrl(src);
 	};
 
 	//#######################################################
@@ -244,6 +248,14 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 
 
 });
+
+myApp.filter('trusted', ['$sce', function ($sce){
+	return function(url){
+		console.log('this is url', url)
+		var video_id = url.split('v=')[1];
+		return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + video_id);
+	}
+}]);
 
 myApp.constant('AUTH_EVENTS', {
   loginSuccess: 'auth-login-success',

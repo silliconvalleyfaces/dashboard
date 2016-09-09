@@ -23,6 +23,10 @@ var PostSchema = new mongoose.Schema({
       type:  String,
       maxlength : 255
     },
+    urlVideo: {
+      type:  String,
+      maxlength : 255
+    },
     comments: [{
       type: Schema.Types.ObjectId,
       ref: 'comments'
