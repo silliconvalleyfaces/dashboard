@@ -12,7 +12,15 @@
 	<div class="">
 		<br>ID: {{ user_id }}
 		<br> User Name: {{ user_name }}
+    <br> {{ first_name }} {{ last_name }}
 		<br> Email: {{ user_email }}
+    <br>
+    <hr>
+    $rootScope.user
+    <br>ID: {{ user._id }}
+		<br> User Name: {{ user.first_name }} {{ user.last_name }}
+		<br> Email: {{ user.email }}
+    <br> phone: {{ user.phone }}
 	</div>
   	<!-- End of user information -->
   	<!-- Search Bar   -->

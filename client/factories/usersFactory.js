@@ -2,12 +2,12 @@ myApp.factory('usersFactory', function ($http, $cookies){
     var users = [];
     var factory = {};
 // get logged in user information
-      factory.index = function (callback){
-        $http.get('/userInformation')
-        .then(function (data){
-          callback(data);
-        });
-      };
+      // factory.index = function (callback){
+      //   $http.get('/userInformation')
+      //   .then(function (data){
+      //     callback(data);
+      //   });
+      // };
 
       factory.createUser = function (userInfo, callback){
         console.log("*** front-end usersFactory.js -- factory.createUser ***");
@@ -36,13 +36,13 @@ myApp.factory('usersFactory', function ($http, $cookies){
 
         });
       };
-      factory.logout = function (){
-        $http.get('/logout')
-        .then(function (){
-          $cookies.remove('accessToken');
-          $cookies.remove('userCookie');
-        });
-      };
+      // factory.logout = function (){
+      //   $http.get('/logout')
+      //   .then(function (){
+      //     $cookies.remove('accessToken');
+      //     $cookies.remove('userCookie');
+      //   });
+      // };
       factory.searchUsers = function (UserName, callback) {
         console.log("*** front-end usersFactory.js -- factory.searchUsers***");
         console.log(UserName);

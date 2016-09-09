@@ -60,45 +60,32 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 
 
 	$scope.comment = {};
+
 	var userCookie = authFact.getUserCookie();
+
 	console.log('globla var userCookie: ', userCookie);
 	console.log("rootScope: ", $rootScope);
+
 	$scope.isLogged = function (){
 		return authFact.getAccessToken();
 	};
 
-
+	//#######################################################
+	//use the following code if any conflict occurred
 	if(authFact.getUserCookie()){
-		// var userCookie = authFact.getUserCookie();
-		// console.log("var userCookie = authFact.getUserCookie() = ", userCookie);
-		// console.log(userCookie.user._id);
-		// console.log(userCookie.user.first_name);
-		// console.log(userCookie.user.last_name);
-		// console.log(userCookie.user.email);
-		$rootScope.user_id = 	userCookie.user._id;
-		$rootScope.user_name = userCookie.user.first_name + " " + userCookie.user.last_name;
-		$rootScope.first_name = userCookie.user.first_name ;
-		$rootScope.last_name = userCookie.user.last_name;
-		$rootScope.user_email = userCookie.user.email;
-		$rootScope.phone = userCookie.user.phone;
-
-		// console.log("$scope.user_id = ",$scope.user_id);
-		// console.log("$scope.user_name = ", $scope.user_name);
-		// console.log("$scope.user_email = ", $scope.user_email);
+		console.log("@~@~@~@~@ got user cookies");
+		$rootScope.user_id = 	userCookie.user._id; //dont change this line for now
+		// $rootScope.user_name = userCookie.user.first_name + " " + userCookie.user.last_name;
+		// $rootScope.first_name = userCookie.user.first_name ;
+		// $rootScope.last_name = userCookie.user.last_name;
+		// $rootScope.user_email = userCookie.user.email;
+		// $rootScope.phone = userCookie.user.phone;
+		$rootScope.user = userCookie.user;
 	}
+	//#######################################################
+	//use the above code if any conflict occurred
 
 
-	// usersFactory.index(function (data){
-	// 	$scope.loggedInUser = data;
-	// 	if($scope.loggedInUser.data.length > 0){
-	// 		$scope.userStatus = true;
-	// 		$scope.user_id = 	authFact.getUserCookieId();
-	// 		$scope.user_name = data.data[0].first_name + " " + data.data[0].last_name;
-	// 	}
-	// 	console.log('$scope.loggedInUser', $scope.loggedInUser);
-	// 	console.log('$scope.user_id', $scope.user_id);
-	//
-	// });
 	refreshPosts = function (){
 		postsFactory.getPosts(function(data){
 	 		console.log(data);
@@ -109,7 +96,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	postsFactory.getPosts(function(data){
  		console.log(data);
  		$scope.posts = data;
- 
+
  	});
 
 	$scope.feed = true;
@@ -172,11 +159,13 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  		});
  	};
 
+	//#######################################################
+	//use the following code if any conflict occurred
  	$scope.commentPost = function(postId){
  		var commentData = {
  			text: $scope.comment[postId].text,
- 			_user_name: $scope.user_name,
- 			_user: $scope.user_id,
+ 			_user_name: $rootScope.user.first_name+ " "+$rootScope.user.last_name ,
+ 			_user: $rootScope.user_id,
  			_post : postId,
  		};
  		// console.log(commentData, "COMMENT DATA")
@@ -188,8 +177,9 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	 			$scope.posts = dat;
 	 		});
  		});
-
  	};
+	//use the above code if any conflict occurred
+	//#######################################################
 
  	$scope.deleteComment = function(commentId){
  		postsFactory.deleteComment(commentId, function(status){
@@ -201,31 +191,32 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  		});
  	};
 
-	$scope.editProfile = function(){
+	//#######################################################
+	//use the following code if any conflict occurred
+	$scope.editProfile = function(user_id, first_name, last_name, user_email, phone){
+		console.log("$scope.editProfile - editing the user with user_id: ", user_id);
 		$scope.edit = {
-			"user_id": userCookie.user._id,
-			"first_name": $scope.first_name,
-			"last_name": $scope.last_name,
-			"email": $scope.user_email,
-			"phone": $scope.phone
+			"user_id": user_id,
+			"first_name": first_name,
+			"last_name": last_name,
+			"email": user_email,
+			"phone": phone
 		};
-
 		console.log("*** made it to editProfile ***");
 		console.log("$scope.edit: ", $scope.edit);
 		// console.log("edit.phone:", $scope.edit.phoneShare);
 		// console.log("edit.phone:", $scope.edit.emailShare);
 		usersFactory.updateUser($scope.edit, function(data){
 			console.log(data);
-			$rootScope.user_id = 	data.data._id;
-			$scope.user_name = data.data.first_name + " "+ data.data.last_name;
-			$scope.first_name = data.data.first_name;
-			$scope.last_name = data.data.last_name;
-			$scope.user_email = data.data.email;
-			console.log('after edit user,, $scope.user_id: ', $rootScope.user_id);
-			// $cookies.remove('userCookie');
-			// authFact.setUserCookie(data.data._id, data.data.first_name, data.data.last_name, data.data.email);
+			$cookies.remove('userCookie');
+			authFact.setUserCookie(data.data._id, data.data.first_name, data.data.last_name, data.data.email, data.data.phone);
+			authFact.getUserCookie();
+			console.log('after edit user -- $rootScope.user: ', $rootScope.user);
 		});
 	}
+	//use the above code if any conflict occurred
+	//#######################################################
+
 
 //##############################################
 // Login and Register
@@ -233,14 +224,19 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 
 	$scope.logout = function(){
 
-	  // $rootScope.user_id = 	null;
-	  // $rootScope.user_name = null;
-	  // $rootScope.first_name = null;
-	  // $rootScope.last_name = null;
-	  // $rootScope.user_email = null;
-		$rootScope = {};
-		console.log('user is login out $rootScope = ', $rootScope);
-	  usersFactory.logout();
+	  $rootScope.user_id = 	undefined;
+	  // $rootScope.user_name = undefined;
+	  // $rootScope.first_name = undefined;
+	  // $rootScope.last_name = undefined;
+	  // $rootScope.user_email = undefined;
+		$rootScope.user = undefined;
+		// $rootScope = {};
+		console.log('before the user logout = ', $rootScope);
+	  // usersFactory.logout();
+		$cookies.remove('accessToken');
+		$cookies.remove('userCookie');
+		// $window.localStorage.clear();
+		console.log('*!*! user is login out $rootScope = ', $rootScope);
 	  $location.url('/login');
 	};
 

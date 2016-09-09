@@ -55,11 +55,11 @@ var usersController = require('../controllers/users.js')
     console.log('req.body', req.body);
     usersController.login(req, res);
   });
-  app.get('/userInformation', function (req, res){
-    console.log('Back-end routes -- app.get /userInformation ');
-    console.log('req.body', req.body);
-    usersController.userInformation(req, res);
-  });
+  // app.get('/userInformation', function (req, res){
+  //   console.log('Back-end routes -- app.get /userInformation ');
+  //   console.log('req.body', req.body);
+  //   usersController.userInformation(req, res);
+  // });
   app.get('/logout', function (req, res){
     console.log('Back-end routes -- app.get /logout ');
     console.log('logout route -- req.body', req.body);

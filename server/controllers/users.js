@@ -38,13 +38,12 @@ module.exports = (function (){
               console.log('*@*@* error ', err);
             }
             else {
-                  console.log('save this user information', user);
-                  req.session.userFirstName = user.first_name;
-                  req.session.userLastName = user.last_name;
-                  req.session.userId = user._id;
-                  req.session.userEmail = user.email;
-                  console.log('req.session', req.session);
-
+                  // console.log('save this user information', user);
+                  // req.session.userFirstName = user.first_name;
+                  // req.session.userLastName = user.last_name;
+                  // req.session.userId = user._id;
+                  // req.session.userEmail = user.email;
+                  // console.log('req.session', req.session);
                   res.send({status:201, userCookie: user, isLoggedIn: true, authentication: true, type:'internal'});
             }
           });
@@ -72,17 +71,17 @@ module.exports = (function (){
                 }
             });
     },
-    userInformation: function (req, res){
-      console.log("*@*@* Back-end controller -- users.js -- userInformation ***");
-      console.log('req.session: ',req.session);
-      User.find({_id:req.session.userId}, function(err, users) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.json(users);
-                }
-            });
-    },
+    // userInformation: function (req, res){
+    //   console.log("*@*@* Back-end controller -- users.js -- userInformation ***");
+    //   console.log('req.session: ',req.session);
+    //   User.find({_id:req.session.userId}, function(err, users) {
+    //             if (err) {
+    //                 console.log(err);
+    //             } else {
+    //                 res.json(users);
+    //             }
+    //         });
+    // },
     login: function (req, res){
       console.log("*@*@* Back-end controller -- users.js -- logIn ***");
       User.findOne({email: req.body.email}, function (err, user){
@@ -103,10 +102,10 @@ module.exports = (function (){
                   console.log("user", user);
           //   // eddys work
           // if(req.body.password === user.password){
-                req.session.userFirstName = user.first_name;
-                req.session.userLastName = user.last_name;
-                req.session.userId = user._id;
-                req.session.userEmail = user.email;
+                // req.session.userFirstName = user.first_name;
+                // req.session.userLastName = user.last_name;
+                // req.session.userId = user._id;
+                // req.session.userEmail = user.email;
                 res.send({status:200, userCookie: user, authentication: true, type:'internal'});
           }
         }
@@ -114,9 +113,9 @@ module.exports = (function (){
     },
     logout: function (req, res){
       console.log("*@*@* Back-end controller -- users.js -- logout ***");
-      console.log('*@*@* destroy the following session data \n', req.session);
-      req.session.destroy();
-      console.log('session data destroied -- session data: ', req.session);
+      // console.log('*@*@* destroy the following session data \n', req.session);
+      // req.session.destroy();
+      // console.log('session data destroied -- session data: ', req.session);
       res.redirect('/');
     },
     searchName: function (req,res) {
