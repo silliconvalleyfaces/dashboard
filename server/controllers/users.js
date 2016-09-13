@@ -148,6 +148,41 @@ module.exports = (function (){
         }
       })
     },
+    admin_login: function (req, res){
+      console.log("*@*@* Back-end controller -- users.js -- logIn ***");
+      User.findOne({email: req.body.email}, function (err, user){
+        var verifyPassword = req.body.password;
+        if(!user){
+          console.log(err);
+          res.send({status:500, message: 'Sorry, the user account does not exist. Please check again!', type:'internal'});
+        }
+        else if(!isvalidPassword(req.body.password, user.password) ){
+          console.log(err);
+          // err = "Incorrect password. Please check again!";
+          res.send({status:500, message: 'Invailid password. Please check again!', type:'internal'});
+          // res.json(err);
+        }
+        else if(user.user_level != 9){
+          console.log(err);
+          // err = "Not Authorized as an Admin!";
+          res.send({status:500, message: 'Not Authorized as an Admin!', type:'internal'});
+          // res.json(err);
+        }
+        else{
+
+            if(isvalidPassword(req.body.password, user.password)){
+                  console.log("user", user);
+          //   // eddys work
+          // if(req.body.password === user.password){
+                // req.session.userFirstName = user.first_name;
+                // req.session.userLastName = user.last_name;
+                // req.session.userId = user._id;
+                // req.session.userEmail = user.email;
+                res.send({status:200, userCookie: user, authentication: true, type:'internal'});
+          }
+        }
+      });
+    }
 
 
   };
