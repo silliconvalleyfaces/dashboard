@@ -46,12 +46,17 @@ myApp.directive('validPasswordC', function() {
             })
             .when('/admin', {
                 controller: 'adminController',
-                templateUrl: "partials/admin.html"
+                templateUrl: "partials/admin.html",
+                authenticate: true
             })
             .when('/', {
                 controller: 'indexController',
                 templateUrl: "partials/index.html",
                 authenticate: true
+            })
+            .when('/admin_login', {
+                controller: 'admin_loginController',
+                templateUrl: "partials/admin_login.html"
             })
             .otherwise({
                 redirectTo: '/login'
@@ -74,7 +79,7 @@ myApp.run(["$rootScope", "$location", "authFact", function ($rootScope, $locatio
        if(!userAuth){
          $location.path('/login');
        }
-       
+
      }
   });
 }]);

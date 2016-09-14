@@ -39,6 +39,7 @@
     <script src="angular-cookie.js"></script>
     <script src="/controllers/indexController.js"></script>
     <script src="/controllers/adminController.js"></script>
+    <script src="/controllers/admin_loginController.js"></script>
     <script src="/controllers/loginController.js"></script>
     <script src="/controllers/MyCtrl.js"></script>
     <script src="/factories/postsFactory.js"></script>
@@ -106,6 +107,10 @@
                             <li>
                                 <a href="#/" ng-switch-when="true" data-toggle="modal" data-target="#findUserModal">Find a Friend</a>
                             </li>
+                            <li>
+                                <a href="#/" ng-switch-when="true" data-toggle="modal" data-target="#tips">Tips</a>
+                            </li>
+
                             <!-- <p>{{edit.first_name}}</p> -->
                             <!-- <li><a href="#/termsConditions">Terms & Conditions</a>
                             </li> -->
@@ -235,6 +240,52 @@
                 </div>
             </div>
         </div>
+
+        <!--*********************** Tips Modal ********************************* -->
+        <div id="tips" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Tips</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div style="margin-bottom: 50px;">
+<h1>To upload an image:</h1>
+
+<p>1. Right click image &  select "Copy image address":<br>
+
+
+<img src="./img/copy_image_address1.png" style="height: auto; width:100%"><br>
+
+(if you don't click "Copy Image address" the image won't post to Silicon Valley Faces)</p>
+
+<p>2. Paste in image to post on "Make a post" on Silicon Valley Faces:</p><br>
+<img src="./img/copy_image_address2.png" style="height: auto; width:100%"><br>
+</div>
+
+<div >
+<h1>To add a youtube video:</h1>
+
+<p>1. Go to your video: </p>
+<img src="./img/copy_video_address1.png" style="height: auto; width:100%"><br>
+
+
+<p>2. Select & copy url: </p>
+<img src="./img/copy_video_address2.png" style="height: auto; width:100%"><br>
+
+
+<p>3. Paste into video upload on "Make a post" on Silicon Valley Faces</p>
+<img src="./img/copy_video_address3.png" style="height: auto; width:100%"><br>
+</div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
 
         <!-- Upload new picture modal -->
         <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
