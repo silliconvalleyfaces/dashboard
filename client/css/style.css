@@ -150,4 +150,12 @@ body {
     color: red;
 }
 
+.tips{
+    margin-bottom: 50px;
+}
 
+.tipsImage{
+    height: auto;
+    width: 100%;
+    border: 10px solid black;
+}
