@@ -124,6 +124,31 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  		});
  	};
 
+ 	$scope.grabPost = function(index){
+ 		$scope.grabbedPost = index
+ 		console.log("grabbed post",$scope.grabbedPost)
+ 	};
+
+ 	//edit post
+ 	$scope.editPost = function(_id, title, url, urlVideo, text){
+		console.log("$scope.editProfile - editing the post with _id: ", _id);
+		$scope.editPost = {
+			"_id": _id,
+			"title": title,
+			"url": url,
+			"urlVideo": urlVideo,
+			"text": text
+		};
+		console.log("*** made it to editPost ***");
+		console.log("$scope.editPost: ", $scope.editPost);
+		postsFactory.updatePost($scope.editPost, function(data){
+			console.log(data);
+			$scope.post = null;
+			console.log('DATA BACK', data.data);
+			
+		});
+	};
+
  	$scope.deletePost = function(postId){
  		postsFactory.deletePost(postId, function(status){
  			postsFactory.getPosts(function(data){

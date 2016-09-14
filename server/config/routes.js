@@ -14,6 +14,10 @@ var usersController = require('../controllers/users.js')
  	app.get('/posts', function(req, res){
  		postsController.getPosts(req, res);
  	})
+  app.post('/posts/:id/edit', function(req, res){
+    console.log('got to the edit post route', req.body);
+    postsController.editPost(req, res);
+  })
  	app.post('/posts/:id/destroy', function(req, res){
  		console.log('got to the destroy post route');
  		postsController.destroyPost(req, res);

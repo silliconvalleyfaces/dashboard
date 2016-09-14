@@ -50,6 +50,24 @@ module.exports = (function() {
  				}
  			})
  		},
+	    editPost: function (req, res){
+	      console.log("*@*@* Back-end controller -- posts.js -- editPost ***");
+	      console.log('edit post req.body: ', req.body._id);
+	      // replace session.userId with cookieId
+	      Post.findOne({_id:req.body._id}, function(err, post) {
+	                if (err) {
+	                    console.log("you done fucked up", err);
+	                } else {
+	                    post.title = req.body.title;
+	                    post.url = req.body.url;
+	                    post.urlVideo = req.body.urlVideo;
+	                    post.text = req.body.text;
+	                    post.save(function(err){
+	                        res.json(post);
+	                    });
+	                }
+	            });
+	    },
  		destroyPost: function(req, res){
  			Post.findByIdAndRemove(req.params.id, function(err){
  				if(err){

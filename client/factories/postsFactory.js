@@ -34,6 +34,18 @@ myApp.factory('postsFactory', function($http){
  		})
  	}
 
+ 	factory.updatePost = function(postInfo, callback){
+		console.log('editPost at factory', postInfo)
+		$http.post('/posts/' + postInfo._id + '/edit', postInfo).then(function(data){
+			if(data.error){
+				callback(data);
+			} else {
+				callback(data);
+				console.log("This is update data!", data)
+			}
+		});
+	}
+
  	factory.deletePost = function(postId, callback){
 		console.log('deletePost at factory', postId)
 		$http.post('/posts/' + postId + '/destroy').then(function(data){
