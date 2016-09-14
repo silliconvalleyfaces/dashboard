@@ -1,54 +1,5 @@
-myApp.controller('indexController', function($scope, $rootScope, $location, $window, $timeout, $cookies, $sce, authFact, postsFactory, usersFactory){
-//upload photo s3 api
+myApp.controller('indexController', function($scope, $rootScope, $location, $window, $timeout, $cookies, $sce, authFact, postsFactory, usersFactory, Upload, S3UploadService){
 
-    // $scope.submit = function(){ //function to call on form submit
-    //     if ($scope.upload_form.file.$valid && $scope.file) { //check if from is valid
-    //         $scope.upload($scope.file); //call upload function
-    //     }
-    // }
-
-    // $scope.upload = function (file) {
-    //     console.log(file);
-
-    //     Upload.upload({
-    //         url: '/upload', //webAPI exposed to upload the file
-    //         data:{file:file} //pass file as data, should be user ng-model
-    //     }).then(function (resp) { //upload function returns a promise
-    //         if(resp.data.error_code === 0){ //validate success
-    //             $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
-    //         } else {
-    //             $window.alert('an error occured');
-    //         }
-    //     }, function (resp) { //catch error
-    //         console.log('Error status: ' + resp.status);
-    //         $window.alert('Error status: ' + resp.status);
-    //     }, function (evt) {
-    //         console.log(evt);
-    //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-    //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-    //         $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
-    //     });
-    // };
-
-
-// $scope.uploadPic = function(file) {
-// 	console.log(file)
-//     file.upload = Upload.upload({
-//       url: '/upload',
-//       data: {file: file},
-//     });
-//     file.upload.then(function (response) {
-//       $timeout(function () {
-//         file.result = response.data;
-//       });
-//     }, function (response) {
-//       if (response.status > 0)
-//         $scope.errorMsg = response.status + ': ' + response.data;
-//     }, function (evt) {
-//       // Math.min is to fix IE which reports 200% sometimes
-//       file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-//     });
-// }
 // the following code is for switching navbarLogin bars based on different routes. navbar files are in '/partials/navbarLogin.html'  and '/partials/navbarWall.html'
 	// $scope.$on('$locationChangeSuccess', function($routeParams) {
   //       var path = $location.path();
@@ -80,6 +31,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	if(authFact.getUserCookie()){
 		console.log("@~@~@~@~@ got user cookies");
 		$rootScope.user = userCookie.user;
+		$rootScope.user.url = 'https://s3-us-west-1.amazonaws.com/siliconvalleyfaces/'+userCookie.user._id+'.jpg'
 	}
 	//#######################################################
 	//use the above code if any conflict occurred
@@ -247,6 +199,48 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 			$location.url('/login');
 		});
 	};
+	// upload image functionality
+	//################################
+
+
+    $scope.uploadFiles = function (files) {
+        // console.log($scope.user);
+        console.log(files[0]); 
+        files[0].url = $scope.user._id+'.jpg';
+        console.log(files);
+        $scope.Files = files;
+        console.log($scope.Files);
+
+        if (files && files.length > 0) {
+            angular.forEach($scope.Files, function (file, key) {
+                S3UploadService.Upload(file).then(function (result) {
+                    // Mark as success
+                    file.Success = true;
+                }, function (error)  {
+                    // Mark the error
+                    $scope.Error = error;
+                }, function (progress) {
+                    // Write the progress as a percentage
+                    file.Progress = (progress.loaded / progress.total) * 100
+                });
+            });
+        }
+
+        usersFactory.uploadPhoto($scope.user._id, function(data){
+            console.log(data);
+
+        })
+        setTimeout(function(){
+        	location.reload()	
+        }, 1200)
+        
+
+
+
+
+
+    };
+    //#########################ENDS##############
 
 
 });

@@ -148,7 +148,20 @@ module.exports = (function (){
         }
       })
     },
+    uploadUrl: function(req, res){
+      console.log(req.params.id); 
+      console.log(req.body)
+      User.findByIdAndUpdate({_id: req.params.id}, { profile_pic: req.body.image}, {new: true}, function(err, updatedUser){
+        if(err){
+          console.log('error', err);
+        }
+        else{
+          console.log('success, this is the updated user: ', updatedUser); 
+          res.json(updatedUser);
+        }
+      })
 
+    }
 
   };
 })();

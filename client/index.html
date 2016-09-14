@@ -40,11 +40,15 @@
     <script src="/controllers/indexController.js"></script>
     <script src="/controllers/adminController.js"></script>
     <script src="/controllers/loginController.js"></script>
-    <script src="/controllers/MyCtrl.js"></script>
     <script src="/factories/postsFactory.js"></script>
     <script src="/factories/usersFactory.js"></script>
     <script src="/factories/authFact.js"></script>
+    <script src="/services/s3UploadService.js"></script>
     <!-- Authentication -->
+
+    <!-- amazon sdk -->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.6.1.min.js"></script>
+    <!-- end -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="https://use.fontawesome.com/3b9b16c0a6.js"></script>
@@ -244,43 +248,40 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">Upload a picture</h4>
                     </div>
-                    <div class="modal-body">
-                        <form name="upload_form">
-                            Photo:
-                            <input type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" /> <i ng-show="myForm.file.$error.required">
-                                *required
-                            </i>
-                            <br>
-                            <!--       <i ng-show="myForm.file.$error.maxSize">
-                                File too large
-                                {{errorFile.size / 1000000|number:1}}MB: max 2M
-                            </i> -->
-                            <!--       <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb">  -->
-                            <!-- <button ng-click="picFile = null" ng-show="picFile">
-                                Remove
-                            </button> -->
-                            <br>
-                            <button type="submit" ng-click="submit()">submit</button>
-
-
-                            <!-- <span class="progress" ng-show="picFile.progress >= 0">
-                                <div style="width:{{picFile.progress}}%"
-                                ng-bind="picFile.progress + '%'"></div>
-                            </span>
-                            <span ng-show="picFile.result">Upload Successful</span>
-                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span> -->
-
-                            <!--     <button type="submit" ng-click="up.submit()">
-                                submit
-                            </button>
-                            <p>{{up.progress}}</p>
- -->
+                    <!-- <div class="modal-body" ng-controller = 'MyCtrl'> -->
+                     <div class="modal-body">
+                         <form novalidate>
+                            <div>
+                                <h1>Upload Files</h1>
+                                <p>We strongly recommend <a href="http://7-zip.org/download.html">7-zip</a> for zipping/extracting files</p>
+                                <p>
+                                    <button type="file" ngf-select="uploadFiles($files)">
+                                        Select File
+                                    </button>
+                                </p>
+                            </div>
+                            <div ng-show="Files.length > 0">
+                                <div ng-repeat="file in Files">
+                                    File:
+                                    <div>
+                                        {{file.name}} {{file.$error}} {{file.$errorParam}}
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{file.Progress}}%;">
+                                            {{file.Progress | number:0}}%
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info" role="alert" ng-show="file.Progress == 100 && !file.Success">Processing, please wait...</div>
+                                    <div class="alert alert-success" role="alert" ng-show="file.Success">Upload Complete!</div>
+                                </div>
+                                <div class="alert alert-danger" role="alert" ng-show="errorMsg.length > 0">
+                                    Oooops we had trouble uploading the file. Please refresh the page and try again.
+                                    <p>If the problem persits please supply us with the following details</p>
+                                    <p>{{errorMsg}}</p>
+                                </div>
+                                <div>{{Error}}</div>
+                            </div>
                         </form>
-
-
-
-
-
 
                     </div>
                     <div class="modal-footer">

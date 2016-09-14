@@ -67,7 +67,18 @@ myApp.factory('usersFactory', function ($http, $cookies){
             callback(data);
           }
         })
-      }
+      }; 
+    factory.uploadPhoto = function (upload, callback){
+        console.log(upload);
+        let url = 'https://s3-us-west-1.amazonaws.com/siliconvalleyfaces/'+upload+'.jpg'
+        let photo = {
+            image: url
+        }
+        $http.post('/imgUrl/'+upload, photo)
+        .then(function(data){
+            callback(data);
+        });
+    };
 
     return factory;
 });
