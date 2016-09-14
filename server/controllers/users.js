@@ -148,7 +148,7 @@ module.exports = (function (){
         }
       })
     },
-<<<<<<< HEAD
+
     uploadUrl: function(req, res){
       console.log(req.params.id); 
       console.log(req.body)
@@ -161,7 +161,7 @@ module.exports = (function (){
           res.json(updatedUser);
         }
       })
-=======
+    },  
     admin_login: function (req, res){
       console.log("*@*@* Back-end controller -- users.js -- logIn ***");
       User.findOne({email: req.body.email}, function (err, user){
@@ -197,9 +197,9 @@ module.exports = (function (){
         }
       });
     }
->>>>>>> 31cac5efc0b0325a7974079fa16bb80b6869d039
 
-    }
+
+    
 
   };
 })();
