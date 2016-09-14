@@ -87,6 +87,12 @@ var usersController = require('../controllers/users.js')
   //   console.log('Back-end routes -- app.get /silliconValleyFacesWall ');
   //   console.log('welcome to silliconValleyFacesWall');
   // });
+
+  app.post('/imgUrl/:id', function(req, res){
+    console.log('made it to the upload image route')
+    usersController.uploadUrl(req, res);
+  })
+
   //#############################################
       // Admin routes
   //#############################################
@@ -95,5 +101,6 @@ var usersController = require('../controllers/users.js')
     console.log('req.body', req.body);
     usersController.admin_login(req, res);
   });
+
 
 }

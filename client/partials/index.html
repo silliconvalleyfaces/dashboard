@@ -5,6 +5,8 @@
 
  	</div>
 	<div class="">
+
+    <img src={{user.url}} alt= 'no picture' height = '120px' width= '120px'>
     <p style="color: red">$rootScope.user - user information is stored in $rootScope.user</p>
     <p>user ID = $rootScope.user._id </p>
     <p>user first name = $rootScope.user.first_name</p>
@@ -32,8 +34,12 @@
   	<div ng-repeat = 'x in posts | orderBy: createdAt : true' style="padding-left: 0;">
   		<div class="container">
  			<div class="col-sm-12" style="padding: 0;">
- 				<div class="form-group">
-          <h4>{{x.title}}</h4>
+
+          <h4>
+            {{x.title}} 
+            <img src={{x._user_id.profile_pic}} height = '100px' width = '100px'>
+            
+          </h4>
   					<img class="img-responsive" ng-if="x.url" src="{{x.url}}"  alt="img">
             <div ng-if="x.urlVideo" class="embed-responsive embed-responsive-16by9">
               <iframe class="embed-responsive-item" ng-src="{{x.urlVideo | trusted}}" frameborder="0" allowfullscreen></iframe>
@@ -55,7 +61,6 @@
  						<br><hr>
   					</div>
  				</div>
- 			</div>
  			<div id="comment" class="col-sm-12">
  				 <form class="form-horizontal">
   					<div class="form-group">
@@ -67,6 +72,7 @@
  				</form>
 
   			</div>
+      </div>
   		</div>
       <!-- Edit post modal -->
       <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
