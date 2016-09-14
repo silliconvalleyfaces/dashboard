@@ -101,6 +101,9 @@ var usersController = require('../controllers/users.js')
     console.log('req.body', req.body);
     usersController.admin_login(req, res);
   });
+  app.get('/flagged_posts', function(req, res){
+ 		postsController.getFlaggedPosts(req, res);
+ 	});
 
 
 }

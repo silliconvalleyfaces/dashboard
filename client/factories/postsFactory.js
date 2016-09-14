@@ -86,6 +86,13 @@ myApp.factory('postsFactory', function($http){
 			}
 		});
 	};
+	factory.getFlaggedPosts = function(callback){
+		$http.get('/flagged_posts').then(function(data){
+			posts = data.data;
+			// console.log("factory.getPosts: ", posts);
+			callback(data.data);
+		});
+	}
 
 	return factory;
 })

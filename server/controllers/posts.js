@@ -99,6 +99,16 @@ module.exports = (function() {
 					});
 			});
  		},
+		getFlaggedPosts: function(req, res){
+			Post.find({flagged: true}).populate('comments').populate('_user_id').sort({created_at: -1}).exec(function(err, posts){
+				if(err){
+					console.log(err);
+				} else {
+					console.log(posts);
+					res.json(posts);
+				}
+			})
+		},
  		commentPost : function(req,res){
  			console.log(req.body, 'THIS IS REQ BODY commentPost');
 			comment = new Comment(req.body);
