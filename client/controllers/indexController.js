@@ -1,4 +1,4 @@
-myApp.controller('indexController', function($scope, $rootScope, $location, $window, $timeout, $cookies, $sce, authFact, postsFactory, usersFactory, Upload){
+myApp.controller('indexController', function($scope, $rootScope, $location, $window, $timeout, $cookies, $sce, authFact, postsFactory, usersFactory, Upload, S3UploadService){
 
 // the following code is for switching navbarLogin bars based on different routes. navbar files are in '/partials/navbarLogin.html'  and '/partials/navbarWall.html'
 	// $scope.$on('$locationChangeSuccess', function($routeParams) {
@@ -219,10 +219,9 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  	};
 
  	$scope.removeProfile = function(userId){
- 		$('#editProfileModal').modal('hide');
 		usersFactory.deleteUser(userId, function(data){
 			console.log('removed this user:', data);
-			$location.url('/register');
+			$location.url('/login');
 		});
 	};
 	// upload image functionality
