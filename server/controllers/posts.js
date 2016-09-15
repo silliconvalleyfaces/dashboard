@@ -50,6 +50,24 @@ module.exports = (function() {
  				}
  			})
  		},
+	    editPost: function (req, res){
+	      console.log("*@*@* Back-end controller -- posts.js -- editPost ***");
+	      console.log('edit post req.body: ', req.body._id);
+	      // replace session.userId with cookieId
+	      Post.findOne({_id:req.body._id}, function(err, post) {
+	                if (err) {
+	                    console.log("you done fucked up", err);
+	                } else {
+	                    post.title = req.body.title;
+	                    post.url = req.body.url;
+	                    post.urlVideo = req.body.urlVideo;
+	                    post.text = req.body.text;
+	                    post.save(function(err){
+	                        res.json(post);
+	                    });
+	                }
+	            });
+	    },
  		destroyPost: function(req, res){
  			Post.findByIdAndRemove(req.params.id, function(err){
  				if(err){
@@ -81,6 +99,16 @@ module.exports = (function() {
 					});
 			});
  		},
+		getFlaggedPosts: function(req, res){
+			Post.find({flagged: true}).populate('comments').populate('_user_id').sort({created_at: -1}).exec(function(err, posts){
+				if(err){
+					console.log(err);
+				} else {
+					console.log(posts);
+					res.json(posts);
+				}
+			})
+		},
  		commentPost : function(req,res){
  			console.log(req.body, 'THIS IS REQ BODY commentPost');
 			comment = new Comment(req.body);

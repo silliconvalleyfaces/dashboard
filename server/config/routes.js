@@ -14,6 +14,10 @@ var usersController = require('../controllers/users.js')
  	app.get('/posts', function(req, res){
  		postsController.getPosts(req, res);
  	})
+  app.post('/posts/:id/edit', function(req, res){
+    console.log('got to the edit post route', req.body);
+    postsController.editPost(req, res);
+  })
  	app.post('/posts/:id/destroy', function(req, res){
  		console.log('got to the destroy post route');
  		postsController.destroyPost(req, res);
@@ -83,6 +87,12 @@ var usersController = require('../controllers/users.js')
   //   console.log('Back-end routes -- app.get /silliconValleyFacesWall ');
   //   console.log('welcome to silliconValleyFacesWall');
   // });
+
+  app.post('/imgUrl/:id', function(req, res){
+    console.log('made it to the upload image route')
+    usersController.uploadUrl(req, res);
+  })
+
   //#############################################
       // Admin routes
   //#############################################
@@ -91,5 +101,9 @@ var usersController = require('../controllers/users.js')
     console.log('req.body', req.body);
     usersController.admin_login(req, res);
   });
+  app.get('/flagged_posts', function(req, res){
+ 		postsController.getFlaggedPosts(req, res);
+ 	});
+
 
 }

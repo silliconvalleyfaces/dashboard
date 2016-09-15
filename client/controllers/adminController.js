@@ -4,12 +4,13 @@ myApp.controller('adminController', function($scope, $location, $window, $timeou
 	$scope.users = [];
 	$scope.flaggedPosts = [];
 
-	// postsFactory.getFlaggedPosts = function(data){
-	// 	$scope.flaggedPosts = data;
-	// };
+	postsFactory.getFlaggedPosts(function(data){
+		console.log(data);
+		$scope.flaggedPosts = data;
+	});
 
 	usersFactory.getUsers(function(data){
-		console.log('THIS ARE THE USERS:',data);
+		console.log('THIS IS ALL THE USERS:',data);
 		$scope.users = data.data;
 	});
 
