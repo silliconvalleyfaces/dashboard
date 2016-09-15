@@ -25,7 +25,19 @@ myApp.directive('validPasswordC', function() {
         }
     };
 });
-
+myApp.directive('ngReallyClick', [function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('click', function() {
+                var message = attrs.ngReallyMessage;
+                if (message && confirm(message)) {
+                    scope.$apply(attrs.ngReallyClick);
+                }
+            });
+        }
+    }
+}]);
 
 // this is our router. You can choose to set your controllers on the partial
 // but I prefer to set my controllers here because it's cleaner

@@ -52,6 +52,7 @@
     <!-- end -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
     <script src="https://use.fontawesome.com/3b9b16c0a6.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -228,7 +229,10 @@
                                     <label class="checkbox-inline">
                                         <input type="checkbox" value="" ng-model="edit.phoneShare">Phone</label>
                                 </div>
-                                <h6><a style="color: red; cursor: pointer;" ng-click="removeProfile(user._id)">Remove Profile</a></h6>
+                                <div class="col-sm-10">
+                                    <h6><a style="color: red; cursor: pointer;" ng-really-message="Are you sure? You are about to remove your profile, this action cannot be reverted" ng-really-click="removeProfile(user._id)">Remove Profile</a></h6>
+                                </div>
+                                
 
                             </div>
 
