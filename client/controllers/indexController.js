@@ -229,14 +229,15 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 
 
     $scope.uploadFiles = function (files) {
+        console.log(files);
         // console.log($scope.user);
-        console.log(files[0]); 
-        files[0].url = $scope.user._id+'.jpg';
+        // console.log(files[0]); 
+        files.url = $scope.user._id+'.jpg';
         console.log(files);
         $scope.Files = files;
         console.log($scope.Files);
 
-        if (files && files.length > 0) {
+        // if (files && files.length > 0) {
             angular.forEach($scope.Files, function (file, key) {
                 S3UploadService.Upload(file).then(function (result) {
                     // Mark as success
@@ -249,15 +250,15 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
                     file.Progress = (progress.loaded / progress.total) * 100
                 });
             });
-        }
+        // }
 
         usersFactory.uploadPhoto($scope.user._id, function(data){
             console.log(data);
 
         })
-        setTimeout(function(){
-        	location.reload()	
-        }, 1200)
+        // setTimeout(function(){
+        // 	location.reload()	
+        // }, 1200)
         
 
 

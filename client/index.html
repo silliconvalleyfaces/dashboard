@@ -307,16 +307,19 @@
                      <div class="modal-body">
                          <form novalidate>
                             <div>
-                                <h1>Upload Files</h1>
-                                <p>We strongly recommend <a href="http://7-zip.org/download.html">7-zip</a> for zipping/extracting files</p>
+                                <h1>Upload Profile Picture</h1>
                                 <p>
-                                    <button type="file" ngf-select="uploadFiles($files)">
+                                 <!--    <button type="file" ngf-select="uploadFiles($files)">
                                         Select File
+                                    </button> -->
+                                    <button ngf-select ng-model="$files" accept="image/*">
+                                        Select Picture
                                     </button>
+                                    <button ng-click = "uploadFiles($files)">Submit</button>
                                 </p>
                             </div>
                             <div ng-show="Files.length > 0">
-                                <div ng-repeat="file in Files">
+                                <div>
                                     File:
                                     <div>
                                         {{file.name}} {{file.$error}} {{file.$errorParam}}
