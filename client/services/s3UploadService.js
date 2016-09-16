@@ -31,4 +31,3 @@ myApp.service('S3UploadService', ['$q', function ($q) {
         return deferred.promise;
     };
 }]);
-
