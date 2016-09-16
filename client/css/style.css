@@ -72,6 +72,16 @@ body {
     background-color: #19254E;
 }
 
+.profile-pic{
+    height: 100px;
+    width: 100px; 
+    border-radius: 50%;
+}
+
+.name{
+    margin-left: 20px;
+}
+
 /*Search Post CSS*/
 
 #searchField{

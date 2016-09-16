@@ -219,10 +219,9 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  	};
 
  	$scope.removeProfile = function(userId){
- 		$('#editProfileModal').modal('hide');
 		usersFactory.deleteUser(userId, function(data){
 			console.log('removed this user:', data);
-			$location.url('/register');
+			$location.url('/login');
 		});
 	};
 	// upload image functionality
