@@ -40,11 +40,8 @@
         </div>
         <div class="col-sm-10" style="padding: 0;">
           <h4>
-            {{x.title}} 
-
-            <img src={{x._user_id.profile_pic}}>
-
-            
+            <img src={{x._user_id.profile_pic}} style="display: block-inline; height:36px; width:36px;">
+            {{x.title}}
           </h4>
   					<img class="img-responsive" ng-if="x.url" src="{{x.url}}"  alt="img">
             <div ng-if="x.urlVideo" class="embed-responsive embed-responsive-16by9">
