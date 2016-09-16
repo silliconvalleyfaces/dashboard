@@ -45,6 +45,7 @@
     <script src="/factories/usersFactory.js"></script>
     <script src="/factories/authFact.js"></script>
     <script src="/services/s3UploadService.js"></script>
+
     <!-- Authentication -->
 
     <!-- amazon sdk -->
@@ -308,37 +309,32 @@
                          <form novalidate>
                             <div>
                                 <h1>Upload Profile Picture</h1>
-                                <p>
+                                <!-- Original html -->
+                                <!-- <p> -->
                                  <!--    <button type="file" ngf-select="uploadFiles($files)">
                                         Select File
                                     </button> -->
-                                    <button ngf-select ng-model="$files" accept="image/*">
+                                    <button ngf-select ng-model="picFile" accept="image/*"  >
                                         Select Picture
                                     </button>
-                                    <button ng-click = "uploadFiles($files)">Submit</button>
+                                    <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+                                    class="cropArea">
+                                        <img-crop image="picFile  | ngfDataUrl"                 
+                                        result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                                        </img-crop>
+                                    </div>
+                                    <div>
+                                        <img ng-src="{{croppedDataUrl}}" />
+                                    </div>
+
+                                    <button ng-click = "uploadFiles(croppedDataUrl)">Submit</button>
                                 </p>
                             </div>
-                            <div ng-show="Files.length > 0">
-                                <div>
-                                    File:
-                                    <div>
-                                        {{file.name}} {{file.$error}} {{file.$errorParam}}
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{file.Progress}}%;">
-                                            {{file.Progress | number:0}}%
-                                        </div>
-                                    </div>
-                                    <div class="alert alert-info" role="alert" ng-show="file.Progress == 100 && !file.Success">Processing, please wait...</div>
-                                    <div class="alert alert-success" role="alert" ng-show="file.Success">Upload Complete!</div>
-                                </div>
-                                <div class="alert alert-danger" role="alert" ng-show="errorMsg.length > 0">
-                                    Oooops we had trouble uploading the file. Please refresh the page and try again.
-                                    <p>If the problem persits please supply us with the following details</p>
-                                    <p>{{errorMsg}}</p>
-                                </div>
-                                <div>{{Error}}</div>
-                            </div>
+                            <span class="progress" ng-show="progress >= 0">    
+                                <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                            </span>
+                            <span ng-show="result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
                         </form>
 
                     </div>
@@ -434,6 +430,11 @@
     <script src="js/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     <script src="js/waypoints.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="ng-img-crop/compile/minified/ng-img-crop.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="ng-img-crop/compile/minified/ng-img-crop.css"> -->
+
+
+
     <script>
         $(document).ready(function() {
             $('#comment').css('visibility', 'hidden');

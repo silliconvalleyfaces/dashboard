@@ -159,3 +159,28 @@ body {
     width: 100%;
     border: 10px solid black;
 }
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:200px;
+    height:200px;
+}
+form .progress {
+    line-height: 15px;
+}
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+}
+
+canvas{
+    margin-top: 0px;
+    margin-left: 0px;
+
+}
