@@ -265,14 +265,15 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	        // Write the progress as a percentage
 	        $scope.progress = (progress.loaded / progress.total) * 100
 	        console.log(progress);
+            setTimeout(function(){
+        		location.reload()	
+			}, 1200)
 	    });
 
-        // usersFactory.uploadPhoto($scope.user._id, function(data){
-        //     console.log(data);
-        // })
-        // setTimeout(function(){
-        // 	location.reload()	
-        // }, 1200)
+        usersFactory.uploadPhoto($scope.user._id, function(data){
+            console.log(data);
+        })
+
         
     };
     //#########################ENDS##############
