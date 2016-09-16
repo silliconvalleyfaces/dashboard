@@ -7,12 +7,12 @@
 	<div class="">
 
     <img src={{user.url}} alt= 'no picture' height = '120px' width= '120px'>
-    <p style="color: red">$rootScope.user - user information is stored in $rootScope.user</p>
-    <p>user ID = $rootScope.user._id </p>
+    <!-- <p style="color: red">$rootScope.user - user information is stored in $rootScope.user</p> -->
+    <!-- <p>user ID = $rootScope.user._id </p>
     <p>user first name = $rootScope.user.first_name</p>
     <p>user last name  = $rootScope.user.last_name</p>
     <p>user email      = $rootScope.user.email</p>
-    <p>user phoone #   = $rootScope.user.phone</p>
+    <p>user phoone #   = $rootScope.user.phone</p> -->
     <br>ID: {{ user._id }}
 		<br> User Name: {{ user.first_name }} {{ user.last_name }}
 		<br> Email: {{ user.email }}
@@ -35,12 +35,16 @@
   		<div class="container">
  			<div class="col-sm-12" style="padding: 0;">
         <div class="col-sm-2" style="margin-top:15px; padding: 0;">
+          <!--  For laptop-->
           <img class="profile-pic" src={{x._user_id.profile_pic}}><br>
-           <strong class="name">{{ x._user_id.first_name }} {{x._user_id.last_name}}</strong>
+           <strong >{{ x._user_id.first_name }} {{x._user_id.last_name}}</strong>
         </div>
         <div class="col-sm-10" style="padding: 0;">
           <h4>
-            <img src={{x._user_id.profile_pic}} style="display: block-inline; height:36px; width:36px;">
+            <!--  For mobile device-->
+            <img src={{x._user_id.profile_pic}} style="display: inline; height:36px; width:36px;">
+            <p style="display: inline; font-size:12px;">{{ x._user_id.first_name }} {{x._user_id.last_name}}</p><br>
+
             {{x.title}}
           </h4>
   					<img class="img-responsive" ng-if="x.url" src="{{x.url}}"  alt="img">
@@ -50,8 +54,8 @@
    					<p>{{x.text}} - {{x.createdAt | date: 'MMMM, dd, yyyy @ h:mm a'}}</p>
             <div class="row" style="padding-bottom: 15px;">
 
-                <button ng-if='user_id == x.rootScope.user._user_id._id' ng-click= "grabPost(x)" class="btn editBtn" href="#/" data-toggle="modal" data-target="#editPostModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true" ></span> Edit</button>
-                <button ng-if='user_id == x.rootScope.user._user_id._id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
+                <button ng-if='user._id == x._user_id._id' ng-click= "grabPost(x)" class="btn editBtn" href="#/" data-toggle="modal" data-target="#editPostModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true" ></span> Edit</button>
+                <button ng-if='user._id == x._user_id._id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
                 <button ng-if ="x.flagged !== true" type="button" class="btn btn-danger" aria-label="Left Align" ng-click='flagPost(x._id)'>
                   <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" ></span> Flag Post
                 </button>
@@ -61,10 +65,9 @@
 
 
  					<div class="col-sm-offset-2 col-sm-9" ng-repeat='c in x.comments' >
-  	<!--                     {{c}} -->
-
+  	                    <!-- {{c}} -->
   						<h5>{{c._user_name}} commented:</h5>
- 						<p class="col-sm-offset-1">{{c.text}} <button ng-if='user_id == c.rootScope.user._user_id._id' class="btn deleteBtn btn-danger" ng-click = 'deleteComment(c._id)'>Delete</button></p>
+ 						<p class="col-sm-offset-1">{{c.text}} <button ng-if='user._id == c._user' class="btn deleteBtn btn-danger" ng-click = 'deleteComment(c._id)'>Delete</button></p>
  						<hr>
   					</div>
  				</div>
