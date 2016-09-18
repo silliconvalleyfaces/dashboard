@@ -70,8 +70,8 @@ myApp.factory('usersFactory', function ($http, $cookies){
       }; 
     factory.uploadPhoto = function (upload, callback){
         console.log(upload);
-        let url = 'https://s3-us-west-1.amazonaws.com/siliconvalleyfaces/'+upload+'.jpg'
-        let photo = {
+        var url = 'https://s3-us-west-1.amazonaws.com/siliconvalleyfaces/'+upload+'.jpg'
+        var photo = {
             image: url
         }
         $http.post('/imgUrl/'+upload, photo)

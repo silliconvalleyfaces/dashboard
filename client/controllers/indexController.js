@@ -219,55 +219,64 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  	};
 
  	$scope.removeProfile = function(userId){
- 		$('#editProfileModal').modal('hide');
 		usersFactory.deleteUser(userId, function(data){
 			console.log('removed this user:', data);
-			$location.url('/register');
+			$location.url('/login');
 		});
 	};
 	// upload image functionality
 	//################################
+	$scope.myImage='';
+    $scope.myCroppedImage='';
 
+    var handleFileSelect=function(evt) {
+      var file=evt.currentTarget.files[0];
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        $scope.$apply(function($scope){
+          $scope.myImage=evt.target.result;
+        });
+      };
+      reader.readAsDataURL(file);
+    };
 
-    $scope.uploadFiles = function (files) {
+    $scope.uploadFiles = function (file) {
+
+    	var cropped = Upload.dataUrltoBlob(file);
         // console.log($scope.user);
-        console.log(files[0]); 
-        files[0].url = $scope.user._id+'.jpg';
-        console.log(files);
-        $scope.Files = files;
-        console.log($scope.Files);
+        // console.log(files[0]); 
 
-        if (files && files.length > 0) {
-            angular.forEach($scope.Files, function (file, key) {
-                S3UploadService.Upload(file).then(function (result) {
-                    // Mark as success
-                    file.Success = true;
-                }, function (error)  {
-                    // Mark the error
-                    $scope.Error = error;
-                }, function (progress) {
-                    // Write the progress as a percentage
-                    file.Progress = (progress.loaded / progress.total) * 100
-                });
-            });
-        }
+        cropped.url = $scope.user._id+'.jpg';
+
+        // console.log(file);
+        // $scope.Files = files;
+        // console.log($scope.Files);
+        // file = $scope.Files
+        $scope.File = file;
+
+		// console.log('this is the file',file);
+	    S3UploadService.Upload(cropped).then(function (result) {
+	        // Mark as success
+	        $scope.success = true;
+	    }, function (error)  {
+	        // Mark the error
+	        $scope.error = error;
+	    }, function (progress) {
+	        // Write the progress as a percentage
+	        $scope.progress = (progress.loaded / progress.total) * 100
+	        console.log(progress);
+            setTimeout(function(){
+        		location.reload()	
+			}, 1200)
+	    });
 
         usersFactory.uploadPhoto($scope.user._id, function(data){
             console.log(data);
-
         })
-        setTimeout(function(){
-        	location.reload()	
-        }, 1200)
+
         
-
-
-
-
-
     };
     //#########################ENDS##############
-
 
 });
 

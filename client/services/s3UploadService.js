@@ -7,6 +7,8 @@ myApp.service('S3UploadService', ['$q', function ($q) {
 
     this.Progress = 0;
     this.Upload = function (file) {
+        console.log('in the S3UploadService')
+        console.log(file)
         var deferred = $q.defer();
         var params = { Bucket: 'siliconvalleyfaces', Key: file.url, ContentType: file.type, Body: file };
         var options = {
@@ -29,4 +31,3 @@ myApp.service('S3UploadService', ['$q', function ($q) {
         return deferred.promise;
     };
 }]);
-
