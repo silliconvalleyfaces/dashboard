@@ -29,6 +29,7 @@ myApp.factory('postsFactory', function($http){
  				console.log(output.error);
  			}
  			else{
+ 				console.log(output);
  				callback(output.data);
  			}
  		})

@@ -34,21 +34,36 @@ module.exports = (function() {
 
 		searchPosts: function(req, res){
  			console.log(req.body.text);
- 			Post.find({$or: [
- 					 {"first_name": new RegExp(req.body.text, "i")},
- 					 {"last_name": new RegExp(req.body.text, "i")},
- 					 {"text": new RegExp(req.body.text, "i")},
- 					 {"title": new RegExp(req.body.text, "i")}
+ 			// Post.find({$or: [
+ 			// 		 {"first_name": new RegExp(req.body.text, "i")},
+ 			// 		 {"last_name": new RegExp(req.body.text, "i")},
+ 			// 		 {"text": new RegExp(req.body.text, "i")},
+ 			// 		 {"title": new RegExp(req.body.text, "i")}
 
- 				]}, function(err, response){
+ 			// 	]}, function(err, response){
+ 			// 	if(err){
+ 			// 		console.log(err);
+ 			// 	}
+ 			// 	else{
+ 			// 		console.log('at the findNames function', response);
+ 			// 		// res.json(response);
+ 			// 	}
+ 			// })
+ 			Post.find().populate({
+ 				path: 'posts', 
+ 				match: {
+ 					type: req.body.text
+ 				}
+ 			}).exec(function(err, posts){
  				if(err){
- 					console.log(err);
+ 					console.log('error', err);
  				}
  				else{
- 					console.log('at the findNames function', response);
- 					res.json(response);
+ 					console.log(posts);
+ 					res.json(posts);
  				}
  			})
+
  		},
 	    editPost: function (req, res){
 	      console.log("*@*@* Back-end controller -- posts.js -- editPost ***");
