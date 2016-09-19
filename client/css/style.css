@@ -7,6 +7,16 @@ body {
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+input[type="email"], input[type="password"], input[type="text"] 
+{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 42px; // Increases height of box
+    margin-bottom: 30px;
+    padding: 0 20px; // padding left and right of input text
+}
+
 /*#nav-color{
     background-color: #141D3D
 }*/
@@ -20,7 +30,7 @@ body {
     width: 100%;
 }
 
-
+/*delete buttons*/
 .btn.btn-danger{
     border-style: none;
     border-radius: 0;
@@ -38,6 +48,7 @@ body {
     background-color: white;
 }
 
+/*edit button*/
 .btn.editBtn{
     border-style: none;
     border-radius: 0;
@@ -53,6 +64,7 @@ body {
     font-weight: bold;
 }
 
+/*comment button*/
 .btn.comments:hover {
   color: #ffffff;
   background: #d9534f;
@@ -71,7 +83,6 @@ body {
     color: white;
     background-color: #19254E;
 }
-
 .profile-pic{
     height: 100px;
     width: 100px; 

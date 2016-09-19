@@ -99,6 +99,20 @@ module.exports = (function() {
 					});
 			});
  		},
+		unflagPost: function(req, res){
+ 			Post.findOne({_id: req.params.id}, function(err, post){
+				post.flagged = false
+				console.log('THIS IS THE post to unflag',post);
+					post.save(function (err) {
+							if(err) {
+									console.error('ERROR unflagging post!');
+							}
+							else{
+								res.end();
+							}
+						})
+					});
+ 		},
 		getFlaggedPosts: function(req, res){
 			Post.find({flagged: true}).populate('comments').populate('_user_id').sort({created_at: -1}).exec(function(err, posts){
 				if(err){

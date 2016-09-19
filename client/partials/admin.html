@@ -1,4 +1,3 @@
-
 <div ng-controller='adminController'>
 	<h3>FLAGGED POST</h3>
 	<div ng-if='flaggedPosts' ng-repeat='x in flaggedPosts| orderBy: createdAt : true' style="padding-left: 0;">
@@ -15,12 +14,15 @@
 						<iframe class="embed-responsive-item" ng-src="{{x.urlVideo | trusted}}" frameborder="0" allowfullscreen></iframe>
 					</div>
 				<p>{{x.text}} - {{x.createdAt | date: 'MMMM, dd, yyyy @ h:mm a'}} Written By: {{ x._user_id.first_name }} {{x._user_id.last_name}}</p>
-				<button ng-if='user_id == x.rootScope.user._user_id._id' ng-click= "grabPost(x)" class="btn editBtn" href="#/" data-toggle="modal" data-target="#editPostModal"><span class="glyphicon glyphicon-pencil" aria-hidden="true" ></span> Edit</button>
-				<button ng-if='user_id == x.rootScope.user._user_id._id' class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
+
+				<button  class="btn deleteBtn btn-danger" ng-click = 'deletePost(x._id)'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
 				<button ng-if ="x.flagged !== true" type="button" class="btn btn-danger" aria-label="Left Align" ng-click='flagPost(x._id)'>
 					<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" ></span> Flag Post
 				</button>
 				<p ng-if ="x.flagged == true" class="label label-danger">This post has been flagged and is under review by the moderator</p>
+				<button  class="btn btn-info" aria-label="Left Align" ng-click='unflagPost(x._id)'>
+					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ></span> UnFlag Post
+				</button>
 				<div ng-repeat='c in x.comments' style="margin-left: 60px;">
 			</div>
 
@@ -44,7 +46,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div ng-repeat='u in users'>
 		<h5>{{u.first_name}} {{u.last_name}}</h5>
 		<div>
