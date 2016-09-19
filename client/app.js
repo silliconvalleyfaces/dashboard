@@ -25,6 +25,8 @@ myApp.directive('validPasswordC', function() {
         }
     };
 });
+
+// code for confirmation of delete users own profile
 myApp.directive('ngReallyClick', [function() {
     return {
         restrict: 'A',

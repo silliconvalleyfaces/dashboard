@@ -69,6 +69,17 @@ myApp.factory('postsFactory', function($http){
 		})
 	}
 
+	factory.unflagPost = function(postId, callback){
+		console.log('unflagPost at factory', postId)
+		$http.post('/posts/' + postId + '/unflag').then(function(data){
+			if(data.error){
+				callback(data);
+			} else {
+				callback(data);
+			}
+		})
+	}
+
 	factory.commentPost = function(commentData, callback){
 		console.log('got to commetPost at factory');
 		$http.post('/comments', commentData).then(function(data){
@@ -87,6 +98,13 @@ myApp.factory('postsFactory', function($http){
 			}
 		});
 	};
+	factory.getFlaggedPosts = function(callback){
+ 		$http.get('/flagged_posts').then(function(data){
+ 			posts = data.data;
+ 			// console.log("factory.getPosts: ", posts);
+ 			callback(data.data);
+ 		});
+ 	}
 
 	return factory;
 })

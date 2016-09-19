@@ -26,6 +26,10 @@ var usersController = require('../controllers/users.js')
  		console.log('got to the flag post route');
  		postsController.flagPost(req, res);
  	})
+  app.post('/posts/:id/unflag', function(req, res){
+ 		console.log('got to the unflag post route');
+ 		postsController.unflagPost(req, res);
+ 	})
   app.post('/comments/:id/destroy', function(req, res){
     console.log('got to the destroy comment route');
     postsController.destroyComment(req, res);

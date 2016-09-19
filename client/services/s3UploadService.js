@@ -1,7 +1,7 @@
 myApp.service('S3UploadService', ['$q', function ($q) {
     // Us standard region
     AWS.config.region = 'us-west-1';
-    AWS.config.update({ accessKeyId: 'fake', secretAccessKey: 'fake' });
+    AWS.config.update({ accessKeyId: 'AKIAJ3IWQLNVS5U6ICSA', secretAccessKey: 'RxqMqlZNmPEgRG0hywMQd5N7Q8wL9OgV/JgcGS2G' });
 
     var bucket = new AWS.S3({ params: { Bucket: 'siliconvalleyfaces', maxRetries: 5 }, httpOptions: { timeout: 360000 } });
 
@@ -31,4 +31,3 @@ myApp.service('S3UploadService', ['$q', function ($q) {
         return deferred.promise;
     };
 }]);
-

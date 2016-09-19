@@ -50,20 +50,21 @@ module.exports = (function() {
  			// 	}
  			// })
  			Post.find().populate({
- 				path: 'posts', 
- 				match: {
- 					type: req.body.text
+ 				path: '_user_id', 
+ 				match: {$or:[{
+					first_name: new RegExp(req.body.text, "i"), 
+ 					last_name: new RegExp(req.body.text, "i"), 
+ 					text: new RegExp(req.body.text, "i"),
+ 					title: new RegExp(req.body.text, "i")
+ 				}]
  				}
  			}).exec(function(err, posts){
- 				if(err){
- 					console.log('error', err);
- 				}
- 				else{
- 					console.log(posts);
- 					res.json(posts);
- 				}
+ 				console.log(posts)
+ 				res.json(posts);
+ 				// posts = posts.filter(function(post){
+ 				// 	return post.text
+ 				// })
  			})
-
  		},
 	    editPost: function (req, res){
 	      console.log("*@*@* Back-end controller -- posts.js -- editPost ***");
@@ -113,6 +114,20 @@ module.exports = (function() {
 							}
 					});
 			});
+ 		},
+		unflagPost: function(req, res){
+ 			Post.findOne({_id: req.params.id}, function(err, post){
+				post.flagged = false
+				console.log('THIS IS THE post to unflag',post);
+					post.save(function (err) {
+							if(err) {
+									console.error('ERROR unflagging post!');
+							}
+							else{
+								res.end();
+							}
+						})
+					});
  		},
 		getFlaggedPosts: function(req, res){
 			Post.find({flagged: true}).populate('comments').populate('_user_id').sort({created_at: -1}).exec(function(err, posts){
