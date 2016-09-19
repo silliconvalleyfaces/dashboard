@@ -23,6 +23,15 @@ myApp.controller('adminController', function($scope, $location, $window, $timeou
 			});
 		});
 	};
+	$scope.unflagPost = function(postId){
+		console.log("unflag post pressed",postId);
+ 		postsFactory.unflagPost(postId, function(status){
+ 			postsFactory.getFlaggedPosts(function(data){
+		 		// console.log(data);
+		 		$scope.flaggedPosts = data;
+		 	});
+ 		});
+ 	};
 
 
 });
