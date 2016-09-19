@@ -97,7 +97,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 			console.log(data);
 			$scope.post = null;
 			console.log('DATA BACK', data.data);
-			
+
 		});
 	};
 
@@ -143,7 +143,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
  		};
 
 //#######################################################
-//use the following code if any conflict occurred		
+//use the following code if any conflict occurred
  		postsFactory.commentPost(commentData, function(){
 			refreshPosts();
 			$scope.comment = {};
@@ -244,7 +244,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 
     	var cropped = Upload.dataUrltoBlob(file);
         // console.log($scope.user);
-        // console.log(files[0]); 
+        // console.log(files[0]);
 
         cropped.url = $scope.user._id+'.jpg';
 
@@ -266,7 +266,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
 	        $scope.progress = (progress.loaded / progress.total) * 100
 	        console.log(progress);
             setTimeout(function(){
-        		location.reload()	
+        		location.reload()
 			}, 1200)
 	    });
 
@@ -274,7 +274,7 @@ myApp.controller('indexController', function($scope, $rootScope, $location, $win
             console.log(data);
         })
 
-        
+
     };
     //#########################ENDS##############
 
@@ -287,6 +287,14 @@ myApp.filter('trusted', ['$sce', function ($sce){
 		return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + video_id);
 	}
 }]);
+
+myApp.filter('capitalize', function() {
+  return function(input, scope) {
+    if (input!=null)
+    input = input.toLowerCase();
+    return input.substring(0,1).toUpperCase()+input.substring(1);
+  }
+});
 
 myApp.constant('AUTH_EVENTS', {
   loginSuccess: 'auth-login-success',

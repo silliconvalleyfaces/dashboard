@@ -7,16 +7,17 @@
 	<div class="">
 
     <img src={{user.url}} alt= 'no picture' height = '120px' width= '120px'>
+    <h4>{{ user.first_name | capitalize }} {{ user.last_name | capitalize}}</h4>
     <!-- <p style="color: red">$rootScope.user - user information is stored in $rootScope.user</p> -->
     <!-- <p>user ID = $rootScope.user._id </p>
     <p>user first name = $rootScope.user.first_name</p>
     <p>user last name  = $rootScope.user.last_name</p>
     <p>user email      = $rootScope.user.email</p>
     <p>user phoone #   = $rootScope.user.phone</p> -->
-    <br>ID: {{ user._id }}
-		<br> User Name: {{ user.first_name }} {{ user.last_name }}
-		<br> Email: {{ user.email }}
-    <br> phone: {{ user.phone }}
+    <!-- <br>ID: {{ user._id }} -->
+
+		<!-- <br> Email: {{ user.email }} -->
+    <!-- <br> phone: {{ user.phone }} -->
 	</div>
   	<!-- End of user information -->
   	<!-- Search Bar   -->
@@ -36,8 +37,8 @@
  			<div class="col-sm-12" style="padding: 0;">
         <div class="col-sm-2" style="margin-top:15px; padding: 0;">
           <!--  For laptop-->
-          <img class="profile-pic" src={{x._user_id.profile_pic}}><br>
-           <strong >{{ x._user_id.first_name }} {{x._user_id.last_name}}</strong>
+          <!-- <img class="profile-pic" src={{x._user_id.profile_pic}}><br>
+           <strong >{{ x._user_id.first_name }} {{x._user_id.last_name}}</strong> -->
         </div>
         <div class="col-sm-10" style="padding: 0;">
           <h4>
@@ -65,7 +66,7 @@
 
 
  					<div class="col-sm-offset-2 col-sm-9" ng-repeat='c in x.comments' >
-  	                    <!-- {{c}} -->
+  	        <!-- {{c}} -->
   						<h5>{{c._user_name}} commented:</h5>
  						<p class="col-sm-offset-1">{{c.text}} <button ng-if='user._id == c._user' class="btn deleteBtn btn-danger" ng-click = 'deleteComment(c._id)'>Delete</button></p>
  						<hr>
