@@ -14,6 +14,15 @@ myApp.controller('adminController', function($scope, $location, $window, $timeou
 		$scope.users = data.data;
 	});
 
+	$scope.deletePost = function(postId){
+		postsFactory.deletePost(postId, function(status){
+			postsFactory.getFlaggedPosts(function(data){
+			// console.log(data);
+			$scope.flaggedPosts = data;
+		});
+		});
+	};
+
 	$scope.deleteUser = function(userId){
 		usersFactory.deleteUser(userId, function(data){
 			console.log('removed this user:', data);
