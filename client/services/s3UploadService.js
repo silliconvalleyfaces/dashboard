@@ -1,7 +1,7 @@
 myApp.service('S3UploadService', ['$q', function ($q) {
     // Us standard region
     AWS.config.region = 'us-west-1';
-    AWS.config.update({ accessKeyId: 'Fake', secretAccessKey: 'Fake' });
+    AWS.config.update({ accessKeyId: 'fake', secretAccessKey: 'fake' });
 
     var bucket = new AWS.S3({ params: { Bucket: 'siliconvalleyfaces', maxRetries: 5 }, httpOptions: { timeout: 360000 } });
 

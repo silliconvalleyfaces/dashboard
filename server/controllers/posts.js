@@ -3,11 +3,13 @@ var Post = mongoose.model('posts');
 var Comment = mongoose.model('comments');
 var User = mongoose.model('users')
 
+
 module.exports = (function() {
 	return {
 
 		makePost: function(req, res){
 			console.log(req.body, 'THIS IS REQ BODY');
+
 			post = new Post(req.body);
 			post.save(function(err, result){
 				if(err){
@@ -15,8 +17,24 @@ module.exports = (function() {
 					console.log('error creating a new post');
 				} else {
 					console.log('this is our new post',result);
-					res.json(result);
-
+					User.findOne({_id : req.body._user_id}, function(err, user){
+						if(err){
+							console.log('there was an error', err); 
+						}
+						else{
+							console.log('found the user', user); 
+							user._post_id.push(result._id); 
+							console.log('this is the newly updated user', user)
+							user.save(function(err){
+								if(err){
+									console.log('there was an error', err);
+								}
+								else{
+									res.json(result);
+								}
+							})
+						}
+					})
 				}
 			})
 		},
@@ -48,12 +66,12 @@ module.exports = (function() {
  			User.find({$or: [
 					{"first_name": new RegExp(req.body.text, "i")},
 					{"last_name": new RegExp(req.body.text, "i")}
-				]}).populate('_post_id').populate('_comment_id').sort({created_at: -1}).exec(function(err, users){
+				]}).populate('_post_id').sort({created_at: -1}).exec(function(err, users){
 				if(err){
 					console.log(err);
 				} else {
 					console.log(users);
-					res.json(users);
+					// res.json(users);
 				}
 			})
 
