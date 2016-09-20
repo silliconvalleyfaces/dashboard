@@ -120,13 +120,27 @@ module.exports = (function (){
     },
     searchName: function (req,res) {
       console.log("*@*@* Back-end controller -- users.js -- searchName ***");
-      User.find({'first_name': {'$regex': req.body.name}}, function(err, users) {
-                if (err) {
+        // original query
+
+      // User.find({'first_name': {'$regex': req.body.name}}, function(err, users) {
+      //           if (err) {
+      //               console.log(err);
+      //           } else {
+      //               res.json(users);
+      //           }
+      //       });
+
+      //updated query by Andrew 9/19
+      User.find({$or: [
+                {"first_name": new RegExp(req.body.name, "i")},
+                {"last_name": new RegExp(req.body.name, "i")}
+            ]}, function(err, users) {
+                if (err){
                     console.log(err);
                 } else {
                     res.json(users);
                 }
-            });
+            }); 
     },
     getUsers: function(req, res){
       console.log('GOT TO GET USERS CONTROLLER');

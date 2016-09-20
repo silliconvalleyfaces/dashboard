@@ -34,37 +34,29 @@ module.exports = (function() {
 
 		searchPosts: function(req, res){
  			console.log(req.body.text);
- 			// Post.find({$or: [
- 			// 		 {"first_name": new RegExp(req.body.text, "i")},
- 			// 		 {"last_name": new RegExp(req.body.text, "i")},
- 			// 		 {"text": new RegExp(req.body.text, "i")},
- 			// 		 {"title": new RegExp(req.body.text, "i")}
+ 		// 	Post.find({$or: [
+ 		// 			 {"text": new RegExp(req.body.text, "i")},
+ 		// 			 {"title": new RegExp(req.body.text, "i")}
+ 		// 		]}).populate('comments').populate('_user_id').sort({created_at: -1}).exec(function(err, posts){
+			// 	if(err){
+			// 		console.log(err);
+			// 	} else {
+			// 		console.log(posts);
+			// 		res.json(posts);
+			// 	}
+			// }); 
+ 			User.find({$or: [
+					{"first_name": new RegExp(req.body.text, "i")},
+					{"last_name": new RegExp(req.body.text, "i")}
+				]}).populate('_post_id').populate('_comment_id').sort({created_at: -1}).exec(function(err, users){
+				if(err){
+					console.log(err);
+				} else {
+					console.log(users);
+					res.json(users);
+				}
+			})
 
- 			// 	]}, function(err, response){
- 			// 	if(err){
- 			// 		console.log(err);
- 			// 	}
- 			// 	else{
- 			// 		console.log('at the findNames function', response);
- 			// 		// res.json(response);
- 			// 	}
- 			// })
- 			Post.find().populate({
- 				path: '_user_id', 
- 				match: {$or:[{
-					first_name: new RegExp(req.body.text, "i"), 
- 					last_name: new RegExp(req.body.text, "i"), 
- 					text: new RegExp(req.body.text, "i"),
- 					title: new RegExp(req.body.text, "i")
- 				}]
- 				}
- 			}).exec(function(err, posts){
- 				console.log(posts)
- 				res.json(posts);
- 				// posts = posts.filter(function(post){
- 				// 	return post.text
- 				// })
- 			})
  		},
 	    editPost: function (req, res){
 	      console.log("*@*@* Back-end controller -- posts.js -- editPost ***");
