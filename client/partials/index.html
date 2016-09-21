@@ -23,7 +23,7 @@
   	<!-- Search Bar   -->
  <div class="container">
  	<form class="searchForm form-horizontal col-sm-12">
- 		<input type="text" id="searchField" class="search-input col-sm-9" name="search" ng-model="search.text" placeholder="Name, Post Title, Post Content">
+ 		<input type="text" id="searchField" class="search-input col-sm-9" name="search" ng-model="search.text" placeholder="Post Title, Post Content">
  		<input type="submit" name="searchButton" id="searchBtn" class="btn-lg searchBtn col-sm-2 pull-right" ng-click="searchPosts(search)" value="Search">
  	</form>
  	<button class="btn-lg searchBtn col-sm-2 pull-right" ng-if='feed == false' ng-click = 'reset()'>Back to feed</button>
@@ -43,8 +43,7 @@
         <div class="col-sm-10" style="padding: 0;">
           <h4>
             <!--  For mobile device-->
-<!--             <img src={{x._user_id.profile_pic}} style="display: inline; height:36px; width:36px;">
-            <p style="display: inline; font-size:12px;">{{ x._user_id.first_name }} {{x._user_id.last_name}}</p><br> -->
+<!--   -->
 
             {{x.title}}
 
