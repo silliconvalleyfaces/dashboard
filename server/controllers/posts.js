@@ -67,12 +67,13 @@ module.exports = (function() {
 					{"first_name": new RegExp(req.body.text, "i")},
 					{"last_name": new RegExp(req.body.text, "i")}
 				]}).populate('_post_id').sort({created_at: -1}).exec(function(err, users){
-				if(err){
-					console.log(err);
-				} else {
-					console.log(users);
-					// res.json(users);
-				}
+						if(err){
+							console.log(err);
+						} else {
+							// console.log(users);
+							console.log(users[0]._post_id);
+							// res.json(users);
+						}
 			})
 
  		},
