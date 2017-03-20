@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- saved from url=(0259)https://a.lw.skype.com/Login/silent/MsaCallback?site_name=lw.skype.com&response_type=postmessage&client_id=580081&redirect_uri=https%3a%2f%2foutlook.live.com%2fowa%2f&state=silentloginsdk_1472834018160&partner=999&session_id=1YoL6BTPH7XgRghkyxul&wa=wsignin1.0 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+
+    <title>Skype</title>
+
+    <script src="./HashFragment.js"></script>
+
+    <script type="text/javascript">
+        var message = "";
+        (function () {
+            var target = "https://outlook.live.com/owa/",
+                messageObject = {"state":"silentloginsdk_1472834018160","rps_token":"EgD+AQMAAAAEgAAADAAB8FTYlC6g2Culdzf5Yu8TvYgkjh9EKvImOdEQ1PaZnv7EPnYUpv1aUS8cArIKj9Xrub4+RF4v/D0eKT0VV4IA7qMKnXAtiTZMZ2cJHutMZboNUpWxuAtaKiSwagzqj6fA2oDP8zv/ccbTGXoEixMkz9ef4UQfYyV0GF68Nppx1Ayu8P+IexiBZw3L8InRcHMM7ptgzzHdUN05grvDiGTNs2nY9WLsysBKG9i01bmBhwKN4y9TrRQPyTIq0DRKJXOjRlTPGaWjK2uYMbgTzrD1rcEK2f1zSTPrTKfnAfg8HRbX6/bpIwX0/MUHtrIP2Jr+glFb4TnXJvz6rAZ1g8+DSO0AcQDtAAAABgDQ3tah4anJV9GpyVeqeQQAChAgABAAADkAAAAAAAJeVVMABTk0NTM4AAAV3wQJAQAAerRtQAAEQwAGRWRpc29uAARXYW5nBEgAAAAAAAAAAAAAAAAsHpikNfopuwAA4anJV9FQQFgAAAAAAAAAAAAAAAANADI0LjEzMC4xOTIuMgAFAQAAAAAAAAAAAAAAAAEEAAAAAAAAAAAA03YfUwAAIHd6WxzGISwAAAAAAAAAAAAAAAAAAAAAAAAXAGVkaXNvbjc0NzZAaG90bWFpbC5jb20AAAAAAAAAAAAAAAAAAAAAAAAA","site_name":"lw.skype.com","skypetoken":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjIifQ.eyJpYXQiOjE0NzI4MzQwMTgsImV4cCI6MTQ3MjkyMDQxNywic2t5cGVpZCI6ImxpdmU6ZWRpc29uNzQ3NiIsInNjcCI6OTU4LCJjc2kiOiIyIiwiY2lkIjoiMzVmYTI5YmIyYzFlOThhNCIsImFhdCI6MTQ3MjgzNDAwMX0.MCAK3Odfwvr2znTNEPk7w3rF_eNN0f-6xgueyUVBvLAen55aCtXMuBvUCZIyXjAMsAMGdeEgw5llfxYLnRm23OWdjDVGHRivC93XtyOGZIluwn8ZBQ2o6gk_hObBUlqo-xKhBZ2dA6s7f8EgsVkkDvwQcJI9hAzMS8RE4y2EtsymivXJq3mlupJlDSmbLYBWC45OijmvueXa8Ok8","expires_in":"86399"};
+
+            window.hashFragment.parseHashParams();
+            var error = window.hashFragment.getHashParam("error");
+            var errorDescription = window.hashFragment.getHashParam("error_description");
+
+            if (!!error && error.length) {
+                messageObject.error = error;
+                messageObject.error_description = errorDescription;
+            }
+            
+            var message = JSON.stringify(messageObject);
+
+            if (!!window.opener) {                              // Send postMessage from a Popup and close window
+                window.opener.postMessage(message, target);
+                window.close();
+            } else if (!!window.parent) {                       // Send postMessage from an Iframe
+                window.parent.postMessage(message, target);
+            }
+        }());
+    </script>
+</head>
+<body>
+
+</body></html>
